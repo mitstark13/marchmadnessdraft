@@ -1,0 +1,87 @@
+@import "../../assets/variables";
+
+.draftHistory {
+	border: 1px solid $off-white;
+	flex: 0 0 250px;
+	padding: 0 20px;
+	background: #fff;
+
+	.historyTitle {
+		height: 100px;
+
+		h2 {
+			font-size: 16px;
+			margin: 10px 0;
+			font-weight: 400;
+		}
+		p {
+			margin: 0;
+			padding: 5px 0;
+			font-size: 12px;
+			text-align: center;
+
+			&:first-of-type {
+				border-top: 1px solid $off-white;
+			}
+
+			&:last-of-type {
+				border-bottom: 1px solid $off-white;
+			}
+		}
+	}
+	table {
+		position: relative;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		overflow-y: scroll;
+
+		tr {
+			display: -webkit-inline-flex;
+			display: -moz-inline-flex;
+			display: -ms-inline-flex;
+			display: -o-inline-flex;
+			display: inline-flex;
+			justify-content: space-between;
+			align-content: center;
+			width: 100%;
+			height: 22px;
+			border-bottom: 1px solid $off-white;
+		}
+		thead tr {
+			height: 26px;
+	    	padding: 3px 0px 0;
+			border-bottom: none;
+			background: $off-white;
+			color: #000;
+		}
+		td, th {
+			width: 16%;
+			text-align: left;
+			padding: 3px 5px 0;
+			font-size: 14px;
+			font-weight: 400;
+		}
+		.pick {
+			flex: 1 1 5%;
+		}
+		.name {
+			flex: 1 1 60%;
+		}
+		.owner {
+			flex: 1 1 35%;
+		}
+		td a {
+			color: $app-green;
+			text-decoration: none;
+		}
+		td a:hover {
+			text-decoration: underline;
+		}
+		tbody {
+			display: block;
+			overflow: auto;
+			height: 300px;
+		}
+	}
+}

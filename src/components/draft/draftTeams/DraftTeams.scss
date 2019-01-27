@@ -1,0 +1,80 @@
+@import "../../assets/variables";
+
+.teamsView {
+	flex: 0 0 250px;
+	margin: 0;
+	padding: 0 20px;
+
+	table {
+		position: relative;
+		flex: 2 0 450px;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		overflow-y: scroll;
+
+		tr {
+			display: -webkit-inline-flex;
+			display: -moz-inline-flex;
+			display: -ms-inline-flex;
+			display: -o-inline-flex;
+			display: inline-flex;
+			justify-content: space-between;
+			align-content: center;
+			width: 100%;
+			height: 22px;
+			border-bottom: 1px solid #fff;
+		}
+		thead tr {
+			height: 26px;
+	    	padding: 3px 0px 0;
+			border-bottom: none;
+			background: $app-blue;
+			color: $off-white;
+		}
+		td, th {
+			flex: 1 1 12%;
+			width: 16%;
+			text-align: left;
+			padding: 3px 5px 0;
+			font-size: 14px;
+			font-weight: 400;
+		}
+		.name {
+			flex: 1 1 60%;
+		}
+		.school {
+			flex: 1 1 40%;
+		}
+		td a {
+			color: $app-green;
+			text-decoration: none;
+		}
+		td a:hover {
+			text-decoration: underline;
+		}
+		tbody {
+			display: block;
+			overflow: auto;
+			height: 300px;
+		}
+	}
+}
+
+.teamsHeader {
+	height: 100px;
+
+	h2 {
+		font-size: 16px;
+		font-weight: 400;
+		margin: 10px 0 15px;
+	}
+
+	select {
+		display: block;
+		margin: 0 auto;
+		width: 90%;
+		height: 35px;
+		font-size: 14px;
+	}
+}

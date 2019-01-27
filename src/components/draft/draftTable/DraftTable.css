@@ -1,0 +1,116 @@
+.draftTable {
+  position: relative;
+  flex: 2 0 450px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-y: scroll; }
+  .draftTable tr {
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flex;
+    display: -o-inline-flex;
+    display: inline-flex;
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+    height: 22px;
+    border-bottom: 1px solid #fff; }
+    .draftTable tr[data-picked="true"] {
+      background: yellow; }
+  .draftTable thead tr {
+    height: 26px;
+    padding: 3px 0px 0;
+    border-bottom: none;
+    background: #475570;
+    color: #F2F4F4; }
+  .draftTable td, .draftTable th {
+    flex: 1 1 12%;
+    width: 16%;
+    text-align: left;
+    padding: 3px 5px 0;
+    font-size: 14px;
+    font-weight: 400; }
+  .draftTable .name {
+    flex: 1 1 28%; }
+  .draftTable .school {
+    flex: 1 1 22%; }
+  .draftTable .total {
+    flex: 1 1 14%; }
+  .draftTable td a {
+    color: #7CB982;
+    text-decoration: none; }
+  .draftTable td a:hover {
+    text-decoration: underline; }
+  .draftTable tbody {
+    display: block;
+    overflow: auto;
+    height: 300px; }
+    .draftTable tbody tr:hover {
+      background: #F2F4F4;
+      cursor: pointer; }
+    .draftTable tbody tr[data-picked="true"]:hover {
+      cursor: not-allowed;
+      background: yellow; }
+
+.draftPreview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 110px;
+  padding: 0; }
+  .draftPreview .draftPlayer {
+    display: flex;
+    align-items: center; }
+    .draftPreview .draftPlayer div {
+      display: inline-block; }
+    .draftPreview .draftPlayer div.draftName {
+      width: 200px; }
+      .draftPreview .draftPlayer div.draftName p {
+        margin: 0 0 7px;
+        font-size: 30px; }
+        .draftPreview .draftPlayer div.draftName p:last-of-type {
+          font-size: 16px;
+          color: rgba(0, 0, 0, 0.7);
+          margin: 0 0 0; }
+    .draftPreview .draftPlayer div.stats {
+      height: 40px;
+      width: 50px;
+      background-color: #fff;
+      text-align: center;
+      padding: 7px 2px;
+      margin-right: 25px;
+      box-shadow: 0px 0px 5px #475570; }
+      .draftPreview .draftPlayer div.stats p {
+        margin: 0 0 5px;
+        font-size: 12px; }
+  .draftPreview button {
+    background: #7CB982;
+    color: #F2F4F4;
+    box-shadow: 0.4rem 0.4rem 2px black;
+    transform: translate(-0.4rem, -0.4rem);
+    border: none;
+    height: 30px;
+    width: 110px;
+    outline: none;
+    transition: .5s; }
+    .draftPreview button:hover {
+      cursor: pointer;
+      box-shadow: 0.2rem 0.2rem 2px black;
+      transform: translate(-0.2rem, -0.2rem); }
+    .draftPreview button:active {
+      box-shadow: 0rem 0rem 2px black;
+      transform: translate(0rem, 0rem);
+      outline: none; }
+  .draftPreview small {
+    font-size: 12px;
+    color: darkgray; }
+    .draftPreview small:hover {
+      cursor: pointer;
+      border-bottom: 1px solid darkgray; }
+
+.draftContainer {
+  width: 100%;
+  padding: 0 10px 5px; }
+
+/*# sourceMappingURL=DraftTable.css.map */

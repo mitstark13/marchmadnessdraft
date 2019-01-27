@@ -1,0 +1,162 @@
+@import "../../assets/_variables.scss";
+
+.draftTable {
+	position: relative;
+	flex: 2 0 450px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	overflow-y: scroll;
+
+	tr {
+		display: -webkit-inline-flex;
+		display: -moz-inline-flex;
+		display: -ms-inline-flex;
+		display: -o-inline-flex;
+		display: inline-flex;
+		justify-content: space-between;
+		align-content: center;
+		width: 100%;
+		height: 22px;
+		border-bottom: 1px solid #fff;
+
+		&[data-picked="true"] {
+			background: yellow;
+		}
+	}
+	thead tr {
+		height: 26px;
+    	padding: 3px 0px 0;
+		border-bottom: none;
+		background: $app-blue;
+		color: $off-white;
+	}
+	td, th {
+		flex: 1 1 12%;
+		width: 16%;
+		text-align: left;
+		padding: 3px 5px 0;
+		font-size: 14px;
+		font-weight: 400;
+	}
+	.name {
+		flex: 1 1 28%;
+	}
+	.school {
+		flex: 1 1 22%;
+	}
+	.total {
+		flex: 1 1 14%;
+	}
+	td a {
+		color: $app-green;
+		text-decoration: none;
+	}
+	td a:hover {
+		text-decoration: underline;
+	}
+	tbody {
+		display: block;
+		overflow: auto;
+		height: 300px;
+
+		tr:hover {
+			background: $off-white;
+			cursor: pointer;
+		}
+
+		tr[data-picked="true"]:hover {
+			cursor: not-allowed;
+			background: yellow;
+		}
+	}
+}
+
+.draftPreview {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 110px;
+	padding: 0;
+
+	.draftPlayer {
+	    display: flex;
+    	align-items: center;
+
+		div {
+			display: inline-block;
+		}
+
+		div.draftName {
+			width: 200px;
+
+			p {
+				margin: 0 0 7px;
+				font-size: 30px;
+
+				&:last-of-type {
+					font-size: 16px;
+					color: rgba(0,0,0,.7);
+					margin: 0 0 0;
+				}
+			}
+		}
+
+		div.stats {
+			height: 40px;
+			width: 50px;
+			background-color: #fff;
+			text-align: center;
+			padding: 7px 2px;
+			margin-right: 25px;
+			box-shadow: 0px 0px 5px $app-blue;
+
+			p {
+				margin: 0 0 5px;
+				font-size: 12px;
+			}
+		}
+	}
+
+	button {
+		background: $app-green;
+		color: $off-white;
+		box-shadow: 0.4rem 0.4rem 2px black;
+  		transform: translate(-0.4rem, -0.4rem);
+		border: none;
+		height: 30px;
+		width: 110px;
+		outline: none;
+		transition: .5s;
+
+		&:hover {
+			cursor: pointer;
+  			box-shadow: 0.2rem 0.2rem 2px black;
+  			transform: translate(-0.2rem, -0.2rem);
+		}
+
+		&:active {
+			box-shadow: 0rem 0rem 2px black;
+  			transform: translate(0rem, 0rem);
+  			outline: none;
+		}
+	}
+
+	small {
+	    font-size: 12px;
+    	color: darkgray;
+
+    	&:hover {
+    		cursor: pointer;
+    		border-bottom: 1px solid darkgray;
+    	}
+	}
+}
+
+
+.draftContainer {
+	width: 100%;
+    padding: 0 10px 5px;
+}
+
+
