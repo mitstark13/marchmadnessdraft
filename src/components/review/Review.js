@@ -18,6 +18,13 @@ class Review extends Component {
     this.setState({owner: newOwner})
   }
 
+  resetDraft() {
+    console.log('Resetting draft to beginning');
+    let payload = "Resetting draft"
+    axios.put(this.props.dbUrl + '/reset', payload)
+    window.location.pathname = '/';
+  }
+
   componentDidMount() {
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
@@ -28,6 +35,7 @@ class Review extends Component {
     });
 
     this.viewNewTeam = this.viewNewTeam.bind(this);
+    this.resetDraft = this.resetDraft.bind(this);
   }
 
   render() {
@@ -40,6 +48,7 @@ class Review extends Component {
     return (
       <section id="draftReview">
         <h1> Draft Review </h1>
+        <button onClick={this.resetDraft}> Reset Draft </button>
         <DraftTeams
             players={draftedOrder}
             owner={this.state.owner}

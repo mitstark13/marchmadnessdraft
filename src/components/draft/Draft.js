@@ -16,7 +16,7 @@ class Draft extends Component {
       ownersList: [],
       draftOrder: [],
       currentPick: 1,
-      round: 2,
+      round: 1,
       owner: 'Mitchell',
       lastDraftTime: '',
       selectedPlayer: {}
@@ -48,6 +48,7 @@ class Draft extends Component {
     axios.get(this.props.dbUrl + '/players').then((players) => {
       let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
       this.setState({ lastDraftTime: players.data[0].lastPick })
+      this.setState({ round: players.data[0].round })
       this.setState({ ownersList: draftOrder })
       this.setState({ currentPick: players.data[0].currentPick })
       this.setState({ players: players.data })
@@ -56,6 +57,14 @@ class Draft extends Component {
       this.startCountdown();
     });
     axios.post(this.props.dbUrl + '/users', payload);
+  }
+
+  testIfDraftEnded(ownersLength, currentPick) {
+    if (ownersLength * 10 < currentPick) { //END OF DRAFT. TODO: Animation or something rather than redirecting right away
+      window.location.pathname = '/review';
+    } else {
+      this.getDraftOrder();
+    }
   }
 
   startCountdown() {
@@ -103,8 +112,14 @@ class Draft extends Component {
     if (owners.length - draftingIdx > 7) {
       owners = owners.slice(draftingIdx, draftingIdx + 7)
     } else {
-      if (round <= 10) {
+      if (round < 10) {
         owners = [...owners.slice(draftingIdx, owners.length), round, ...owners.slice(0, 7 - (owners.length - draftingIdx))]
+        if (this.state.ownersList.length - draftingIdx <= 1) {
+          console.log('Owners Length: ' + this.state.ownersList.length);
+          console.log('Drafting Idx: ' + draftingIdx);
+          console.log('New Round started')
+          this.setState({ round: this.state.round + 1})
+        }
       } else {
         owners = [...owners.slice(draftingIdx, owners.length)]
       }
@@ -116,7 +131,6 @@ class Draft extends Component {
   playerDrafted(pusher) {
     const channel = pusher.subscribe('draft');
     channel.bind('playerDrafted', data => {
-      console.log(data)
       const nameDrafted = data.value.name;
       console.log(nameDrafted + " has been drafted!")
       
@@ -132,7 +146,7 @@ class Draft extends Component {
       this.setState({ players: playersList });
       this.setState({ currentPick: pickNum});
       this.setState({ lastDraftTime: new Date().getTime() })
-      this.getDraftOrder();
+      this.testIfDraftEnded(this.state.ownersList.length, this.state.currentPick);
     });
   }
 

@@ -80,6 +80,7 @@ MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/n
           owner: "",
           pickNumber: "0",
           currentPick: 1,
+          round: 1,
           lastPick: "0"
         }
       }, (err, result) => {
