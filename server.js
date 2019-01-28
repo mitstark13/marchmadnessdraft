@@ -20,6 +20,20 @@ const pusher = new Pusher({
   encrypted: true
 });
 
+app.use(express.static(__dirname + '/build'));
+
+app.get('/admin', function(req, res){
+  res.redirect('/');
+});
+
+app.get('/draft', function(req, res){
+  res.redirect('/');
+});
+
+app.get('/review', function(req, res){
+  res.redirect('/');
+});
+
 app.set('PORT', process.env.PORT || 5000);
 
 MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/new-db-starkey', (err, database) => {

@@ -33,7 +33,7 @@ class DraftTable extends Component {
             </div>
             <div className="stats total">
               <p>Total</p>
-              <span>{total ? total : "29"}</span>
+              <span>{total ? total : "0"}</span>
             </div>
           </div>
           <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
