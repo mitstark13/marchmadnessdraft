@@ -46,14 +46,16 @@
   display: flex;
   justify-content: space-around;
   align-items: top;
-  height: 100%; }
+  height: 100%;
+  width: 99vw; }
 
 #draft {
   position: relative;
   grid-area: draft;
   display: flex;
   justify-content: space-around;
-  align-items: top; }
+  align-items: top;
+  width: 99vw; }
 
 #chat {
   grid-area: messaging;
