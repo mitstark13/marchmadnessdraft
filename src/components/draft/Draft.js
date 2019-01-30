@@ -5,6 +5,7 @@ import DraftTable from './draftTable/DraftTable';
 import DraftHistory from './draftHistory/DraftHistory';
 import DraftTeams from './draftTeams/DraftTeams';
 import DraftOrder from './draftOrder/DraftOrder';
+import soundFile from '../../music/mmMusic.mp3';
 
 class Draft extends Component {
   constructor(props) {
@@ -17,7 +18,6 @@ class Draft extends Component {
       draftOrder: [],
       currentPick: 1,
       round: 1,
-      owner: 'Mitchell',
       lastDraftTime: '',
       selectedPlayer: {},
       filterTeam: ''
@@ -56,8 +56,25 @@ class Draft extends Component {
       this.setState({ selectedPlayer: players.data[Math.floor(Math.random() * Math.floor(players.data.length - 1))]})
       this.getDraftOrder();
       this.startCountdown();
+      this.playMusic();
     });
     axios.post(this.props.dbUrl + '/users', payload);
+  }
+
+  playMusic() {
+    let pickNum = this.state.currentPick
+    let ownerIdx = pickNum % this.state.ownersList.length
+    const owner = ownerIdx <= 0 ? this.state.ownersList[ownerIdx] : this.state.ownersList[ownerIdx-1]
+
+    if (owner === this.state.username || this.state.username === 'Admin') {
+
+      const audio = new Audio(soundFile)
+      if (!audio) return
+
+      audio.currentTime = 10 //perfect timing
+      audio.play()
+
+    }
   }
 
   testIfDraftEnded(ownersLength, currentPick) {

@@ -34,7 +34,6 @@ class App extends Component {
       draftOrder: [],
       currentPick: 1,
       round: 2,
-      owner: 'Mitchell',
       lastDraftTime: ''
     };
   }
