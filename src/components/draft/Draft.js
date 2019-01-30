@@ -19,7 +19,8 @@ class Draft extends Component {
       round: 1,
       owner: 'Mitchell',
       lastDraftTime: '',
-      selectedPlayer: {}
+      selectedPlayer: {},
+      filterTeam: ''
     };
   }
 
@@ -65,6 +66,11 @@ class Draft extends Component {
     } else {
       this.getDraftOrder();
     }
+  }
+
+  handleTeamFilter() {
+    let team = document.querySelector('.teamFilter').value;
+    this.setState({filterTeam: team})
   }
 
   startCountdown() {
@@ -154,7 +160,9 @@ class Draft extends Component {
     console.log('Resetting draft to beginning');
     let payload = "Resetting draft"
     axios.put(this.props.dbUrl + '/reset', payload)
-    window.location.pathname = '/';
+      .then((resp) => {
+        window.location.pathname = '/';
+      })
   }
 
   viewNewTeam() {
@@ -185,6 +193,7 @@ class Draft extends Component {
       }
       axios.put(this.props.dbUrl + '/marchmadness', payload)
       axios.put(this.props.dbUrl + '/currentPick', payload)
+      
       let newPlayer = "";
       while (newPlayer === "") {
         let option = players[Math.floor(Math.random() * Math.floor(players.length - 1)) + 1]
@@ -192,6 +201,7 @@ class Draft extends Component {
           newPlayer = option
         }
       }
+
       this.setState({ selectedPlayer: newPlayer })
     } else {
       this.showDraftError()
@@ -215,7 +225,14 @@ class Draft extends Component {
         </section>
         
         <section id="draft">
-          <DraftTable players={this.state.players} resetDraft={this.resetDraft.bind(this)} selectedPlayer={this.state.selectedPlayer} draftPlayer={this.draftPlayer.bind(this)} selectPlayer={this.selectPlayer.bind(this)}/>
+          <DraftTable
+            players={this.state.players}
+            resetDraft={this.resetDraft.bind(this)}
+            selectedPlayer={this.state.selectedPlayer}
+            draftPlayer={this.draftPlayer.bind(this)}
+            filterTeam={this.state.filterTeam}
+            handleTeamFilter={this.handleTeamFilter.bind(this)}
+            selectPlayer={this.selectPlayer.bind(this)}/>
           <DraftHistory players={draftedOrder}/>
           <DraftTeams
             players={draftedOrder}

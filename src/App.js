@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import Pusher from 'pusher-js';
 import ChatList from './components/chat/ChatList';
@@ -121,8 +122,18 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <div className="App-name">
-              <h1 className="App-title">Fantasy Draft 2019</h1>
-              <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">View Current Bracket</a>
+              <Link to="/">
+                <h1 className="App-title">Fantasy Draft 2019</h1>
+              </Link>
+              <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
+                <button>View Current Bracket</button>
+              </a>
+              <Link to='/admin'>
+                <button>Admin Page</button>
+              </Link>
+              <Link to='/review'>
+                <button>Admin Page</button>
+              </Link>
             </div>
             <div className="App-user">
               <p>Welcome, {this.state.username}</p>

@@ -1,7 +1,7 @@
 .App {
   display: grid;
   grid-template-areas: "header header header" "order order order" "draft draft draft" "messaging messaging messaging";
-  grid-template-rows: 25px 70px 1fr 170px;
+  grid-template-rows: 25px 70px 460px 170px;
   grid-gap: 5px;
   background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
   background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
@@ -18,17 +18,27 @@
   text-align: center;
   padding: 10px 40px;
   box-shadow: 0px 1px 5px #475570; }
-
-.App-title {
-  display: inline-block;
-  font-size: 16px;
-  margin: 0; }
-
-.App-bracket {
-  display: inline-block;
-  margin-left: 20px;
-  font-size: 12px;
-  color: #F2F4F4; }
+  .App-header button {
+    background: none;
+    border: 1px solid #F2F4F4;
+    border-radius: 5px;
+    color: #F2F4F4;
+    margin: 0 20px;
+    transition: .5s; }
+    .App-header button:hover {
+      cursor: pointer;
+      color: #7CB982;
+      border: 1px solid #7CB982;
+      background: #F2F4F4; }
+  .App-header .App-title {
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    color: #F2F4F4; }
+  .App-header .App-bracket {
+    display: inline-block;
+    font-size: 12px;
+    color: #F2F4F4; }
 
 #draftOrder {
   position: relative;

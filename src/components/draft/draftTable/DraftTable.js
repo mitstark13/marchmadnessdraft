@@ -8,6 +8,7 @@ class DraftTable extends Component {
     let sortedPlayers = [...this.props.players]
     const {name, team, rebounds, assists, total, points} = this.props.selectedPlayer;
     const id = this.props.selectedPlayer._id;
+    const filterTeam = this.props.filterTeam;
 
     sortedPlayers.sort((a, b) => b.total - a.total)
 
@@ -39,6 +40,10 @@ class DraftTable extends Component {
           <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
           <small onClick={this.props.resetDraft}>Reset</small>
         </div>
+
+        <span>Search name or team: </span>
+        <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
+
         <table className="draftTable">
           <thead className="draftHeader">
             <tr>
@@ -54,7 +59,7 @@ class DraftTable extends Component {
           {sortedPlayers.map((player, i) => {
             const picked = Number(player.pickNumber) > 0;
             const playerLink = "http://www.espn.com/search/results?q=" + player.name
-            if (player.name && player.owner.length < 1) {
+            if ((player.name && player.owner.length < 1) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
               return (
                 <tr key={i} data-picked={picked} onClick={() => {this.props.selectPlayer(player)}}>
                   <td className="name"><a href={playerLink} target="_blank">{player.name}</a></td>
