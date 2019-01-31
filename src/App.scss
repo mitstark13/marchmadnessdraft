@@ -7,7 +7,7 @@
     "order order order"
     "draft draft draft"
     "messaging messaging messaging";
-  grid-template-rows: 25px 70px 460px 170px;
+  grid-template-rows: 25px 70px 460px 270px;
   grid-gap: 5px;
   background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
   background: -webkit-linear-gradient(-45deg, #eeeeee 0%,#F7F7F7 47%,#eeeeee 100%);
@@ -31,7 +31,7 @@
     border: 1px solid $off-white;
     border-radius: 5px;
     color: $off-white;
-    margin: 0 20px;
+    margin: 0 0 0 10px;
     transition: .5s;
 
     &:hover {
@@ -76,6 +76,6 @@
 
 #chat {
   grid-area: messaging;
-  height: 157px;
+  height: 257px;
   background: $app-blue;
 }

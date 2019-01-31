@@ -1,7 +1,7 @@
 .App {
   display: grid;
   grid-template-areas: "header header header" "order order order" "draft draft draft" "messaging messaging messaging";
-  grid-template-rows: 25px 70px 460px 170px;
+  grid-template-rows: 25px 70px 460px 270px;
   grid-gap: 5px;
   background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
   background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
@@ -23,7 +23,7 @@
     border: 1px solid #F2F4F4;
     border-radius: 5px;
     color: #F2F4F4;
-    margin: 0 20px;
+    margin: 0 0 0 10px;
     transition: .5s; }
     .App-header button:hover {
       cursor: pointer;
@@ -59,7 +59,7 @@
 
 #chat {
   grid-area: messaging;
-  height: 157px;
+  height: 257px;
   background: #475570; }
 
 /*# sourceMappingURL=App.css.map */

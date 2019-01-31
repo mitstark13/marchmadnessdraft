@@ -61,14 +61,14 @@ class App extends Component {
   pusherChat(pusher) {
     const channel = pusher.subscribe('chat');
     channel.bind('message', data => {
-      this.setState({ chats: [...this.state.chats, data], test: '' });
+      this.setState({ chats: [data, ...this.state.chats], test: '' });
     });
   }
 
   pusherLogin(pusher) {
     const channel = pusher.subscribe('login');
     channel.bind('users', data => {
-      this.setState({ chats: [...this.state.chats, data], test: '' });
+      this.setState({ chats: [data, ...this.state.chats], test: '' });
     })
   }
 
@@ -129,7 +129,7 @@ class App extends Component {
                 <button>Admin Page</button>
               </Link>
               <Link to='/review'>
-                <button>Review/Draft ended Page</button>
+                <button>Review/Draft ended page</button>
               </Link>
             </div>
             <div className="App-user">
