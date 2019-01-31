@@ -129,7 +129,7 @@ class App extends Component {
                 <button>Admin Page</button>
               </Link>
               <Link to='/review'>
-                <button>Admin Page</button>
+                <button>Review/Draft ended Page</button>
               </Link>
             </div>
             <div className="App-user">
