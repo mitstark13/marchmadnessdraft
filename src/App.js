@@ -39,31 +39,23 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //this.loginUser();
 
     const pusher = new Pusher('4f19babc17552ecbf634', {
       cluster: 'us2',
       encrypted: true
     });
 
-    // this.pusherChat(pusher);
+    this.pusherChat(pusher);
     this.pusherLogin(pusher);
-    // this.playerDrafted(pusher);
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
-    // this.viewNewTeam = this.viewNewTeam.bind(this);
-
-    // const payload = [
-    //   this.state.username
-    // ];
+    this.ownerLogin = this.ownerLogin.bind(this);
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
-      console.log(players.data)
       let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
       this.setState({ ownersList: draftOrder })
     });
-    // axios.post(this.props.dbUrl + '/users', payload);
   }
 
   pusherChat(pusher) {
@@ -81,7 +73,6 @@ class App extends Component {
   }
 
   ownerLogin(owner) {
-    console.log(owner);
 
     this.setState({ username: owner })
 
@@ -90,6 +81,13 @@ class App extends Component {
     setTimeout(() => {
       loginModal.style.display = 'none';
     }, 500);
+
+    const payload = {
+      username: '',
+      message: owner + ' has entered the draft'
+    };
+
+    axios.post(this.props.dbUrl + '/users', payload);
   }
 
   loginUser() {

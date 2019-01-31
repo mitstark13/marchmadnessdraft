@@ -10,7 +10,7 @@ export default ({ owners, teamNames, ownerLogin }) => (
           <h1> Welcome to the 2019 March Madness Draft! </h1>
           <small> Please select your name from the list below to login </small>
         </div>
-        <Link to="/draft" >
+        <Link to="/draft">
           <div className="ownersLoginList">
             {owners.map((owner, i) => {
               return (

@@ -42,10 +42,6 @@ class Draft extends Component {
 
     this.viewNewTeam = this.viewNewTeam.bind(this);
 
-    const payload = [
-      this.state.username
-    ];
-
     axios.get(this.props.dbUrl + '/players').then((players) => {
       let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
       this.setState({ lastDraftTime: players.data[0].lastPick })
@@ -58,7 +54,6 @@ class Draft extends Component {
       this.startCountdown();
       this.playMusic();
     });
-    axios.post(this.props.dbUrl + '/users', payload);
   }
 
   playMusic() {
@@ -138,8 +133,6 @@ class Draft extends Component {
       if (round < 10) {
         owners = [...owners.slice(draftingIdx, owners.length), round, ...owners.slice(0, 7 - (owners.length - draftingIdx))]
         if (this.state.ownersList.length - draftingIdx <= 1) {
-          console.log('Owners Length: ' + this.state.ownersList.length);
-          console.log('Drafting Idx: ' + draftingIdx);
           console.log('New Round started')
           this.setState({ round: this.state.round + 1})
         }
@@ -174,7 +167,6 @@ class Draft extends Component {
   }
 
   resetDraft() {
-    console.log('Resetting draft to beginning');
     let payload = "Resetting draft"
     axios.put(this.props.dbUrl + '/reset', payload)
       .then((resp) => {
