@@ -36,12 +36,15 @@ class DraftTable extends Component {
               <p>Total</p>
               <span>{total ? total : "0"}</span>
             </div>
+            
+            <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
           </div>
-          <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
         </div>
 
-        <span>Search name or team: </span>
-        <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
+        <div className="tableFilters">
+          <span>Search name or team: </span>
+          <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
+        </div>
 
         <table className="draftTable">
           <thead className="draftHeader">

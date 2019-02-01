@@ -14,7 +14,7 @@
     justify-content: space-between;
     align-content: center;
     width: 100%;
-    height: 22px;
+    height: 26px;
     border-bottom: 1px solid #fff; }
     .draftTable tr[data-picked="true"] {
       background: yellow; }
@@ -29,7 +29,7 @@
     width: 16%;
     text-align: left;
     padding: 3px 5px 0;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400; }
   .draftTable .name {
     flex: 1 1 28%; }
@@ -45,7 +45,7 @@
   .draftTable tbody {
     display: block;
     overflow: auto;
-    height: 300px; }
+    height: 345px; }
     .draftTable tbody tr:hover {
       background: #F2F4F4;
       cursor: pointer; }
@@ -54,28 +54,33 @@
       background: yellow; }
 
 .draftPreview {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: block;
+  position: relative;
   height: 110px;
-  padding: 0; }
+  padding: 0 0 0 10px; }
   .draftPreview .draftPlayer {
     display: flex;
-    align-items: center; }
+    align-items: center;
+    width: 100%;
+    height: 105px; }
     .draftPreview .draftPlayer div {
       display: inline-block; }
     .draftPreview .draftPlayer div.draftName {
-      width: 200px; }
+      flex: 1 0 115px;
+      max-width: 250px; }
       .draftPreview .draftPlayer div.draftName p {
         margin: 0 0 7px;
         font-size: 30px; }
+        @media screen and (max-width: 1360px) {
+          .draftPreview .draftPlayer div.draftName p {
+            font-size: 23px; } }
         .draftPreview .draftPlayer div.draftName p:last-of-type {
-          font-size: 16px;
+          font-size: 18px;
           color: rgba(0, 0, 0, 0.7);
           margin: 0 0 0; }
     .draftPreview .draftPlayer div.stats {
       height: 40px;
-      width: 50px;
+      width: 62px;
       background-color: #fff;
       text-align: center;
       padding: 7px 2px;
@@ -84,14 +89,18 @@
       .draftPreview .draftPlayer div.stats p {
         margin: 0 0 5px;
         font-size: 12px; }
+      .draftPreview .draftPlayer div.stats span {
+        font-size: 22px; }
   .draftPreview button {
     background: #7CB982;
     color: #F2F4F4;
     box-shadow: 0.4rem 0.4rem 2px black;
     transform: translate(-0.4rem, -0.4rem);
     border: none;
-    height: 30px;
-    width: 110px;
+    height: 42px;
+    width: 160px;
+    font-size: 18px;
+    margin-left: 20px;
     outline: none;
     transition: .5s; }
     .draftPreview button:hover {
@@ -102,6 +111,9 @@
       box-shadow: 0rem 0rem 2px black;
       transform: translate(0rem, 0rem);
       outline: none; }
+
+.tableFilters {
+  padding-left: 10px; }
 
 .draftContainer {
   width: 100%;

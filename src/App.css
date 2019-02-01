@@ -1,7 +1,7 @@
 .App {
   display: grid;
-  grid-template-areas: "header header header" "order order order" "draft draft draft" "messaging messaging messaging";
-  grid-template-rows: 25px 70px 460px 270px;
+  grid-template-areas: "header header header" "draft draft draft" "messaging messaging messaging";
+  grid-template-rows: 35px 595px 270px;
   grid-gap: 5px;
   background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
   background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
@@ -40,22 +40,16 @@
     font-size: 12px;
     color: #F2F4F4; }
 
-#draftOrder {
-  position: relative;
-  grid-area: order;
-  display: flex;
-  justify-content: space-around;
-  align-items: top;
-  height: 100%;
-  width: 99vw; }
+#draftWrapper {
+  grid-area: draft; }
 
 #draft {
   position: relative;
-  grid-area: draft;
   display: flex;
   justify-content: space-around;
   align-items: top;
-  width: 99vw; }
+  width: 99vw;
+  height: calc(100% - 75px); }
 
 #chat {
   grid-area: messaging;

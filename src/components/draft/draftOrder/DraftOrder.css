@@ -1,3 +1,11 @@
+#draftOrder {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: top;
+  height: 75px;
+  width: 99vw; }
+
 .draftOrder {
   display: flex;
   justify-content: space-between;

@@ -17,7 +17,7 @@
 		justify-content: space-between;
 		align-content: center;
 		width: 100%;
-		height: 22px;
+		height: 26px;
 		border-bottom: 1px solid #fff;
 
 		&[data-picked="true"] {
@@ -36,7 +36,7 @@
 		width: 16%;
 		text-align: left;
 		padding: 3px 5px 0;
-		font-size: 14px;
+		font-size: 16px;
 		font-weight: 400;
 	}
 	.name {
@@ -58,7 +58,7 @@
 	tbody {
 		display: block;
 		overflow: auto;
-		height: 300px;
+		height: 345px;
 
 		tr:hover {
 			background: $off-white;
@@ -73,29 +73,35 @@
 }
 
 .draftPreview {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	display: block;
+	position: relative;
 	height: 110px;
-	padding: 0;
+	padding: 0 0 0 10px;
 
 	.draftPlayer {
 	    display: flex;
-    	align-items: center;
+		align-items: center;
+		width: 100%;
+		height: 105px;
 
 		div {
 			display: inline-block;
 		}
 
 		div.draftName {
-			width: 200px;
+			flex: 1 0 115px;
+			max-width: 250px;
 
 			p {
 				margin: 0 0 7px;
 				font-size: 30px;
 
+				@media screen and (max-width: 1360px) {
+					font-size: 23px;
+				}
+
 				&:last-of-type {
-					font-size: 16px;
+					font-size: 18px;
 					color: rgba(0,0,0,.7);
 					margin: 0 0 0;
 				}
@@ -104,16 +110,20 @@
 
 		div.stats {
 			height: 40px;
-			width: 50px;
+			width: 62px;
 			background-color: #fff;
 			text-align: center;
 			padding: 7px 2px;
 			margin-right: 25px;
 			box-shadow: 0px 0px 5px $app-blue;
 
-			p {
+			p { //label
 				margin: 0 0 5px;
 				font-size: 12px;
+			}
+
+			span { //stat
+				font-size: 22px;
 			}
 		}
 	}
@@ -124,8 +134,10 @@
 		box-shadow: 0.4rem 0.4rem 2px black;
   		transform: translate(-0.4rem, -0.4rem);
 		border: none;
-		height: 30px;
-		width: 110px;
+		height: 42px;
+		width: 160px;
+		font-size: 18px;
+		margin-left: 20px;
 		outline: none;
 		transition: .5s;
 
@@ -143,10 +155,11 @@
 	}
 }
 
+.tableFilters {
+	padding-left: 10px;
+}
 
 .draftContainer {
 	width: 100%;
     padding: 0 10px 5px;
 }
-
-
