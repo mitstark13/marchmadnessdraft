@@ -17,7 +17,7 @@ class DraftTable extends Component {
         <div className="draftPreview">
           <div className="draftPlayer">
             <div className="draftName">
-              <p>{name ? name : "Test Player"}</p>
+              <p>{name ? name : "Nick Starkey"}</p>
               <p>{team ? team : "Lebanon"}</p>
             </div>
             <div className="stats pts">
@@ -38,7 +38,6 @@ class DraftTable extends Component {
             </div>
           </div>
           <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
-          <small onClick={this.props.resetDraft}>Reset</small>
         </div>
 
         <span>Search name or team: </span>

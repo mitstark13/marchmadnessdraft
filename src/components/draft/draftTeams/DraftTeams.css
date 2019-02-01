@@ -1,7 +1,7 @@
 .teamsView {
   flex: 0 0 250px;
   margin: 0;
-  padding: 0 20px; }
+  padding: 0 5px 0 10px; }
   .teamsView table {
     position: relative;
     flex: 2 0 450px;

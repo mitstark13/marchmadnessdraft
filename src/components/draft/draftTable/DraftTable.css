@@ -102,12 +102,6 @@
       box-shadow: 0rem 0rem 2px black;
       transform: translate(0rem, 0rem);
       outline: none; }
-  .draftPreview small {
-    font-size: 12px;
-    color: darkgray; }
-    .draftPreview small:hover {
-      cursor: pointer;
-      border-bottom: 1px solid darkgray; }
 
 .draftContainer {
   width: 100%;

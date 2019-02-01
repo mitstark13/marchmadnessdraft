@@ -44,6 +44,14 @@ class Admin extends Component {
     this.postPlayer();
   }
 
+  resetDraft = () => {
+    let payload = "Resetting draft"
+    axios.put(this.props.dbUrl + '/reset', payload)
+      .then((resp) => {
+        alert('Draft reset to pick #1')
+      })
+  }
+
   filePicked = (oEvent) => {
     var oFile = oEvent.target.files[0];
     var sFilename = oFile.name;
@@ -96,6 +104,8 @@ class Admin extends Component {
         <div id='my_file_output'></div>
 
         <button className="deleteBlank" onClick={this.deleteNull}>Delete bad uploads</button>
+
+        <button className="deleteBlank" onClick={this.resetDraft}>Reset Draft</button>
 
       </div>
     )

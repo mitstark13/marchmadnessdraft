@@ -166,14 +166,6 @@ class Draft extends Component {
     });
   }
 
-  resetDraft() {
-    let payload = "Resetting draft"
-    axios.put(this.props.dbUrl + '/reset', payload)
-      .then((resp) => {
-        window.location.pathname = '/';
-      })
-  }
-
   viewNewTeam() {
     const newOwner = document.querySelector('.teamSelect').value;
     this.setState({owner: newOwner})
@@ -236,7 +228,6 @@ class Draft extends Component {
         <section id="draft">
           <DraftTable
             players={this.state.players}
-            resetDraft={this.resetDraft.bind(this)}
             selectedPlayer={this.state.selectedPlayer}
             draftPlayer={this.draftPlayer.bind(this)}
             filterTeam={this.state.filterTeam}
