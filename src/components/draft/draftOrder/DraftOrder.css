@@ -32,6 +32,12 @@
       clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%); }
     .draftOrder .orderOwner:after {
       animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite; }
+  @media screen and (max-width: 760px) {
+    .draftOrder {
+      overflow-x: hidden; }
+      .draftOrder .orderOwner {
+        width: auto;
+        flex: 1 0 calc(100vw / 3 - 150px / 3); } }
   .draftOrder #countdown {
     position: relative;
     height: 100%;
@@ -40,33 +46,43 @@
     background: #475570;
     border: 1px solid #111;
     padding: 0; }
-  .draftOrder #countdown #tiles span {
-    width: 92px;
-    max-width: 92px;
-    font: bold 24px 'Droid Sans', Arial, sans-serif;
-    text-align: center;
-    color: #111;
-    background-color: #ddd;
-    border-top: 1px solid #fff;
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
-    margin: 5px 7px;
-    padding: 4px 0;
-    display: inline-block;
-    position: relative; }
-  .draftOrder #countdown .labels {
-    width: 100%;
-    height: 25px;
-    text-align: center;
-    position: absolute;
-    bottom: 0px; }
-  .draftOrder #countdown .labels li {
-    width: 102px;
-    font: bold 15px 'Droid Sans', Arial, sans-serif;
-    color: #7CB982;
-    text-shadow: 1px 1px 0px #000;
-    text-align: center;
-    text-transform: uppercase;
-    display: inline-block; }
+    .draftOrder #countdown #tiles span {
+      width: 92px;
+      max-width: 92px;
+      font: bold 24px 'Droid Sans', Arial, sans-serif;
+      text-align: center;
+      color: #111;
+      background-color: #ddd;
+      border-top: 1px solid #fff;
+      box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+      margin: 5px 7px;
+      padding: 4px 0;
+      display: inline-block;
+      position: relative; }
+    .draftOrder #countdown .labels {
+      width: 100%;
+      height: 25px;
+      text-align: center;
+      position: absolute;
+      bottom: 0px; }
+      .draftOrder #countdown .labels li {
+        width: 102px;
+        font: bold 15px 'Droid Sans', Arial, sans-serif;
+        color: #7CB982;
+        text-shadow: 1px 1px 0px #000;
+        text-align: center;
+        text-transform: uppercase;
+        display: inline-block; }
+    @media screen and (max-width: 760px) {
+      .draftOrder #countdown {
+        min-width: 142px; }
+        .draftOrder #countdown #tiles span {
+          width: 42px;
+          font: bold 24px 'Droid Sans', Arial, sans-serif; }
+        .draftOrder #countdown .labels li {
+          font: bold 8px 'Droid Sans', Arial, sans-serif;
+          margin: 0 12px;
+          width: auto; } }
 
 /* motion */
 @keyframes gradient-animation {

@@ -31,12 +31,21 @@
     padding: 3px 5px 0;
     font-size: 16px;
     font-weight: 400; }
+    @media screen and (max-width: 760px) {
+      .draftTable td.pts, .draftTable td.reb, .draftTable td.ast, .draftTable th.pts, .draftTable th.reb, .draftTable th.ast {
+        display: none; } }
   .draftTable .name {
     flex: 1 1 28%; }
   .draftTable .school {
     flex: 1 1 22%; }
   .draftTable .total {
-    flex: 1 1 14%; }
+    flex: 1 1 12%; }
+  @media screen and (max-width: 760px) {
+    .draftTable .school, .draftTable .total {
+      flex: 1 1 40px;
+      font-size: 14px; }
+    .draftTable .total {
+      flex: 1 1 20px; } }
   .draftTable td a {
     color: #7CB982;
     text-decoration: none; }
@@ -86,6 +95,9 @@
       padding: 7px 2px;
       margin-right: 25px;
       box-shadow: 0px 0px 5px #475570; }
+      @media screen and (max-width: 760px) {
+        .draftPreview .draftPlayer div.stats.pts, .draftPreview .draftPlayer div.stats.rebs, .draftPreview .draftPlayer div.stats.ast {
+          display: none; } }
       .draftPreview .draftPlayer div.stats p {
         margin: 0 0 5px;
         font-size: 12px; }
@@ -103,6 +115,11 @@
     margin-left: 20px;
     outline: none;
     transition: .5s; }
+    @media screen and (max-width: 760px) {
+      .draftPreview button {
+        height: 38px;
+        width: 130px;
+        font-size: 14px; } }
     .draftPreview button:hover {
       cursor: pointer;
       box-shadow: 0.2rem 0.2rem 2px black;

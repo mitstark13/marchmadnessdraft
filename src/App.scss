@@ -33,6 +33,10 @@
     margin: 0 0 0 10px;
     transition: .5s;
 
+    @media screen and (max-width: 760px) {
+      display: none;
+    }
+
     &:hover {
       cursor: pointer;
       color: $app-green;
@@ -71,4 +75,16 @@
   grid-area: messaging;
   height: 257px;
   background: $app-blue;
+}
+
+
+@media screen and (max-width: 1150px) {
+  .App {
+    grid-template-rows: 35px auto 270px;
+    height: auto;
+  }
+
+  #draft {
+    flex-wrap: wrap;
+  }
 }

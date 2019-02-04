@@ -38,6 +38,12 @@
 		padding: 3px 5px 0;
 		font-size: 16px;
 		font-weight: 400;
+
+		@media screen and (max-width: 760px) {
+			&.pts, &.reb, &.ast {
+				display: none;
+			}
+		}
 	}
 	.name {
 		flex: 1 1 28%;
@@ -46,8 +52,19 @@
 		flex: 1 1 22%;
 	}
 	.total {
-		flex: 1 1 14%;
+		flex: 1 1 12%;
 	}
+	
+	@media screen and (max-width: 760px) {
+		.school, .total {
+			flex: 1 1 40px;
+    		font-size: 14px;
+		}
+		.total {
+			flex: 1 1 20px;
+		}
+	}
+
 	td a {
 		color: $app-green;
 		text-decoration: none;
@@ -117,6 +134,12 @@
 			margin-right: 25px;
 			box-shadow: 0px 0px 5px $app-blue;
 
+			@media screen and (max-width: 760px) {
+				&.pts, &.rebs, &.ast {
+					display: none;
+				}
+			}
+
 			p { //label
 				margin: 0 0 5px;
 				font-size: 12px;
@@ -140,6 +163,12 @@
 		margin-left: 20px;
 		outline: none;
 		transition: .5s;
+
+		@media screen and (max-width: 760px) {
+			height: 38px;
+			width: 130px;
+			font-size: 14px;
+		}
 
 		&:hover {
 			cursor: pointer;
