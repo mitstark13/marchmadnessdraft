@@ -4,13 +4,39 @@ import './DraftTable.css';
 class DraftTable extends Component {
 
   render() {
-    // Sort players so best available is on top
-    let sortedPlayers = [...this.props.players]
+    // Sort players by total so best available is on top.
+    let sortedPlayers = this.props.players
+    let seedList = this.props.seedList
     const {name, team, rebounds, assists, total, points} = this.props.selectedPlayer;
     const id = this.props.selectedPlayer._id;
     const filterTeam = this.props.filterTeam;
 
-    sortedPlayers.sort((a, b) => b.total - a.total)
+    sortedPlayers.sort((a, b) => {
+      
+      if (this.props.filterByProj) {
+        // *** PLEASE FIND BETTER WAY TO DO THIS. CURRENTLY LAZY ***
+        let aTeam = a.team
+        let aSeed = seedList[aTeam]
+        let aSeedStrength = 1
+
+        let bTeam = b.team
+        let bSeed = seedList[bTeam]
+        let bSeedStrength = 1
+
+        // Finding projected games to be played, then multiply that to total
+        for (let i = 1; i < 9; i+=2) {
+          aSeedStrength = aSeed <= i ? aSeedStrength+=1 : aSeedStrength
+          bSeedStrength = bSeed <= i ? bSeedStrength+=1 : bSeedStrength
+        }
+
+        a.AdjTotal = a.total * aSeedStrength
+        b.AdjTotal = b.total * bSeedStrength
+      } else {
+        [a.AdjTotal, b.AdjTotal] = [a.total, b.total]
+      }
+
+      return b.AdjTotal - a.AdjTotal
+    })
 
     return (
       <div className="draftContainer">
@@ -42,8 +68,21 @@ class DraftTable extends Component {
         </div>
 
         <div className="tableFilters">
-          <span>Search name or team: </span>
-          <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
+          <div className="teamFilterWrapper">
+            <label>Search name or team: </label>
+            <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
+          </div>
+
+          <div className="bestAvailableWrapper">
+            <label>Best Available: </label>
+            <input type="checkbox" className="bestAvailableFilter" onChange={this.props.handleAvailableFilter} />
+            <div className="bestAvailableInfo">
+              <span>?</span>
+              <div className="bestAvailableInfoModal">
+                <p>"Best Available" will filter based on projected number of games the player will play<span className="warning">Warning: this would have put most of the Virginia players near the top last year...</span></p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <table className="draftTable">

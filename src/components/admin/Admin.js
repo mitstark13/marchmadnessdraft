@@ -15,7 +15,7 @@ class Admin extends Component {
       pickNumber: '0',
       owner: '',
       currentPick: 1,
-      lastPick: '0',
+      lastPick: '0'
     };
   }
 
@@ -62,7 +62,7 @@ class Admin extends Component {
     reader.onload = function(evt) {
       const bstr = evt.target.result;
       const wb = XLSX.read(bstr, {type:'binary'});
-      /* Get first worksheet */
+      // Get first worksheet
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
       console.log(ws)
@@ -102,9 +102,9 @@ class Admin extends Component {
 
         <input type="file" id="my_file_input" onChange={this.filePicked} />
         <div id='my_file_output'></div>
-
+        <br/>
         <button className="deleteBlank" onClick={this.deleteNull}>Delete bad uploads</button>
-
+        <br/>
         <button className="deleteBlank" onClick={this.resetDraft}>Reset Draft</button>
 
       </div>

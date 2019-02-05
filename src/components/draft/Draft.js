@@ -13,6 +13,7 @@ class Draft extends Component {
 
     this.state = {
       username: '',
+      teamViewOwner: '',
       players: [],
       ownersList: [],
       draftOrder: [],
@@ -20,7 +21,9 @@ class Draft extends Component {
       round: 1,
       lastDraftTime: '',
       selectedPlayer: {},
-      filterTeam: ''
+      seedList: {},
+      filterTeam: '',
+      filterByProj: false
     };
   }
 
@@ -37,6 +40,7 @@ class Draft extends Component {
     }
 
     this.setState({ username: this.props.username })
+    this.setState({ teamViewOwner: document.querySelector('.teamSelect').value})
 
     this.playerDrafted(pusher);
 
@@ -46,6 +50,7 @@ class Draft extends Component {
       let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
       this.setState({ lastDraftTime: players.data[0].lastPick })
       this.setState({ round: players.data[0].round })
+      this.setState({ seedList: players.data[0].seedList })
       this.setState({ ownersList: draftOrder })
       this.setState({ currentPick: players.data[0].currentPick })
       this.setState({ players: players.data })
@@ -83,6 +88,10 @@ class Draft extends Component {
   handleTeamFilter() {
     let team = document.querySelector('.teamFilter').value;
     this.setState({filterTeam: team})
+  }
+
+  handleAvailableFilter() {
+    this.setState({filterByProj: !this.state.filterByProj})
   }
 
   startCountdown() {
@@ -168,7 +177,7 @@ class Draft extends Component {
 
   viewNewTeam() {
     const newOwner = document.querySelector('.teamSelect').value;
-    this.setState({owner: newOwner})
+    this.setState({teamViewOwner: newOwner})
   }
 
   selectPlayer(e) {
@@ -228,15 +237,18 @@ class Draft extends Component {
         <section id="draft">
           <DraftTable
             players={this.state.players}
+            seedList={this.state.seedList}
             selectedPlayer={this.state.selectedPlayer}
             draftPlayer={this.draftPlayer.bind(this)}
             filterTeam={this.state.filterTeam}
+            filterByProj={this.state.filterByProj}
             handleTeamFilter={this.handleTeamFilter.bind(this)}
+            handleAvailableFilter={this.handleAvailableFilter.bind(this)}
             selectPlayer={this.selectPlayer.bind(this)}/>
           <DraftHistory players={draftedOrder}/>
           <DraftTeams
             players={draftedOrder}
-            owner={this.state.owner}
+            owner={this.state.teamViewOwner}
             viewNewTeam={this.viewNewTeam}
           />
         </section>

@@ -20,17 +20,7 @@ class App extends Component {
       chats: [],
       players: [],
       ownersList: [],
-      teamNames: [
-        'Jedi Padawans',
-        'The Three Musketeers',
-        'St Louis',
-        'CK/KC',
-        'I.W.O.Y.B.Y.A.R.T.A.I',
-        "One and Done's",
-        'Sith Lords',
-        'In The Bagley',
-        'Team Noah'
-      ],
+      teamNames: [],
       draftOrder: [],
       currentPick: 1,
       round: 2,
@@ -54,6 +44,7 @@ class App extends Component {
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
       let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
+      this.setState({ teamNames: players.data[0].teamNames })
       this.setState({ ownersList: draftOrder })
     });
   }
