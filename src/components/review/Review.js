@@ -18,11 +18,12 @@ class Review extends Component {
     this.setState({owner: newOwner})
   }
 
-  resetDraft() {
-    console.log('Resetting draft to beginning');
+  resetDraft = () => {
     let payload = "Resetting draft"
     axios.put(this.props.dbUrl + '/reset', payload)
-    window.location.pathname = '/';
+      .then((resp) => {
+        alert('Draft reset to pick #1')
+      })
   }
 
   componentDidMount() {

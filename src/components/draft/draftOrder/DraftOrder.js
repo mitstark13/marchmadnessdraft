@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './DraftOrder.css';
 
-class ChatBox extends Component {
+class DraftOrder extends Component {
 
   render() {
     let owners = this.props.owners;
@@ -35,4 +35,4 @@ class ChatBox extends Component {
   }
 }
 
-export default ChatBox;
+export default DraftOrder;

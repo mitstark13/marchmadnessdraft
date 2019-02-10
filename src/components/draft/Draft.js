@@ -19,6 +19,8 @@ class Draft extends Component {
       draftOrder: [],
       currentPick: 1,
       round: 1,
+      maxRounds: 2,
+      autopick: false,
       lastDraftTime: '',
       selectedPlayer: {},
       seedList: {},
@@ -35,6 +37,13 @@ class Draft extends Component {
       encrypted: true
     });
 
+    console.log('testing audio');
+    if (this.audio) {
+      this.audio.pause()
+    }
+
+    this.audio = new Audio(soundFile)
+
     if (this.props.username.length < 1) {
       window.location.pathname = '/'
     }
@@ -45,6 +54,7 @@ class Draft extends Component {
     this.playerDrafted(pusher);
 
     this.viewNewTeam = this.viewNewTeam.bind(this);
+    this.countdownVar = true;
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
       let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
@@ -56,9 +66,24 @@ class Draft extends Component {
       this.setState({ players: players.data })
       this.setState({ selectedPlayer: players.data[Math.floor(Math.random() * Math.floor(players.data.length - 1))]})
       this.getDraftOrder();
-      this.startCountdown();
       this.playMusic();
+      // this.countdownInterval = setInterval(() => { this.getCountdown() }, 1000);
     });
+
+    this.countdownInterval = setInterval(() => { if (this.countdownVar) this.getCountdown() }, 1000);
+  }
+
+  componentWillMount() {
+    this.countdownVar = true;
+  }
+
+  componentWillUnmount(){
+    this.countdownVar = false;
+    clearInterval(this.intervalId);
+
+    if (this.audio) {
+      this.audio.pause()
+    }
   }
 
   playMusic() {
@@ -68,17 +93,23 @@ class Draft extends Component {
 
     if (owner === this.state.username || this.state.username === 'Admin') {
 
-      const audio = new Audio(soundFile)
-      if (!audio) return
+      if (!this.audio) return
 
-      audio.currentTime = 10 //perfect timing
-      audio.play()
+      this.audio.currentTime = 10 //perfect timing
+      this.audio.volume = 0.2 //quiet for testing
+      this.audio.play()
 
     }
   }
 
+  stopAudio() {
+    if (this.audio) {
+      this.audio.pause()
+    }
+  }
+
   testIfDraftEnded(ownersLength, currentPick) {
-    if (ownersLength * 10 < currentPick) { //END OF DRAFT. TODO: Animation or something rather than redirecting right away
+    if (ownersLength * this.state.maxRounds < currentPick) { //END OF DRAFT. TODO: Animation or something rather than redirecting right away
       window.location.pathname = '/review';
     } else {
       this.getDraftOrder();
@@ -93,39 +124,33 @@ class Draft extends Component {
   handleAvailableFilter() {
     this.setState({filterByProj: !this.state.filterByProj})
   }
+   
+  //Countdown Clock
 
-  startCountdown() {
-    //Countdown Clock
-
+  getCountdown() {
     var countdown = document.getElementById("tiles"); // get tag element
+    let twoMinFrom = this.state.lastDraftTime === "0" ? new Date().getTime() : Number(this.state.lastDraftTime)
+    var target_date = twoMinFrom + (1000 * 60 * 2); // set the countdown date
+    var minutes, seconds; // variables for time units
 
-    var interval = setInterval(function () { getCountdown(); }, 1000);
+    // find the amount of "seconds" between now and target
+    var current_date = new Date().getTime();
+    var seconds_left = (target_date - current_date) / 1000;
+    console.log(seconds_left)
+    if (seconds_left <= 1) {
+      this.setState({ autopick: true })
+      this.draftPlayer();
+    }
+    seconds_left = seconds_left % 3600;
+        
+    minutes = pad( parseInt(seconds_left / 60, 10) );
+    seconds = pad( parseInt( seconds_left % 60, 10 ) );
 
-    let getCountdown = () => {
-      let twoMinFrom = this.state.lastDraftTime === "0" ? new Date().getTime() : Number(this.state.lastDraftTime)
-      var target_date = twoMinFrom + (1000 * 60 * 2); // set the countdown date
-      var minutes, seconds; // variables for time units
-
-      // find the amount of "seconds" between now and target
-      var current_date = new Date().getTime();
-      var seconds_left = (target_date - current_date) / 1000;
-      if (seconds_left <= 1) {
-        this.draftPlayer();
-        clearInterval(interval)
-        target_date = new Date().getTime() + (1000 * 60 * 2);
-        interval = setInterval(function () { getCountdown(); }, 1000);
-      }
-      seconds_left = seconds_left % 3600;
-          
-      minutes = pad( parseInt(seconds_left / 60, 10) );
-      seconds = pad( parseInt( seconds_left % 60, 10 ) );
-
-      // format countdown string + set tag value
+    // format countdown string + set tag value
+    if (countdown) {
       countdown.innerHTML = "<span>" + minutes + "</span><span>" + seconds + "</span>"; 
     }
-
-    getCountdown();
-
+    
     function pad(n) {
       return (n < 10 ? '0' : '') + n;
     }
@@ -139,7 +164,7 @@ class Draft extends Component {
     if (owners.length - draftingIdx > 7) {
       owners = owners.slice(draftingIdx, draftingIdx + 7)
     } else {
-      if (round < 10) {
+      if (round < this.state.maxRounds) {
         owners = [...owners.slice(draftingIdx, owners.length), round, ...owners.slice(0, 7 - (owners.length - draftingIdx))]
         if (this.state.ownersList.length - draftingIdx <= 1) {
           console.log('New Round started')
@@ -158,6 +183,7 @@ class Draft extends Component {
     channel.bind('playerDrafted', data => {
       const nameDrafted = data.value.name;
       console.log(nameDrafted + " has been drafted!")
+      this.stopAudio()
       
       const playersList = this.state.players
       let pickNum = this.state.currentPick
@@ -172,6 +198,7 @@ class Draft extends Component {
       this.setState({ currentPick: pickNum});
       this.setState({ lastDraftTime: new Date().getTime() })
       this.testIfDraftEnded(this.state.ownersList.length, this.state.currentPick);
+      this.playMusic();
     });
   }
 
@@ -194,7 +221,7 @@ class Draft extends Component {
     const players = this.state.players
     const dateNow = new Date().getTime();
 
-    if (owner === this.state.username || this.state.username === 'Admin') {
+    if (owner === this.state.username || this.state.username === 'Admin' || this.state.autopick) {
       const payload = {
         name,
         owner,
@@ -213,6 +240,7 @@ class Draft extends Component {
       }
 
       this.setState({ selectedPlayer: newPlayer })
+      this.setState({ autopick: false })
     } else {
       this.showDraftError()
     }
