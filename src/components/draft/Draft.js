@@ -19,7 +19,7 @@ class Draft extends Component {
       draftOrder: [],
       currentPick: 1,
       round: 1,
-      maxRounds: 2,
+      maxRounds: 10,
       autopick: false,
       lastDraftTime: '',
       selectedPlayer: {},
@@ -57,7 +57,7 @@ class Draft extends Component {
     this.countdownVar = true;
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
-      let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
+      let draftOrder = [...players.data[0].owners]
       this.setState({ lastDraftTime: players.data[0].lastPick })
       this.setState({ round: players.data[0].round })
       this.setState({ seedList: players.data[0].seedList })
@@ -91,7 +91,7 @@ class Draft extends Component {
     let ownerIdx = pickNum % this.state.ownersList.length
     const owner = ownerIdx <= 0 ? this.state.ownersList[ownerIdx] : this.state.ownersList[ownerIdx-1]
 
-    if (owner === this.state.username || this.state.username === 'Admin') {
+    if (owner === this.state.username) {
 
       if (!this.audio) return
 
@@ -157,25 +157,32 @@ class Draft extends Component {
   }
 
   getDraftOrder() {
-    let owners = this.state.ownersList;
     let round = this.state.round;
-    let draftingIdx = (this.state.currentPick - 1) % owners.length;
+    let ownersList = [...this.state.ownersList];
+    let owners = [...ownersList, ...ownersList.reverse()];
+    let draftingIdx = (this.state.currentPick - 1) % (owners.length);
+
+    if (draftingIdx * 2 < owners.length) {
+      owners = [...ownersList.reverse(), round, ...ownersList.reverse()];
+      if (draftingIdx * 2 === owners.length - 1) {
+        draftingIdx+=1
+      }
+    }
+
+    if (round >= this.state.maxRounds) {
+      owners = [...ownersList.reverse().slice(draftingIdx, owners.length)]
+    }
 
     if (owners.length - draftingIdx > 7) {
       owners = owners.slice(draftingIdx, draftingIdx + 7)
     } else {
       if (round < this.state.maxRounds) {
         owners = [...owners.slice(draftingIdx, owners.length), round, ...owners.slice(0, 7 - (owners.length - draftingIdx))]
-        if (this.state.ownersList.length - draftingIdx <= 1) {
-          console.log('New Round started')
-          this.setState({ round: this.state.round + 1})
-        }
-      } else {
-        owners = [...owners.slice(draftingIdx, owners.length)]
       }
     }
 
     this.setState({draftOrder: owners})
+
   }
 
   playerDrafted(pusher) {
@@ -187,8 +194,7 @@ class Draft extends Component {
       
       const playersList = this.state.players
       let pickNum = this.state.currentPick
-      let ownerIdx = pickNum % this.state.ownersList.length
-      const owner = ownerIdx <= 0 ? this.state.ownersList[ownerIdx] : this.state.ownersList[ownerIdx-1]
+      const owner = document.querySelector('.orderOwner.active span.name').innerHTML;
       const playerIdx = playersList.findIndex(x => x.name === nameDrafted);
       playersList[playerIdx].pickNumber = pickNum
       playersList[playerIdx].owner = owner
@@ -215,10 +221,10 @@ class Draft extends Component {
 
   draftPlayer() {
     const name = document.querySelector('.draftName p').innerHTML;
-    let ownerIdx = this.state.currentPick % (this.state.ownersList.length)
-    let owner = this.state.ownersList[ownerIdx-1 < 0 ? 0 : ownerIdx-1]
-    const pickNumber = this.state.currentPick
-    const players = this.state.players
+    let owner = document.querySelector('.orderOwner.active span.name').innerHTML;
+    const pickNumber = this.state.currentPick;
+    const players = this.state.players;
+    let ownersList = [...this.state.ownersList];
     const dateNow = new Date().getTime();
 
     if (owner === this.state.username || this.state.username === 'Admin' || this.state.autopick) {
@@ -238,6 +244,9 @@ class Draft extends Component {
           newPlayer = option
         }
       }
+
+      let roundNum = Math.floor(pickNumber / ownersList.length) + 1
+      this.setState({round: roundNum})
 
       this.setState({ selectedPlayer: newPlayer })
       this.setState({ autopick: false })

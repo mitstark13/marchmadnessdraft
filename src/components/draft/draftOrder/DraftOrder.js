@@ -25,7 +25,7 @@ class DraftOrder extends Component {
             <div key={i} className={i < 1 ? 'orderOwner active' : 'orderOwner waiting'}>
               {owner > 0 ? <b>Round</b> : "Pick #" + (pickNumber + i + newRoundFix)}
               <br/>
-              {owner > 0 ? <b>{owner + 1}</b> : owner}
+              {owner > 0 ? <b>{owner + 1}</b> : <span className="name">{owner}</span>}
             </div>
           )
 
