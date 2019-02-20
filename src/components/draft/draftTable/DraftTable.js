@@ -14,7 +14,7 @@ class DraftTable extends Component {
     sortedPlayers.sort((a, b) => {
       
       if (this.props.filterByProj) {
-        // *** PLEASE FIND BETTER WAY TO DO THIS. CURRENTLY LAZY ***
+        // *** PLEASE FIND BETTER WAY TO DO THIS ***
         let aTeam = a.team
         let aSeed = seedList[aTeam]
         let aSeedStrength = 1
@@ -43,24 +43,24 @@ class DraftTable extends Component {
         <div className="draftPreview">
           <div className="draftPlayer">
             <div className="draftName">
-              <p>{name ? name : "Nick Starkey"}</p>
-              <p>{team ? team : "Lebanon"}</p>
+              <p>{name ? name : "Andrew Funk"}</p>
+              <p>{team ? <small>{seedList[team]} {team}</small> : "Bucknell"}</p>
             </div>
             <div className="stats pts">
               <p>PTS</p>
-              <span>{points ? points : "0"}</span>
+              <span>{points ? points : "3.5"}</span>
             </div>
             <div className="stats rebs">
               <p>REBS</p>
-              <span>{rebounds ? rebounds : "0"}</span>
+              <span>{rebounds ? rebounds : "1.3"}</span>
             </div>
             <div className="stats ast">
               <p>AST</p>
-              <span>{assists ? assists : "0"}</span>
+              <span>{assists ? assists : "0.8"}</span>
             </div>
             <div className="stats total">
               <p>Total</p>
-              <span>{total ? total : "0"}</span>
+              <span>{total ? total : "5.6"}</span>
             </div>
             
             <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
@@ -104,7 +104,7 @@ class DraftTable extends Component {
               return (
                 <tr key={i} data-picked={picked} onClick={() => {this.props.selectPlayer(player)}}>
                   <td className="name"><a href={playerLink} target="_blank">{player.name}</a></td>
-                  <td className="school">{player.team}</td>
+                  <td className="school"><small>{seedList[player.team]}</small> {player.team}</td>
                   <td className="pts">{player.points}</td>
                   <td className="reb">{player.rebounds}</td>
                   <td className="ast">{player.assists}</td>
