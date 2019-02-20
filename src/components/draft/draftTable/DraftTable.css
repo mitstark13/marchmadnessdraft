@@ -134,9 +134,35 @@
   justify-content: space-between;
   align-items: center;
   padding-left: 10px; }
+  @media screen and (max-width: 680px) {
+    .tableFilters {
+      flex-wrap: wrap; } }
   .tableFilters label {
     display: inline-block;
     margin-right: 10px; }
+  @media screen and (max-width: 680px) {
+    .tableFilters .teamFilterWrapper {
+      width: 100%; } }
+  .tableFilters .seedFilterWrapper {
+    width: 200px; }
+    .tableFilters .seedFilterWrapper .noUi-target {
+      display: inline-block;
+      width: calc(100% - 55px);
+      float: right; }
+    .tableFilters .seedFilterWrapper .noUi-horizontal .noUi-handle {
+      width: 20px;
+      height: 20px;
+      padding-top: 5px;
+      border-radius: 50%;
+      top: -2px;
+      background: #475570; }
+      .tableFilters .seedFilterWrapper .noUi-horizontal .noUi-handle span {
+        display: block;
+        color: white;
+        font-size: 8px;
+        text-align: center; }
+    .tableFilters .seedFilterWrapper .noUi-handle:before, .tableFilters .seedFilterWrapper .noUi-handle:after {
+      background: none; }
   .tableFilters .bestAvailableInfo {
     display: inline-block;
     margin-left: 5px;

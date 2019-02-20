@@ -25,7 +25,8 @@ class Draft extends Component {
       selectedPlayer: {},
       seedList: {},
       filterTeam: '',
-      filterSeed: "0",
+      filterSeedMin: 0,
+      filterSeedMax: 16,
       filterByProj: false
     };
   }
@@ -122,9 +123,14 @@ class Draft extends Component {
     this.setState({filterTeam: team})
   }
 
-  handleSeedFilter(e) {
-    console.log(e.target.value)
-    this.setState({filterSeed: e.target.value})
+  handleSeedFilter(render, handle, value, un, percent) {
+    let minSeed = Math.floor(value[0]);
+    let maxSeed = Math.floor(value[1]);
+    this.setState({ filterSeedMin: minSeed })
+    this.setState({ filterSeedMax: maxSeed })
+
+    document.querySelector('.noUi-handle.noUi-handle-lower').innerHTML = "<span>" + minSeed + "</span>";
+    document.querySelector('.noUi-handle.noUi-handle-upper').innerHTML = "<span>" + maxSeed + "</span>";
   }
 
   handleAvailableFilter() {
@@ -284,7 +290,8 @@ class Draft extends Component {
             selectedPlayer={this.state.selectedPlayer}
             draftPlayer={this.draftPlayer.bind(this)}
             filterTeam={this.state.filterTeam}
-            filterSeed={this.state.filterSeed}
+            filterSeedMin={this.state.filterSeedMin}
+            filterSeedMax={this.state.filterSeedMax}
             filterByProj={this.state.filterByProj}
             handleTeamFilter={this.handleTeamFilter.bind(this)}
             handleSeedFilter={this.handleSeedFilter.bind(this)}

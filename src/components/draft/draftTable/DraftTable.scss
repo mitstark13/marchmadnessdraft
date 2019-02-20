@@ -190,12 +190,50 @@
     align-items: center;
 	padding-left: 10px;
 
+	@media screen and (max-width: 680px) {
+		flex-wrap: wrap;
+	}
+
 	label {
 		display: inline-block;
 		margin-right: 10px;
 
 		@media screen and (max-width: 760px) {
 			// font-size: 14px;
+		}
+	}
+
+	.teamFilterWrapper {
+		@media screen and (max-width: 680px) {
+			width: 100%;
+		}
+	}
+
+	.seedFilterWrapper {
+		width: 200px;
+
+		.noUi-target {
+			display: inline-block;
+			width: calc(100% - 55px);
+			float: right;
+		}
+		.noUi-horizontal .noUi-handle {
+			width: 20px;
+			height: 20px;
+			padding-top: 5px;
+			border-radius: 50%;
+			top: -2px;
+			background: $app-blue;
+
+			span {
+				display: block;
+				color: white;
+				font-size: 8px;
+				text-align: center;
+			}
+		}
+		.noUi-handle:before, .noUi-handle:after {
+			background: none;
 		}
 	}
 

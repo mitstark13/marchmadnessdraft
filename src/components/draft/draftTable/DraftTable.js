@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Nouislider from "nouislider-react";
+import "nouislider/distribute/nouislider.css";
 import './DraftTable.css';
 
 class DraftTable extends Component {
@@ -10,8 +12,8 @@ class DraftTable extends Component {
     const {name, team, rebounds, assists, total, points} = this.props.selectedPlayer;
     const id = this.props.selectedPlayer._id;
     const filterTeam = this.props.filterTeam;
-    const filterSeed = this.props.filterSeed;
-    console.log(filterSeed)
+    const filterSeedMin = this.props.filterSeedMin;
+    const filterSeedMax = this.props.filterSeedMax;
 
     sortedPlayers.sort((a, b) => {
       
@@ -39,10 +41,6 @@ class DraftTable extends Component {
 
       return b.AdjTotal - a.AdjTotal
     })
-
-    if (sortedPlayers[1]) {
-      console.log(seedList[sortedPlayers[1].team])
-    }
 
     let seedOptions = []
 
@@ -87,10 +85,15 @@ class DraftTable extends Component {
 
           <div className="seedFilterWrapper">
             <label>Seed: </label>
-            <select className="seedFilter" onChange={this.props.handleSeedFilter}>
-              <option value="0">All</option>
-              {seedOptions}
-            </select>
+            <Nouislider
+              range={{
+                'min': 1,
+                'max': 16
+              }}
+              start={[1, 16]}
+              step={1}
+              onUpdate={this.props.handleSeedFilter}
+              connect />
           </div>
 
           <div className="bestAvailableWrapper">
@@ -120,7 +123,7 @@ class DraftTable extends Component {
           {sortedPlayers.map((player, i) => {
             const picked = Number(player.pickNumber) > 0;
             const playerLink = "http://www.espn.com/search/results?q=" + player.name
-            if ((player.name && player.owner.length < 1) && (filterSeed === '0' || Number(filterSeed) === seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
+            if ((player.name && player.owner.length < 1) && (filterSeedMax >= seedList[player.team] && filterSeedMin <= seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
               return (
                 <tr key={i} data-picked={picked} onClick={() => {this.props.selectPlayer(player)}}>
                   <td className="name"><a href={playerLink} target="_blank">{player.name}</a></td>
