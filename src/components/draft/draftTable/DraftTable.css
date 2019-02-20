@@ -153,6 +153,7 @@
       width: 20px;
       height: 20px;
       padding-top: 5px;
+      padding-right: 1px;
       border-radius: 50%;
       top: -2px;
       background: #475570; }
@@ -163,24 +164,6 @@
         text-align: center; }
     .tableFilters .seedFilterWrapper .noUi-handle:before, .tableFilters .seedFilterWrapper .noUi-handle:after {
       background: none; }
-  .tableFilters .bestAvailableInfo {
-    display: inline-block;
-    margin-left: 5px;
-    color: #475570;
-    height: 20px;
-    width: 20px;
-    font-size: 15px;
-    text-align: center;
-    transition: .5s; }
-    @media screen and (max-width: 760px) {
-      .tableFilters .bestAvailableInfo {
-        display: none; } }
-    .tableFilters .bestAvailableInfo:hover {
-      cursor: pointer;
-      color: #7CB982; }
-      .tableFilters .bestAvailableInfo:hover .bestAvailableInfoModal {
-        display: block;
-        opacity: 1; }
   .tableFilters .bestAvailableInfoModal {
     display: none;
     position: absolute;

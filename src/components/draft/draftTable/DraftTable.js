@@ -99,12 +99,6 @@ class DraftTable extends Component {
           <div className="bestAvailableWrapper">
             <label>Best Available: </label>
             <input type="checkbox" className="bestAvailableFilter" onChange={this.props.handleAvailableFilter} />
-            <div className="bestAvailableInfo">
-              <span>?</span>
-              <div className="bestAvailableInfoModal">
-                <p>"Best Available" will filter based on projected number of games the player will play<span className="warning">Warning: this would have put most of the Virginia players near the top last year...</span></p>
-              </div>
-            </div>
           </div>
         </div>
 

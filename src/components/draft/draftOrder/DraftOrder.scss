@@ -19,28 +19,38 @@
     box-sizing: border-box;
 		position: relative;
 		border: 1px solid #fff;
+		color: #5a5a5a;
 		text-align: center;
 		padding-top: 10px;
 		height: 100%;
 		width: 100%;
+		font-size: 16px;
+
+		span.name {
+			display: inline-block;
+			margin-top: 5px;
+			font-size: 22px;
+			color: black;
+		}
 
 		&.active {
+			border: none;
 			
-			&:after {
+			&:before {
 			  content: '';
 			  position: absolute;
 			  top: 0;
 			  left: 0;
 			  right: 0;
 			  bottom: 0;
-			  border-radius: 4px;
+			  border-radius: 0px;
 			  background: linear-gradient(120deg, #00F260, #0575E6, #00F260);
 			  background-size: 300% 300%;
-			  clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+			  clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%);
 			}
 		}
 
-		&:after {
+		&:before {
 		  animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite;
 		}
 	}
@@ -56,7 +66,7 @@
 
 	#countdown{
 		position: relative;
-		height: 100%;
+		height: calc(100% - 2px);
 		min-width: 250px;
 		text-align: center;
 		background: $app-blue;
@@ -128,18 +138,18 @@
 
 @keyframes frame-enter {
   0% {
-    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), 3px calc(100% - 3px), 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%);
   }
   25% {
-    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) calc(100% - 3px), calc(100% - 3px) 100%, 100% 100%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 100% 100%, 100% 0%, 0% 0%);
   }
   50% {
-    clip-path: polygon(0% 100%, 3px 100%, 3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, calc(100% - 3px) 3px, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, 100% 0%, 0% 0%);
   }
   75% {
-    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 3px, 3px 0%, 0% 0%);
+    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 0%, 0% 0%);
   }
   100% {
-    -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 3px 100%, 0% 100%);
+    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 0% 100%);
   }
 }

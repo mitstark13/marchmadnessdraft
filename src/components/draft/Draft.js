@@ -19,7 +19,7 @@ class Draft extends Component {
       draftOrder: [],
       currentPick: 1,
       round: 1,
-      maxRounds: 10,
+      maxRounds: 4,
       autopick: false,
       lastDraftTime: '',
       selectedPlayer: {},
