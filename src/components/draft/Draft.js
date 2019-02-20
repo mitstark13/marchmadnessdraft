@@ -25,6 +25,7 @@ class Draft extends Component {
       selectedPlayer: {},
       seedList: {},
       filterTeam: '',
+      filterSeed: "0",
       filterByProj: false
     };
   }
@@ -119,6 +120,11 @@ class Draft extends Component {
   handleTeamFilter() {
     let team = document.querySelector('.teamFilter').value;
     this.setState({filterTeam: team})
+  }
+
+  handleSeedFilter(e) {
+    console.log(e.target.value)
+    this.setState({filterSeed: e.target.value})
   }
 
   handleAvailableFilter() {
@@ -278,8 +284,10 @@ class Draft extends Component {
             selectedPlayer={this.state.selectedPlayer}
             draftPlayer={this.draftPlayer.bind(this)}
             filterTeam={this.state.filterTeam}
+            filterSeed={this.state.filterSeed}
             filterByProj={this.state.filterByProj}
             handleTeamFilter={this.handleTeamFilter.bind(this)}
+            handleSeedFilter={this.handleSeedFilter.bind(this)}
             handleAvailableFilter={this.handleAvailableFilter.bind(this)}
             selectPlayer={this.selectPlayer.bind(this)}/>
           <DraftHistory players={draftedOrder}/>

@@ -10,6 +10,8 @@ class DraftTable extends Component {
     const {name, team, rebounds, assists, total, points} = this.props.selectedPlayer;
     const id = this.props.selectedPlayer._id;
     const filterTeam = this.props.filterTeam;
+    const filterSeed = this.props.filterSeed;
+    console.log(filterSeed)
 
     sortedPlayers.sort((a, b) => {
       
@@ -37,6 +39,16 @@ class DraftTable extends Component {
 
       return b.AdjTotal - a.AdjTotal
     })
+
+    if (sortedPlayers[1]) {
+      console.log(seedList[sortedPlayers[1].team])
+    }
+
+    let seedOptions = []
+
+    for (let i = 1; i < 17; i++) {
+      seedOptions.push(<option key={i} value={i}>{i}</option>)
+    }
 
     return (
       <div className="draftContainer">
@@ -73,6 +85,14 @@ class DraftTable extends Component {
             <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
           </div>
 
+          <div className="seedFilterWrapper">
+            <label>Seed: </label>
+            <select className="seedFilter" onChange={this.props.handleSeedFilter}>
+              <option value="0">All</option>
+              {seedOptions}
+            </select>
+          </div>
+
           <div className="bestAvailableWrapper">
             <label>Best Available: </label>
             <input type="checkbox" className="bestAvailableFilter" onChange={this.props.handleAvailableFilter} />
@@ -100,7 +120,7 @@ class DraftTable extends Component {
           {sortedPlayers.map((player, i) => {
             const picked = Number(player.pickNumber) > 0;
             const playerLink = "http://www.espn.com/search/results?q=" + player.name
-            if ((player.name && player.owner.length < 1) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
+            if ((player.name && player.owner.length < 1) && (filterSeed === '0' || Number(filterSeed) === seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
               return (
                 <tr key={i} data-picked={picked} onClick={() => {this.props.selectPlayer(player)}}>
                   <td className="name"><a href={playerLink} target="_blank">{player.name}</a></td>
