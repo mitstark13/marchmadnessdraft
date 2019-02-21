@@ -61,6 +61,11 @@
 		.orderOwner {
 			width: auto;
 			flex: 1 0 calc(100vw / 3 - 150px / 3); //calc((100vw - 150px) /3) throws compile error but works in dev tools
+
+			span.name {
+				margin-top: 11px;
+				font-size: 16px;
+			}
 		}
 	}
 
