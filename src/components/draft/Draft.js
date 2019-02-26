@@ -151,7 +151,11 @@ class Draft extends Component {
     
     if (seconds_left <= 1) {
       this.setState({ autopick: true })
-      this.draftPlayer();
+      //this.draftPlayer(); Autopick currently turned off. We talk too much and don't care about the countdown
+
+      seconds_left = 0 // To keep from showing negative numbers when autopick is turned off
+      // TODO: Create annoyDrafter() to hurry up the draft so it doesn't take 4 hours like last year
+      this.annoyDrafter();
     }
     seconds_left = seconds_left % 3600;
         
@@ -166,6 +170,11 @@ class Draft extends Component {
     function pad(n) {
       return (n < 10 ? '0' : '') + n;
     }
+  }
+
+  annoyDrafter() {
+    let countdownWrapper = document.querySelector('#countdown');
+    countdownWrapper.classList.add('draftWarning');
   }
 
   getDraftOrder() {
@@ -217,6 +226,8 @@ class Draft extends Component {
       this.setState({ lastDraftTime: new Date().getTime() })
       this.testIfDraftEnded(this.state.ownersList.length, this.state.currentPick);
       this.playMusic();
+      let countdownWrapper = document.querySelector('#countdown');
+      countdownWrapper.classList.remove('draftWarning');
     });
   }
 

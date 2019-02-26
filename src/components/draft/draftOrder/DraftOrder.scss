@@ -77,6 +77,15 @@
 		background: $app-blue;
 		border: 1px solid #111;
 		padding: 0;
+
+		&.draftWarning {
+			background: linear-gradient(120deg, #650000, #e60505, #650000);
+			animation: warning-gradient-animation 2s ease-in-out infinite;
+
+			.labels li {
+				color: white;
+			}
+		}
 		
 		#tiles span{
 			width: 92px;
@@ -138,6 +147,18 @@
   }
   100% {
     background-position: 15% 0%;
+  }
+}
+
+@keyframes warning-gradient-animation {
+  0% {
+    background-size: 100%;
+  }
+  50% {
+    background-size: 200%;
+  }
+  100% {
+    background-size: 100%;
   }
 }
 
