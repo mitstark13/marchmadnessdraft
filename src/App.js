@@ -37,6 +37,7 @@ class App extends Component {
 
     this.pusherChat(pusher);
     this.pusherLogin(pusher);
+    this.draftReset(pusher);
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.submitMessage = this.submitMessage.bind(this);
@@ -60,6 +61,13 @@ class App extends Component {
     const channel = pusher.subscribe('login');
     channel.bind('users', data => {
       this.setState({ chats: [data, ...this.state.chats], test: '' });
+    })
+  }
+
+  draftReset(pusher) {
+    const channel = pusher.subscribe('draft');
+    channel.bind('draftReset', data => {
+      window.location.reload();
     })
   }
 
@@ -102,6 +110,8 @@ class App extends Component {
       message: this.state.text
     };
     axios.post(this.props.dbUrl + '/message', payload);
+
+    this.setState({text: ''})
   }
 
   render() {
@@ -138,7 +148,10 @@ class App extends Component {
             render={(props) => <Review dbUrl={this.props.dbUrl} /> } />
           
           <section id="chat">
-            <ChatList chats={this.state.chats} />
+            <ChatList 
+              chats={this.state.chats} 
+              username={this.state.username}
+            />
             <ChatBox
               text={this.state.text}
               username={this.state.username}

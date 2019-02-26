@@ -6,6 +6,10 @@
   padding: 0 10px;
   /*$0.scrollTop = $0.offsetHeight*/
 }
+div.userMessage {
+  display: flex;
+  justify-content: flex-end;
+}
 .chatMessage {
   position: relative;
   border: 1px solid #ccc;

@@ -79,7 +79,6 @@ MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/n
       }, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
-        //TODO: Add Pusher trigger
         pusher.trigger('draft', 'playerDrafted', result);
         console.log('successful')
       })
@@ -100,6 +99,7 @@ MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/n
       }, (err, result) => {
         if (err) return res.send(err)
         res.send(result)
+        pusher.trigger('draft', 'draftReset', result);
         console.log('successful reset')
       })
     })
