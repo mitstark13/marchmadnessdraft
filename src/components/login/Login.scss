@@ -46,10 +46,29 @@ section#login {
 		&:hover {
 			cursor: pointer;
 			box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
+			background: linear-gradient(120deg, rgb(28, 33, 44), #4A556E, rgb(28, 33, 44));
+			animation: warning-gradient-animation 2s ease-in-out infinite;
+
+			p {
+				color: white;
+				font-size: 24px;
+			}
 		}
 		p {
 			flex: 1 0 100%;
 		}
+	}
+}
+
+@keyframes warning-gradient-animation {
+	0% {
+		background-size: 100%;
+	}
+	50% {
+		background-size: 200%;
+	}
+	100% {
+		background-size: 100%;
 	}
 }
 

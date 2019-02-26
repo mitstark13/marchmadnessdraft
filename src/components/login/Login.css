@@ -39,10 +39,22 @@ section#login {
     transition: .5s; }
     .ownersLoginList div:hover {
       cursor: pointer;
-      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7); }
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(120deg, #1c212c, #4A556E, #1c212c);
+      animation: warning-gradient-animation 2s ease-in-out infinite; }
+      .ownersLoginList div:hover p {
+        color: white;
+        font-size: 24px; }
     .ownersLoginList div p {
       flex: 1 0 100%; }
 
+@keyframes warning-gradient-animation {
+  0% {
+    background-size: 100%; }
+  50% {
+    background-size: 200%; }
+  100% {
+    background-size: 100%; } }
 @media screen and (max-width: 750px) {
   .loginContainer {
     width: 85vw; }

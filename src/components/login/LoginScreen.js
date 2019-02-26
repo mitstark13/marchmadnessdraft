@@ -16,13 +16,13 @@ export default ({ owners, teamNames, ownerLogin }) => (
               return (
                 <div key={i} onClick={() => {ownerLogin(owner)}}>
                   <p>{owner}</p>
-                  <small>{teamNames[i]}</small>
+                  {/* <small>{teamNames[i]}</small> */}
                 </div>
               )
             })}
             <div onClick={() => {ownerLogin('Admin')}}>
               <p>Admin</p>
-              <small>Draft for All</small>
+              {/* <small>Draft for All</small> */}
             </div>
           </div>
         </Link>
