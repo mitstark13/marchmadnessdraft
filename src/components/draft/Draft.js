@@ -311,8 +311,9 @@ class Draft extends Component {
           <DraftHistory players={draftedOrder}/>
           <DraftTeams
             players={draftedOrder}
-            owner={this.state.teamViewOwner}
+            owner={this.state.ownersList[0]}
             viewNewTeam={this.viewNewTeam}
+            ownersList={this.state.ownersList}
           />
         </section>
       </section>

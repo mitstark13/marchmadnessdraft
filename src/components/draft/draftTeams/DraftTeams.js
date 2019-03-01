@@ -1,19 +1,16 @@
 import React from "react";
 import './DraftTeams.css';
 
-export default ({ players, owner, viewNewTeam }) => (
+export default ({ players, owner, viewNewTeam, ownersList }) => (
   <div className="teamsView">
     <div className="teamsHeader">
       <h2>View teams</h2>
       <select className="teamSelect" onChange={viewNewTeam}>
-        <option value="Mitchell">Mitchell</option>
-        <option value="Nick">Nick</option>
-        <option value="Kyle">Kyle</option>
-        <option value="Caleb">Caleb</option>
-        <option value="Ben">Ben</option>
-        <option value="Isaac">Isaac</option>
-        <option value="Darian">Darian</option>
-        <option value="Deni">Deni</option>
+        {ownersList.map((ownerName, i) => {
+          return (
+            <option value={ownerName} key={i}>{ownerName}</option>
+          )
+        })}
       </select>
     </div>
     <table>
