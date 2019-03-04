@@ -54,6 +54,7 @@ class Review extends Component {
             players={draftedOrder}
             owner={this.state.owner}
             viewNewTeam={this.viewNewTeam}
+            ownersList={this.state.ownersList}
           />
       </section>
     )
