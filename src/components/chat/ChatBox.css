@@ -20,4 +20,10 @@
 	color: white;
 	font-size: 18px;
 	text-align: center;
+	transition: .5s;
+}
+
+.chatInput button:hover {
+	cursor: pointer;
+	opacity: .8;
 }

@@ -1,11 +1,15 @@
 .draftHistory {
   border: 1px solid #F2F4F4;
-  flex: 0 0 250px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 250px;
+          flex: 0 0 250px;
   padding: 18px 10px 0;
   background: #fff; }
   @media screen and (max-width: 1150px) {
     .draftHistory {
-      flex: 1 1 250px; } }
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 250px;
+              flex: 1 1 250px; } }
   .draftHistory .historyTitle {
     height: 100px; }
     .draftHistory .historyTitle h2 {
@@ -28,13 +32,17 @@
     width: 100%;
     overflow-y: scroll; }
     .draftHistory table tr {
-      display: -webkit-inline-flex;
       display: -moz-inline-flex;
       display: -ms-inline-flex;
       display: -o-inline-flex;
+      display: -webkit-inline-box;
+      display: -ms-inline-flexbox;
       display: inline-flex;
-      justify-content: space-between;
-      align-content: center;
+      -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -ms-flex-line-pack: center;
+          align-content: center;
       width: 100%;
       height: 22px;
       border-bottom: 1px solid #F2F4F4; }
@@ -51,13 +59,19 @@
       font-size: 14px;
       font-weight: 400; }
     .draftHistory table .pick {
-      flex: 1 1 5%; }
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 5%;
+              flex: 1 1 5%; }
     .draftHistory table .name {
-      flex: 1 1 60%; }
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 60%;
+              flex: 1 1 60%; }
     .draftHistory table .owner {
-      flex: 1 1 35%; }
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 35%;
+              flex: 1 1 35%; }
     .draftHistory table td a {
-      color: #7CB982;
+      color: #3A814A;
       text-decoration: none; }
     .draftHistory table td a:hover {
       text-decoration: underline; }

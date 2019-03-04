@@ -3,35 +3,41 @@
   grid-template-areas: "header header header" "draft draft draft" "messaging messaging messaging";
   grid-template-rows: 35px 595px 270px;
   grid-gap: 5px;
-  background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
-  background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
   background: linear-gradient(135deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
   height: 100vh; }
 
 .App-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   grid-area: header;
-  background-color: #7CB982;
+  background-color: #3A814A;
   color: #F2F4F4;
   text-align: center;
   padding: 10px 40px;
-  box-shadow: 0px 1px 5px #475570; }
+  -webkit-box-shadow: 0px 1px 5px #475570;
+          box-shadow: 0px 1px 5px #475570; }
   .App-header button {
     background: none;
     border: 1px solid #F2F4F4;
     border-radius: 5px;
     color: #F2F4F4;
     margin: 0 0 0 10px;
+    -webkit-transition: .5s;
     transition: .5s; }
     @media screen and (max-width: 760px) {
       .App-header button {
         display: none; } }
     .App-header button:hover {
       cursor: pointer;
-      color: #7CB982;
-      border: 1px solid #7CB982;
+      color: #3A814A;
+      border: 1px solid #3A814A;
       background: #F2F4F4; }
   .App-header .App-title {
     display: inline-block;
@@ -48,9 +54,14 @@
 
 #draft {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  align-items: top;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: top;
+      -ms-flex-align: top;
+          align-items: top;
   width: 99vw;
   height: calc(100% - 75px); }
 
@@ -65,6 +76,7 @@
     height: auto; }
 
   #draft {
-    flex-wrap: wrap; } }
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; } }
 
 /*# sourceMappingURL=App.css.map */

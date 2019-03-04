@@ -1,5 +1,6 @@
 section#login {
   position: fixed;
+  -webkit-transition: .5s;
   transition: .5s;
   background: rgba(0, 0, 0, 0.5);
   height: 100vh;
@@ -12,41 +13,70 @@ section#login {
   background: #fff;
   max-width: 650px;
   width: 100%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   text-align: center;
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7); }
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7); }
   .loginContainer a {
     color: #4A556E;
     text-decoration: none; }
 
 .loginHeader {
   padding: 1px 0 10px;
-  background: #7CB982;
+  background: #3A814A;
   color: white; }
 
 .ownersLoginList {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap; }
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
   .ownersLoginList div {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    flex: 1 1 30%;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 30%;
+            flex: 1 1 30%;
     height: 80px;
+    -webkit-transition: .5s;
     transition: .5s; }
     .ownersLoginList div:hover {
       cursor: pointer;
-      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
+      -webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
+              box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
       background: linear-gradient(120deg, #1c212c, #4A556E, #1c212c);
-      animation: warning-gradient-animation 2s ease-in-out infinite; }
+      -webkit-animation: warning-gradient-animation 2s ease-in-out infinite;
+              animation: warning-gradient-animation 2s ease-in-out infinite; }
       .ownersLoginList div:hover p {
         color: white;
         font-size: 24px; }
     .ownersLoginList div p {
-      flex: 1 0 100%; }
+      -webkit-box-flex: 1;
+          -ms-flex: 1 0 100%;
+              flex: 1 0 100%; }
+
+@-webkit-keyframes warning-gradient-animation {
+  0% {
+    background-size: 100%; }
+  50% {
+    background-size: 200%; }
+  100% {
+    background-size: 100%; } }
 
 @keyframes warning-gradient-animation {
   0% {
@@ -63,7 +93,9 @@ section#login {
     font-size: 10px; }
 
   .ownersLoginList div {
-    flex: 1 1 45%;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 45%;
+            flex: 1 1 45%;
     height: 72px; }
     .ownersLoginList div small {
       font-size: 10px; } }
