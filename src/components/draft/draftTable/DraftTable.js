@@ -28,9 +28,12 @@ class DraftTable extends Component {
         let bSeedStrength = 1
 
         // Finding projected games to be played, then multiply that to total
-        for (let i = 1; i < 9; i+=2) {
+        let i = 1
+        while (i < 9) {
           aSeedStrength = aSeed <= i ? aSeedStrength+=1 : aSeedStrength
           bSeedStrength = bSeed <= i ? bSeedStrength+=1 : bSeedStrength
+
+          i = i<2 ? 2 : i * i
         }
 
         a.AdjTotal = a.total * aSeedStrength
