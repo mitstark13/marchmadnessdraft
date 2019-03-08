@@ -184,6 +184,9 @@
       width: 100%; } }
   .tableFilters .seedFilterWrapper {
     width: 200px; }
+    @media screen and (max-width: 380px) {
+      .tableFilters .seedFilterWrapper {
+        margin-right: 10px; } }
     .tableFilters .seedFilterWrapper .noUi-target {
       display: inline-block;
       width: calc(100% - 55px);

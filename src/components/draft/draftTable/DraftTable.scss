@@ -212,6 +212,10 @@
 	.seedFilterWrapper {
 		width: 200px;
 
+		@media screen and (max-width: 380px) {
+			margin-right: 10px;
+		}
+
 		.noUi-target {
 			display: inline-block;
 			width: calc(100% - 55px);

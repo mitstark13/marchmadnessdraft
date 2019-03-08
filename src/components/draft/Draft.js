@@ -89,9 +89,7 @@ class Draft extends Component {
   }
 
   playMusic() {
-    let pickNum = this.state.currentPick
-    let ownerIdx = pickNum % this.state.ownersList.length
-    const owner = ownerIdx <= 0 ? this.state.ownersList[ownerIdx] : this.state.ownersList[ownerIdx-1]
+    const owner = document.querySelector('.orderOwner.active .name').innerText;
 
     if (owner === this.state.username) {
 
