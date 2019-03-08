@@ -29,10 +29,13 @@ class DraftHistory extends Component {
             const drafted = player.pickNumber > 0
 
             if (drafted) {
+              let name = player.name
+              name = name.length < 19 ? name : name.slice(0, 16) + '...'
+              
               return (
                 <tr key={i}>
                   <td className="pick">{player.pickNumber}</td>
-                  <td className="name">{player.name}</td>
+                  <td className="name">{name}</td>
                   <td className="owner">{player.owner}</td>
                 </tr>
               );

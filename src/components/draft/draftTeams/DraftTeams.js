@@ -22,10 +22,14 @@ export default ({ players, owner, viewNewTeam, ownersList }) => (
       </thead>
       <tbody>
       {players.map((player, i) => {
-        if (player.owner === owner) {
+        if ((player.owner === owner) && (player.name)) {
+
+          let name = player.name
+          name = name.length < 19 ? name : name.slice(0, 16) + '...'
+
           return (
             <tr key={i}>
-              <td className="name">{player.name}</td>
+              <td className="name">{name}</td>
               <td className="school">{player.team}</td>
             </tr>
           );

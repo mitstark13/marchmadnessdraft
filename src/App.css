@@ -68,7 +68,11 @@
 #chat {
   grid-area: messaging;
   height: 257px;
-  background: #475570; }
+  background: #475570;
+  margin-bottom: 40px; }
+
+.mobile-hamburger, .mobile-menu {
+  display: none; }
 
 @media screen and (max-width: 1150px) {
   .App {
@@ -78,5 +82,34 @@
   #draft {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap; } }
+@media screen and (max-width: 760px) {
+  .mobile-menu {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 40px;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #3A814A; }
+    .mobile-menu button {
+      background: none;
+      border: 1px solid #F2F4F4;
+      border-radius: 5px;
+      color: #F2F4F4;
+      margin: 0 0 0 10px;
+      -webkit-transition: .5s;
+      transition: .5s; }
+      .mobile-menu button:hover {
+        cursor: pointer;
+        color: #3A814A;
+        border: 1px solid #3A814A;
+        background: #F2F4F4; } }
 
 /*# sourceMappingURL=App.css.map */

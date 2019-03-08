@@ -120,10 +120,17 @@ class DraftTable extends Component {
           {sortedPlayers.map((player, i) => {
             const picked = Number(player.pickNumber) > 0;
             const playerLink = "http://www.espn.com/search/results?q=" + player.name
+
             if ((player.name && player.owner.length < 1) && (filterSeedMax >= seedList[player.team] && filterSeedMin <= seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
+              let name = player.name
+              
+              if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
+                name = name.length < 19 ? name : name.slice(0, 16) + '...'
+              }
+              
               return (
                 <tr key={i} data-picked={picked} onClick={() => {this.props.selectPlayer(player)}}>
-                  <td className="name"><a href={playerLink} target="_blank">{player.name}</a></td>
+                  <td className="name"><a href={playerLink} target="_blank">{name}</a></td>
                   <td className="school"><small>{seedList[player.team]}</small> {player.team}</td>
                   <td className="pts">{player.points}</td>
                   <td className="reb">{player.rebounds}</td>

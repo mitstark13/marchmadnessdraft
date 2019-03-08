@@ -60,6 +60,7 @@ class Draft extends Component {
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
       let draftOrder = [...players.data[0].owners]
+      this.setState({ teamViewOwner: draftOrder[0] })
       this.setState({ lastDraftTime: players.data[0].lastPick })
       this.setState({ round: players.data[0].round })
       this.setState({ seedList: players.data[0].seedList })
@@ -309,7 +310,7 @@ class Draft extends Component {
           <DraftHistory players={draftedOrder}/>
           <DraftTeams
             players={draftedOrder}
-            owner={this.state.ownersList[0]}
+            owner={this.state.teamViewOwner}
             viewNewTeam={this.viewNewTeam}
             ownersList={this.state.ownersList}
           />

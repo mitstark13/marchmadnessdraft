@@ -130,7 +130,7 @@ class App extends Component {
                 <button>Admin Page</button>
               </Link>
               <Link to='/review'>
-                <button>Review/Draft ended page</button>
+                <button>Draft Review</button>
               </Link>
             </div>
             <div className="App-user">
@@ -159,6 +159,18 @@ class App extends Component {
               submitMessage={this.submitMessage}
             />
           </section>
+
+          <div className="mobile-menu">
+            <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
+              <button>View Current Bracket</button>
+            </a>
+            <Link to='/admin'>
+              <button>Admin Page</button>
+            </Link>
+            <Link to='/review'>
+              <button>Draft Review</button>
+            </Link>
+          </div>
 
           <Route exact path="/"
             render={(props) => <LoginScreen ownerLogin={this.ownerLogin.bind(this)} teamNames={this.state.teamNames} owners={this.state.ownersList.slice(0, this.state.ownersList.length / 2)}/>}

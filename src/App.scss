@@ -75,6 +75,11 @@
   grid-area: messaging;
   height: 257px;
   background: $app-blue;
+  margin-bottom: 40px;
+}
+
+.mobile-hamburger, .mobile-menu {
+  display: none;
 }
 
 
@@ -86,5 +91,35 @@
 
   #draft {
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .mobile-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: $app-green;
+
+    button {
+      background: none;
+      border: 1px solid $off-white;
+      border-radius: 5px;
+      color: $off-white;
+      margin: 0 0 0 10px;
+      transition: .5s;
+  
+      &:hover {
+        cursor: pointer;
+        color: $app-green;
+        border: 1px solid $app-green;
+        background: $off-white;
+      }
+    }
   }
 }
