@@ -45,11 +45,14 @@ class Admin extends Component {
   }
 
   resetDraft = () => {
-    let payload = "Resetting draft"
-    axios.put(this.props.dbUrl + '/reset', payload)
-      .then((resp) => {
-        alert('Draft reset to pick #1')
-      })
+    let confirmation = window.confirm("Are you sure? All progress will be lost unless Nick made an Excel sheet");
+    if (confirmation) {
+      let payload = "Resetting draft"
+      axios.put(this.props.dbUrl + '/reset', payload)
+        .then((resp) => {
+          alert('Draft reset to pick #1')
+        })
+    }
   }
 
   filePicked = (oEvent) => {

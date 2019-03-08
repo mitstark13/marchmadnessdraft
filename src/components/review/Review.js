@@ -7,36 +7,16 @@ class Review extends Component {
     super(props);
 
     this.state = {
-      players: [],
-      ownersList: [],
-      owner: ''
+      players: []
     };
   }
   
   componentDidMount() {
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
-      let draftOrder = players.data[0].owners
-      this.setState({ ownersList: draftOrder })
-      this.setState({ owner: draftOrder[0] })
       this.setState({ players: players.data })
     });
-
-    this.viewNewTeam = this.viewNewTeam.bind(this);
-    this.resetDraft = this.resetDraft.bind(this);
-  }
-
-  viewNewTeam() {
-    const newOwner = document.querySelector('.teamSelect').value;
-    this.setState({owner: newOwner})
-  }
-
-  resetDraft = () => {
-    let payload = "Resetting draft"
-    axios.put(this.props.dbUrl + '/reset', payload)
-      .then((resp) => {
-        alert('Draft reset to pick #1')
-      })
+    
   }
 
   render() {
@@ -49,7 +29,6 @@ class Review extends Component {
     return (
       <section className="draftHistory review">
         <h1> Draft Review </h1>
-        <button onClick={this.resetDraft}> Reset Draft </button>
 
         <table>
           <thead>
