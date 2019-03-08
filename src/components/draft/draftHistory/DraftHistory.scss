@@ -6,6 +6,12 @@
 	padding: 18px 10px 0;
 	background: #fff;
 
+	&.review {
+		grid-area: draft;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
 	@media screen and (max-width: 1150px) {
 		flex: 1 1 250px;
 	}
