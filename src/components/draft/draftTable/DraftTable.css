@@ -188,7 +188,6 @@
       .tableFilters .seedFilterWrapper {
         margin-right: 10px; } }
     .tableFilters .seedFilterWrapper .noUi-target {
-      display: inline-block;
       width: calc(100% - 55px);
       float: right; }
     .tableFilters .seedFilterWrapper .noUi-horizontal .noUi-handle {

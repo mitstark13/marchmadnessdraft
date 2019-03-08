@@ -20,11 +20,11 @@ class DraftTable extends Component {
       if (this.props.filterByProj) {
         // *** PLEASE FIND BETTER WAY TO DO THIS ***
         let aTeam = a.team
-        let aSeed = seedList[aTeam]
+        let aSeed = seedList[aTeam] ? seedList[aTeam] : 8
         let aSeedStrength = 1
 
         let bTeam = b.team
-        let bSeed = seedList[bTeam]
+        let bSeed = seedList[bTeam] ? seedList[bTeam] : 8
         let bSeedStrength = 1
 
         // Finding projected games to be played, then multiply that to total
