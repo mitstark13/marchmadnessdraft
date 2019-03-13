@@ -68,8 +68,7 @@
 #chat {
   grid-area: messaging;
   height: 257px;
-  background: #475570;
-  margin-bottom: 40px; }
+  background: #475570; }
 
 .mobile-hamburger, .mobile-menu {
   display: none; }
@@ -110,6 +109,9 @@
         cursor: pointer;
         color: #3A814A;
         border: 1px solid #3A814A;
-        background: #F2F4F4; } }
+        background: #F2F4F4; }
+
+  #chat {
+    margin-bottom: 40px; } }
 
 /*# sourceMappingURL=App.css.map */

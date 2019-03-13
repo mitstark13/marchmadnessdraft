@@ -24,6 +24,9 @@
     border-bottom: 1px solid #fff; }
     .draftTable tr[data-picked="true"] {
       background: yellow; }
+    .draftTable tr.selected td, .draftTable tr.selected th {
+      background: #fff;
+      font-weight: bold; }
   .draftTable thead tr {
     height: 26px;
     padding: 3px 0px 0;
@@ -74,8 +77,10 @@
     overflow: auto;
     height: 345px; }
     .draftTable tbody tr:hover {
-      background: #F2F4F4;
+      background: #fff;
       cursor: pointer; }
+      .draftTable tbody tr:hover th, .draftTable tbody tr:hover td {
+        font-weight: bold; }
     .draftTable tbody tr[data-picked="true"]:hover {
       cursor: not-allowed;
       background: yellow; }

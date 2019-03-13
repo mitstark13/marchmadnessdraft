@@ -23,6 +23,13 @@
 		&[data-picked="true"] {
 			background: yellow;
 		}
+
+		&.selected {
+			td, th {
+				background: #fff;
+				font-weight: bold;
+			}
+		}
 	}
 	thead tr {
 		height: 26px;
@@ -78,8 +85,12 @@
 		height: 345px;
 
 		tr:hover {
-			background: $off-white;
+			background: #fff;
 			cursor: pointer;
+
+			th, td {
+				font-weight: bold;
+			}
 		}
 
 		tr[data-picked="true"]:hover {

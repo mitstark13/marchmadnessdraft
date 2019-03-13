@@ -50,10 +50,16 @@ class App extends Component {
     });
   }
 
+  updateScroll() {
+    var element = document.querySelector(".draftChat");
+    element.scrollTop = element.scrollHeight;
+  }
+
   pusherChat(pusher) {
     const channel = pusher.subscribe('chat');
     channel.bind('message', data => {
-      this.setState({ chats: [data, ...this.state.chats], test: '' });
+      this.setState({ chats: [...this.state.chats, data], test: '' });
+      setTimeout(this.updateScroll, 500);
     });
   }
 

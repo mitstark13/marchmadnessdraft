@@ -19,7 +19,7 @@ class Draft extends Component {
       draftOrder: [],
       currentPick: 1,
       round: 1,
-      maxRounds: 4,
+      maxRounds: 10,
       autopick: false,
       lastDraftTime: '',
       selectedPlayer: {},
@@ -51,7 +51,6 @@ class Draft extends Component {
     }
 
     this.setState({ username: this.props.username })
-    this.setState({ teamViewOwner: document.querySelector('.teamSelect').value})
 
     this.playerDrafted(pusher);
 
@@ -60,7 +59,6 @@ class Draft extends Component {
 
     axios.get(this.props.dbUrl + '/players').then((players) => {
       let draftOrder = [...players.data[0].owners]
-      this.setState({ teamViewOwner: draftOrder[0] })
       this.setState({ lastDraftTime: players.data[0].lastPick })
       this.setState({ round: players.data[0].round })
       this.setState({ seedList: players.data[0].seedList })
@@ -68,6 +66,7 @@ class Draft extends Component {
       this.setState({ currentPick: players.data[0].currentPick })
       this.setState({ players: players.data })
       this.setState({ selectedPlayer: players.data[Math.floor(Math.random() * Math.floor(players.data.length - 1))]})
+      this.setTeamsDropdown();
       this.getDraftOrder();
       this.playMusic();
       // this.countdownInterval = setInterval(() => { this.getCountdown() }, 1000);
@@ -107,6 +106,13 @@ class Draft extends Component {
     if (this.audio) {
       this.audio.pause()
     }
+  }
+
+  setTeamsDropdown() {
+    let username = this.state.username;
+    username = username === "Admin" ? this.state.ownersList[0] : username
+    document.querySelector('.teamSelect').value = username
+    this.setState({ teamViewOwner: username})
   }
 
   testIfDraftEnded(ownersLength, currentPick) {
@@ -190,7 +196,7 @@ class Draft extends Component {
     }
 
     if (round >= this.state.maxRounds) {
-      owners = [...ownersList.reverse().slice(draftingIdx, owners.length)]
+      owners = owners.slice(draftingIdx, draftingIdx + 7)
     }
 
     if (owners.length - draftingIdx > 7) {

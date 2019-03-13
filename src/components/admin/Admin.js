@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './admin.css';
 import * as XLSX from 'xlsjs';
 
 class Admin extends Component {
@@ -15,7 +16,8 @@ class Admin extends Component {
       pickNumber: '0',
       owner: '',
       currentPick: 1,
-      lastPick: '0'
+      lastPick: '0',
+      oFile: ''
     };
   }
 
@@ -60,7 +62,13 @@ class Admin extends Component {
     var sFilename = oFile.name;
     console.log(sFilename + ' Uploaded');
 
+    this.setState({'oFile': oFile})
+  }
+
+  uploadTeam = () => {
+    let oFile = this.state.oFile;
     var reader = new FileReader();
+    let teamName = document.querySelector("input[name='teamName']").value
 
     reader.onload = function(evt) {
       const bstr = evt.target.result;
@@ -74,7 +82,7 @@ class Admin extends Component {
 
       for (let i = 2; i <= numPlayers; i++) {
         this.setState({ 'name': ws['B' + i].v})
-        this.setState({ 'team': ws['B1'].v})
+        this.setState({ 'team': teamName})
         this.setState({ 'rebounds': ws['T' + i].v})
         this.setState({ 'assists': ws['U' + i].v})
         this.setState({ 'points': ws['Z' + i].v})
@@ -82,10 +90,16 @@ class Admin extends Component {
 
         this.postPlayer();
       }
+
+      alert(teamName + ' has been uploaded!')
     }.bind(this);
 
-    // Tell JS To Start Reading The File
-    reader.readAsBinaryString(oFile);
+    if ((oFile !== '') || (teamName === '')) {
+      // Tell JS To Start Reading The File
+      reader.readAsBinaryString(oFile);
+    } else {
+      alert("Please upload an excel file and put a team name")
+    }
   }
 
   render() {
@@ -103,8 +117,13 @@ class Admin extends Component {
           <button type="submit">Submit</button>
         </form>
 
-        <input type="file" id="my_file_input" onChange={this.filePicked} />
-        <div id='my_file_output'></div>
+        <div className="fullTeamWrapper">
+          <input type="text" placeholder="Team Name" name="teamName" />
+          <input type="file" id="my_file_input" onChange={this.filePicked} />
+          <button className="uploadExcelTeam" onClick={this.uploadTeam}>Upload Full Team</button>
+          <div id='my_file_output'></div>
+        </div>
+
         <br/>
         <button className="deleteBlank" onClick={this.deleteNull}>Delete bad uploads</button>
         <br/>

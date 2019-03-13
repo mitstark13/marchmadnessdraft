@@ -123,13 +123,14 @@ class DraftTable extends Component {
 
             if ((player.name && player.owner.length < 1) && (filterSeedMax >= seedList[player.team] && filterSeedMin <= seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
               let name = player.name
+              let selectedPlayer = player.name === this.props.selectedPlayer.name ? "selected" : "nah"
               
               if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
                 name = name.length < 19 ? name : name.slice(0, 16) + '...'
               }
               
               return (
-                <tr key={i} data-picked={picked} onClick={() => {this.props.selectPlayer(player)}}>
+                <tr key={i} data-picked={picked} className={selectedPlayer} onClick={() => {this.props.selectPlayer(player)}}>
                   <td className="name"><a href={playerLink} target="_blank">{name}</a></td>
                   <td className="school"><small>{seedList[player.team]}</small> {player.team}</td>
                   <td className="pts">{player.points}</td>

@@ -75,7 +75,6 @@
   grid-area: messaging;
   height: 257px;
   background: $app-blue;
-  margin-bottom: 40px;
 }
 
 .mobile-hamburger, .mobile-menu {
@@ -121,5 +120,9 @@
         background: $off-white;
       }
     }
+  }
+
+  #chat {
+    margin-bottom: 40px;
   }
 }
