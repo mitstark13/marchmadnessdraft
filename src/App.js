@@ -66,7 +66,7 @@ class App extends Component {
   pusherLogin(pusher) {
     const channel = pusher.subscribe('login');
     channel.bind('users', data => {
-      this.setState({ chats: [data, ...this.state.chats], test: '' });
+      this.setState({ chats: [...this.state.chats, data], test: '' });
     })
   }
 
