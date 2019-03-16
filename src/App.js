@@ -132,9 +132,9 @@ class App extends Component {
               <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
                 <button>View Current Bracket</button>
               </a>
-              <Link to='/admin'>
+              {/* <Link to='/admin'>
                 <button>Admin Page</button>
-              </Link>
+              </Link> */}
               <Link to='/review'>
                 <button>Draft Review</button>
               </Link>

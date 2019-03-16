@@ -184,11 +184,12 @@
   .tableFilters label {
     display: inline-block;
     margin-right: 10px; }
-  @media screen and (max-width: 680px) {
+  @media screen and (max-width: 650px) {
     .tableFilters .teamFilterWrapper {
       width: 100%; } }
   .tableFilters .seedFilterWrapper {
-    width: 200px; }
+    width: 200px;
+    margin-right: 20px; }
     @media screen and (max-width: 380px) {
       .tableFilters .seedFilterWrapper {
         margin-right: 10px; } }
@@ -210,27 +211,8 @@
         text-align: center; }
     .tableFilters .seedFilterWrapper .noUi-handle:before, .tableFilters .seedFilterWrapper .noUi-handle:after {
       background: none; }
-  .tableFilters .bestAvailableInfoModal {
-    display: none;
-    position: absolute;
-    top: 132px;
-    right: 10px;
-    z-index: 9999;
-    opacity: 0;
-    -webkit-box-shadow: 1px 1px 2px black;
-            box-shadow: 1px 1px 2px black;
-    border-radius: 2px;
-    background: #F2F4F4;
-    color: #000;
-    padding: 3px 7px;
-    -webkit-transition: .5s;
-    transition: .5s; }
-    .tableFilters .bestAvailableInfoModal p {
-      font-size: 14px;
-      text-align: center; }
-      .tableFilters .bestAvailableInfoModal p .warning {
-        display: block;
-        margin: 5px 0; }
+  .tableFilters .bestAvailableWrapper {
+    display: none; }
 
 .draftContainer {
   position: relative;

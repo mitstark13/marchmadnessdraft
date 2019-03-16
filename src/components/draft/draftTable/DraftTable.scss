@@ -215,13 +215,14 @@
 	}
 
 	.teamFilterWrapper {
-		@media screen and (max-width: 680px) {
+		@media screen and (max-width: 650px) {
 			width: 100%;
 		}
 	}
 
 	.seedFilterWrapper {
 		width: 200px;
+		margin-right: 20px;
 
 		@media screen and (max-width: 380px) {
 			margin-right: 10px;
@@ -252,30 +253,8 @@
 		}
 	}
 
-	.bestAvailableInfoModal {
+	.bestAvailableWrapper {
 		display: none;
-		position: absolute;
-		top: 132px;
-		right: 10px;
-		z-index: 9999;
-		opacity: 0;
-		box-shadow: 1px 1px 2px black;
-		border-radius: 2px;
-		background: $off-white;
-		color: #000;
-		padding: 3px 7px;
-		transition: .5s;
-	
-		p {
-			font-size: 14px;
-			text-align: center;
-
-			.warning {
-				display: block;
-				margin: 5px 0;
-				
-			}
-		}
 	}
 }
 
