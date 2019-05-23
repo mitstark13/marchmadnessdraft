@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 
-const config = require('./config');
+// const config = require('./config');
 
 
 const app = express();
@@ -48,6 +48,15 @@ MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/n
     app.get('/players', (req, res) => {
       //Sort puts the document with the owners list first
       database.collection('players').find().sort( { owners: -1 } ).toArray(function(err, array) {
+        if (err) return console.log(err)
+
+        res.send(array)
+      })
+    })
+
+    app.get('/leagues', (req, res) => {
+      //Sort puts the document with the owners list first
+      database.collection('leagues').find().toArray(function(err, array) {
         if (err) return console.log(err)
 
         res.send(array)

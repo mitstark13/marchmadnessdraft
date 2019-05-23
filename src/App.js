@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import Pusher from 'pusher-js';
-import ChatList from './components/chat/ChatList';
-import ChatBox from './components/chat/ChatBox';
-import LoginScreen from './components/login/LoginScreen';
+// import axios from 'axios';
+// import cheerio from 'cheerio';
+// import Pusher from 'pusher-js';
+// import ChatList from './components/chat/ChatList';
+// import ChatBox from './components/chat/ChatBox';
+import Home from './components/home/Home';
 import Admin from './components/admin/Admin';
 import Draft from './components/draft/Draft';
 import Review from './components/review/Review';
@@ -18,57 +19,125 @@ class App extends Component {
       text: '',
       username: '',
       chats: [],
-      players: [],
-      ownersList: [],
-      teamNames: [],
-      draftOrder: [],
-      currentPick: 1,
-      round: 2,
-      lastDraftTime: ''
+      ownersList: []
     };
   }
 
   componentDidMount() {
 
-    const pusher = new Pusher('4f19babc17552ecbf634', {
-      cluster: 'us2',
-      encrypted: true
-    });
+    // const pusher = new Pusher('4f19babc17552ecbf634', {
+    //   cluster: 'us2',
+    //   encrypted: true
+    // });
 
-    this.pusherChat(pusher);
-    this.pusherLogin(pusher);
-    this.draftReset(pusher);
+    // this.pusherChat(pusher);
+    // this.pusherLogin(pusher);
+    // this.draftReset(pusher);
 
-    this.handleTextChange = this.handleTextChange.bind(this);
-    this.submitMessage = this.submitMessage.bind(this);
-    this.ownerLogin = this.ownerLogin.bind(this);
+    // this.handleTextChange = this.handleTextChange.bind(this);
+    // this.submitMessage = this.submitMessage.bind(this);
+    // this.ownerLogin = this.ownerLogin.bind(this);
 
-    axios.get(this.props.dbUrl + '/players').then((players) => {
-      let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
-      this.setState({ teamNames: players.data[0].teamNames })
-      this.setState({ ownersList: draftOrder })
-    });
+    // axios.get(this.props.dbUrl + '/players').then((players) => {
+    //   let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
+    //   this.setState({ teamNames: players.data[0].teamNames })
+    //   this.setState({ ownersList: draftOrder })
+    // });
+
+    // this.getAllGames();
   }
+
+  // getAllGames() {
+  //   let gameIds = []
+  //   axios.get('http://www.espn.com/mens-college-basketball/tournament/bracket')
+  //     .then((html) => {
+  //       const $ = cheerio.load(html.data);
+
+  //       $('.match dd').each((i, match) => {
+  //         const game = match
+
+  //         if (game.attribs) {
+  //           let gameId = game.attribs.onclick.split('(')[1].split(',')[0]
+  //           gameIds.push(gameId)
+  //         }
+  //       })
+  //     }).then(() => {
+  //       this.getGameData(gameIds)
+  //     })
+  // }
+
+  // getGameData(ids) {
+  //   console.log(ids)
+  //   let names = [];
+  //   let points = [];
+  //   let rebounds = [];
+  //   let assists = [];
+
+  //   axios.get('http://www.espn.com/mens-college-basketball/boxscore?gameId=' + ids[0])
+  //     .then((html) => {
+  //       const $ = cheerio.load(html.data);
+
+  //       //REWRITE THIS TO DO ALL ONE PLAYER AT ONCE AND SAVE AS OBJECT WITH NAME AS KEY
+  //       //CAN BE DONE LIKE THIS: $(result).children('td.date');
+
+  //       $('.content.desktop table.mod-data tbody .name span:first-child').each((i, name) => {
+  //         console.log(name)
+  //         if (name.children[0]) {
+  //           let playerName = name.children[0].data
+  //           names.push(playerName)
+  //         }
+  //       })
+
+  //       $('.content.desktop table.mod-data tbody .pts').each((i, name) => {
+  //         console.log(name)
+  //         if (name.children[0]) {
+  //           let pointsTotal = name.children[0].data
+  //           points.push(pointsTotal)
+  //         }
+  //       })
+
+  //       $('.content.desktop table.mod-data tbody .reb').each((i, name) => {
+  //         console.log(name)
+  //         if (name.children[0]) {
+  //           let rebTotal = name.children[0].data
+  //           rebounds.push(rebTotal)
+  //         }
+  //       })
+  //       $('.content.desktop table.mod-data tbody .ast').each((i, name) => {
+  //         console.log(name)
+  //         if (name.children[0]) {
+  //           let astTotal = name.children[0].data
+  //           assists.push(astTotal)
+  //         }
+  //       })
+  //     })
+  //     .then(() => {
+  //       console.log(names)
+  //       console.log(points)
+  //       console.log(rebounds)
+  //       console.log(assists)
+  //     })
+  // }
 
   updateScroll() {
     var element = document.querySelector(".draftChat");
     element.scrollTop = element.scrollHeight;
   }
 
-  pusherChat(pusher) {
-    const channel = pusher.subscribe('chat');
-    channel.bind('message', data => {
-      this.setState({ chats: [...this.state.chats, data], test: '' });
-      setTimeout(this.updateScroll, 500);
-    });
-  }
+  // pusherChat(pusher) {
+  //   const channel = pusher.subscribe('chat');
+  //   channel.bind('message', data => {
+  //     this.setState({ chats: [...this.state.chats, data], test: '' });
+  //     setTimeout(this.updateScroll, 500);
+  //   });
+  // }
 
-  pusherLogin(pusher) {
-    const channel = pusher.subscribe('login');
-    channel.bind('users', data => {
-      this.setState({ chats: [...this.state.chats, data], test: '' });
-    })
-  }
+  // pusherLogin(pusher) {
+  //   const channel = pusher.subscribe('login');
+  //   channel.bind('users', data => {
+  //     this.setState({ chats: [...this.state.chats, data], test: '' });
+  //   })
+  // }
 
   draftReset(pusher) {
     const channel = pusher.subscribe('draft');
@@ -77,48 +146,48 @@ class App extends Component {
     })
   }
 
-  ownerLogin(owner) {
+  // ownerLogin(owner) {
 
-    this.setState({ username: owner })
+  //   this.setState({ username: owner })
 
-    let loginModal = document.querySelector('section#login');
-    loginModal.style.opacity = 0;
-    setTimeout(() => {
-      loginModal.style.display = 'none';
-    }, 500);
+  //   let loginModal = document.querySelector('section#login');
+  //   loginModal.style.opacity = 0;
+  //   setTimeout(() => {
+  //     loginModal.style.display = 'none';
+  //   }, 500);
 
-    const payload = {
-      username: '',
-      message: owner + ' has entered the draft'
-    };
+  //   const payload = {
+  //     username: '',
+  //     message: owner + ' has entered the draft'
+  //   };
 
-    axios.post(this.props.dbUrl + '/users', payload);
-  }
+  //   axios.post(this.props.dbUrl + '/users', payload);
+  // }
 
-  loginUser() {
-    const username = window.prompt('Username: ', 'Anonymous');
+  // loginUser() {
+  //   const username = window.prompt('Username: ', 'Anonymous');
     
-    this.setState({ username });
-    this.setState({ users: [...this.state.users, username]})
-  }
+  //   this.setState({ username });
+  //   this.setState({ users: [...this.state.users, username]})
+  // }
 
-  handleTextChange(e) {
-    if (e.keyCode === 13) {
-      this.submitMessage();
-    } else {
-      this.setState({ text: e.target.value });
-    }
-  }
+  // handleTextChange(e) {
+  //   if (e.keyCode === 13) {
+  //     this.submitMessage();
+  //   } else {
+  //     this.setState({ text: e.target.value });
+  //   }
+  // }
 
-  submitMessage() {
-    const payload = {
-      username: this.state.username,
-      message: this.state.text
-    };
-    axios.post(this.props.dbUrl + '/message', payload);
+  // submitMessage() {
+  //   const payload = {
+  //     username: this.state.username,
+  //     message: this.state.text
+  //   };
+  //   axios.post(this.props.dbUrl + '/message', payload);
 
-    this.setState({text: ''})
-  }
+  //   this.setState({text: ''})
+  // }
 
   render() {
     return (
@@ -127,7 +196,7 @@ class App extends Component {
           <header className="App-header">
             <div className="App-name">
               <Link to="/">
-                <h1 className="App-title">Fantasy Draft 2019</h1>
+                <h1 className="App-title">Fantasy Draft 2020</h1>
               </Link>
               <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
                 <button>View Current Bracket</button>
@@ -135,12 +204,12 @@ class App extends Component {
               {/* <Link to='/admin'>
                 <button>Admin Page</button>
               </Link> */}
-              <Link to='/review'>
+              {/* <Link to='/review'>
                 <button>Draft Review</button>
-              </Link>
+              </Link> */}
             </div>
             <div className="App-user">
-              <p>Welcome, {this.state.username}</p>
+              <p>{this.state.username !== '' ? "Welcome, " + this.state.username : "Sign In"}</p>
             </div>
           </header>
           
@@ -153,7 +222,7 @@ class App extends Component {
           <Route path="/review"
             render={(props) => <Review dbUrl={this.props.dbUrl} /> } />
           
-          <section id="chat">
+          {/* <section id="chat">
             <ChatList 
               chats={this.state.chats} 
               username={this.state.username}
@@ -164,7 +233,7 @@ class App extends Component {
               handleTextChange={this.handleTextChange}
               submitMessage={this.submitMessage}
             />
-          </section>
+          </section> */}
 
           <div className="mobile-menu">
             <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
@@ -173,13 +242,13 @@ class App extends Component {
             <Link to='/admin'>
               <button>Admin Page</button>
             </Link>
-            <Link to='/review'>
+            {/* <Link to='/review'>
               <button>Draft Review</button>
-            </Link>
+            </Link> */}
           </div>
 
           <Route exact path="/"
-            render={(props) => <LoginScreen ownerLogin={this.ownerLogin.bind(this)} teamNames={this.state.teamNames} owners={this.state.ownersList.slice(0, this.state.ownersList.length / 2)}/>}
+            render={(props) => <Home dbUrl={this.props.dbUrl}/>}
           />
           
         </div>

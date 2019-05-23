@@ -46,9 +46,9 @@ class Draft extends Component {
 
     this.audio = new Audio(soundFile)
 
-    if (this.props.username.length < 1) {
-      window.location.pathname = '/'
-    }
+    // if (this.props.username.length < 1) {
+    //   window.location.pathname = '/'
+    // }
 
     this.setState({ username: this.props.username })
 
