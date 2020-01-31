@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import JoinLeague from '../joinLeague/JoinLeague';
+import CreateLeague from '../createLeague/CreateLeague';
 import './Home.css';
 
 class Home extends Component {
@@ -21,43 +22,22 @@ class Home extends Component {
     });
   };
 
-  openCreateLeague() {
-    document.querySelector('section.createLeague').classList.toggle('hide');
-  }
-
   render() {
     return(
-      <main>
-        <section className="home">
-          <h1>Draft Leagues</h1>
-          <p>Join / Create league below</p>
-          <input type="text" />
-          <button onClick={this.openCreateLeague}>Create</button>
-
-          <ul>
-            {this.state.leagues.map((league) => {
-              let joinLink = "/draft?id=" + league._id
-              return (
-                <li key={league._id}>
-                  <span>{league.name}</span>
-                  <small>{league.members.length}/{league.maxMembers}</small>
-                  <Link to={joinLink}>Join</Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-        <section className="createLeague hide">
-          <h2>Create new league</h2>
-          <input type="text" name="leagueName" placeholder="League Name" />
-          <input type="number" min="4" max="14" defaultValue="4" />
-          <input type="radio" name="leaguePrivate" />
-          <input type="password" name="leaguePw" placeholder="Password" />
-        </section>
-        <footer>
+      <section className="c-home">
+        <div className="c-home__wrapper">
+          <JoinLeague leagues={this.state.leagues}/>
+          <div className="c-home__middle">
+            <div className="line"></div>
+            <b>OR</b>
+            <div className="line"></div>
+          </div>
+          <CreateLeague />
+        </div>
+        <footer className="c-home__footer">
           <small>Created by <a href="www.mstark.tech" target="_blank">Mitchell Starkey</a></small>
         </footer>
-      </main>
+      </section>
     )
   }
 };

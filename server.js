@@ -47,7 +47,7 @@ MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/n
 
     app.get('/players', (req, res) => {
       //Sort puts the document with the owners list first
-      database.collection('players').find().sort( { owners: -1 } ).toArray(function(err, array) {
+      database.collection('players').find().sort( { seedList: -1 } ).toArray(function(err, array) {
         if (err) return console.log(err)
 
         res.send(array)

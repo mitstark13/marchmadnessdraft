@@ -1,0 +1,17 @@
+.c-join {
+  text-align: center; }
+  .c-join ul {
+    list-style-type: none;
+    width: 400px;
+    padding: 0;
+    border: 1px solid black; }
+    .c-join ul li {
+      display: flex;
+      border: 1px solid #e2e2e2;
+      padding: 4px 7px;
+      margin: 0;
+      font-size: 18px; }
+      .c-join ul li span {
+        flex: 1; }
+
+/*# sourceMappingURL=JoinLeague.css.map */

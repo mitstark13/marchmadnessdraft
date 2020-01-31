@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,SAAU;EACN,UAAU,EAAE,IAAI;EAChB,MAAM,EAAE,eAAe;EACvB,UAAU,EAAE,GAAG",
+"sources": ["CreateLeague.scss"],
+"names": [],
+"file": "CreateLeague.css"
+}

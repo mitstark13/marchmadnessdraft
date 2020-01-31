@@ -1,0 +1,22 @@
+.c-join {
+    text-align: center;
+
+    ul {
+        list-style-type: none;
+        width: 400px;
+        padding: 0;
+        border: 1px solid black;
+
+        li {
+            display: flex;
+            border: 1px solid #e2e2e2;
+            padding: 4px 7px;
+            margin: 0;
+            font-size: 18px;
+
+            span {
+                flex: 1;
+            }
+        }
+    }
+}
