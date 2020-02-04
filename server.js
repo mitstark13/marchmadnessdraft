@@ -114,6 +114,16 @@ MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/n
         console.log('successful reset')
       })
     })
+    // **** LEAGUES ****
+    // ***** ADMIN PAGE *****
+    app.post('/newLeague', (req, res) => {
+      database.collection('leagues').save(req.body, (err, result) => {
+        if (err) return console.log(err)
+        res.send(result)
+        console.log('Created new league')
+        //ToDo: Add Pusher event to show success message
+      })
+    })
 
     // ***** ADMIN PAGE *****
     app.post('/newPlayer', (req, res) => {

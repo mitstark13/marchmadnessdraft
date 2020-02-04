@@ -248,7 +248,7 @@ class App extends Component {
           </div>
 
           <Route exact path="/"
-            render={(props) => <Home dbUrl={this.props.dbUrl}/>}
+            render={(props) => <Home dbUrl={this.props.dbUrl} username={this.state.username} />}
           />
           
         </div>

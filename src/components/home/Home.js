@@ -26,13 +26,13 @@ class Home extends Component {
     return(
       <section className="c-home">
         <div className="c-home__wrapper">
-          <JoinLeague leagues={this.state.leagues}/>
+          <JoinLeague leagues={this.state.leagues} dbUrl={this.props.dbUrl} />
           <div className="c-home__middle">
             <div className="line"></div>
             <b>OR</b>
             <div className="line"></div>
           </div>
-          <CreateLeague />
+          <CreateLeague dbUrl={this.props.dbUrl} />
         </div>
         <footer className="c-home__footer">
           <small>Created by <a href="www.mstark.tech" target="_blank">Mitchell Starkey</a></small>
