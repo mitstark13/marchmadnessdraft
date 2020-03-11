@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-// import axios from 'axios';
+import axios from 'axios';
 // import cheerio from 'cheerio';
-// import Pusher from 'pusher-js';
-// import ChatList from './components/chat/ChatList';
-// import ChatBox from './components/chat/ChatBox';
 import Home from './components/home/Home';
 import Admin from './components/admin/Admin';
 import Draft from './components/draft/Draft';
 import Review from './components/review/Review';
+import LoginModal from './components/login/LoginModal';
 import './App.css';
 
 class App extends Component {
@@ -17,34 +15,52 @@ class App extends Component {
     super(props);
     this.state = {
       text: '',
-      username: '',
+      userName: '',
+      loggedInID: 0,
+      viewingLeagues: false,
+      loggingIn: false,
       chats: [],
-      ownersList: []
+      leagues: [],
+      ownersList: [],
+      usersLeagues: []
     };
+
+    this.openLoginModal = this.openLoginModal.bind(this);
+    this.closeLoginModal = this.closeLoginModal.bind(this);
   }
 
   componentDidMount() {
 
-    // const pusher = new Pusher('4f19babc17552ecbf634', {
-    //   cluster: 'us2',
-    //   encrypted: true
-    // });
+    const savedUser = sessionStorage.getItem('loginId');
+    const savedUsername = sessionStorage.getItem('loginUsername');
 
-    // this.pusherChat(pusher);
-    // this.pusherLogin(pusher);
-    // this.draftReset(pusher);
+    axios.get(this.props.dbUrl + '/leagues').then((leagues) => {
+      this.setState({ leagues: leagues.data })
+    }).then(() => {
+      if (savedUsername) {
+        this.handleLogin({
+          _id: savedUser,
+          username: savedUsername
+        })
 
-    // this.handleTextChange = this.handleTextChange.bind(this);
-    // this.submitMessage = this.submitMessage.bind(this);
-    // this.ownerLogin = this.ownerLogin.bind(this);
-
-    // axios.get(this.props.dbUrl + '/players').then((players) => {
-    //   let draftOrder = [...players.data[0].owners, ...players.data[0].owners.reverse()]
-    //   this.setState({ teamNames: players.data[0].teamNames })
-    //   this.setState({ ownersList: draftOrder })
-    // });
+        this.getLeaguesByUser(savedUser);
+      }
+    });
 
     // this.getAllGames();
+  }
+
+  getLeaguesByUser = (userId) => {
+    let usersLeagues = [];
+    this.state.leagues.forEach((league) => {
+      if (league.teams.filter(function(team) { return team.userId === userId }).length > 0) {
+        usersLeagues.push(league);
+      }
+    });
+
+    this.setState({
+      usersLeagues: usersLeagues
+    })
   }
 
   // getAllGames() {
@@ -119,26 +135,6 @@ class App extends Component {
   //     })
   // }
 
-  updateScroll() {
-    var element = document.querySelector(".draftChat");
-    element.scrollTop = element.scrollHeight;
-  }
-
-  // pusherChat(pusher) {
-  //   const channel = pusher.subscribe('chat');
-  //   channel.bind('message', data => {
-  //     this.setState({ chats: [...this.state.chats, data], test: '' });
-  //     setTimeout(this.updateScroll, 500);
-  //   });
-  // }
-
-  // pusherLogin(pusher) {
-  //   const channel = pusher.subscribe('login');
-  //   channel.bind('users', data => {
-  //     this.setState({ chats: [...this.state.chats, data], test: '' });
-  //   })
-  // }
-
   draftReset(pusher) {
     const channel = pusher.subscribe('draft');
     channel.bind('draftReset', data => {
@@ -146,94 +142,100 @@ class App extends Component {
     })
   }
 
-  // ownerLogin(owner) {
+  openLoginModal() {
+    this.setState({ loggingIn: true });
+  }
 
-  //   this.setState({ username: owner })
+  closeLoginModal() {
+    this.setState({ loggingIn: false });
+  }
 
-  //   let loginModal = document.querySelector('section#login');
-  //   loginModal.style.opacity = 0;
-  //   setTimeout(() => {
-  //     loginModal.style.display = 'none';
-  //   }, 500);
+  handleLogin(user) {
+    this.setState({
+      loggedInID: user._id,
+      userName: user.username,
+      loggingIn: false
+    })
 
-  //   const payload = {
-  //     username: '',
-  //     message: owner + ' has entered the draft'
-  //   };
+    this.getLeaguesByUser(user._id);
+  }
 
-  //   axios.post(this.props.dbUrl + '/users', payload);
-  // }
+  mouseEnter = () => {
+    this.setState({
+      viewingLeagues: true
+    })
+  }
 
-  // loginUser() {
-  //   const username = window.prompt('Username: ', 'Anonymous');
-    
-  //   this.setState({ username });
-  //   this.setState({ users: [...this.state.users, username]})
-  // }
-
-  // handleTextChange(e) {
-  //   if (e.keyCode === 13) {
-  //     this.submitMessage();
-  //   } else {
-  //     this.setState({ text: e.target.value });
-  //   }
-  // }
-
-  // submitMessage() {
-  //   const payload = {
-  //     username: this.state.username,
-  //     message: this.state.text
-  //   };
-  //   axios.post(this.props.dbUrl + '/message', payload);
-
-  //   this.setState({text: ''})
-  // }
+  mouseLeave = () => {
+    this.setState({
+      viewingLeagues: false
+    })
+  }
 
   render() {
     return (
       <Router>
         <div className="App">
           <header className="App-header">
-            <div className="App-name">
+            <nav className="c-app__nav">
               <Link to="/">
                 <h1 className="App-title">Fantasy Draft 2020</h1>
               </Link>
-              <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
-                <button>View Current Bracket</button>
-              </a>
-              {/* <Link to='/admin'>
-                <button>Admin Page</button>
-              </Link> */}
-              {/* <Link to='/review'>
-                <button>Draft Review</button>
-              </Link> */}
-            </div>
+              <ul className="c-app__nav-list">
+                <li className="c-app__nav-item">
+                  <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
+                    <button>View Current Bracket</button>
+                  </a>
+                </li>
+                {/* <Link to='/admin'>
+                  <button>Admin Page</button>
+                </Link> */}
+                {/* <Link to='/review'>
+                  <button>Draft Review</button>
+                </Link> */}
+
+                {this.state.userName !== '' &&
+                <li className="c-app__nav-item" onMouseEnter={this.mouseEnter}>
+                  My leagues <span className="c-app__caret">&#9660;</span>
+                  <ul className={this.state.viewingLeagues ? "c-app__submenu dropdown" : "c-app__submenu"} onMouseLeave={this.mouseLeave}>
+                    {this.state.usersLeagues.map((league, idx) => {
+                      return (
+                        <li key={idx}>
+                          <Link to={{
+                            pathname: `/draft/${league._id}`,
+                          }}>{league.settings.name}</Link>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </li>
+                }
+              </ul>
+            </nav>
             <div className="App-user">
-              <p>{this.state.username !== '' ? "Welcome, " + this.state.username : "Sign In"}</p>
+              {this.state.userName !== ''
+              ? <p>{"Welcome, " + this.state.userName}</p>
+              : <button onClick={this.openLoginModal}>Sign In</button>
+              }
             </div>
           </header>
+
+          <Route exact path="/"
+            render={(props) => <Home dbUrl={this.props.dbUrl} leagues={this.state.leagues} openLoginModal={this.openLoginModal} loggedInUser={this.state.loggedInID} username={this.state.userName} />} />
           
-          <Route path="/draft"
-            render={(props) => <Draft dbUrl={this.props.dbUrl} username={this.state.username} /> } />
+          <Route path="/draft/:id"
+            render={(props) => <Draft dbUrl={this.props.dbUrl} usersleagues={this.state.usersLeagues} username={this.state.userName} /> } />
           
           <Route path="/admin"
             render={(props) => <Admin dbUrl={this.props.dbUrl} /> } />
 
           <Route path="/review"
             render={(props) => <Review dbUrl={this.props.dbUrl} /> } />
-          
-          {/* <section id="chat">
-            <ChatList 
-              chats={this.state.chats} 
-              username={this.state.username}
-            />
-            <ChatBox
-              text={this.state.text}
-              username={this.state.username}
-              handleTextChange={this.handleTextChange}
-              submitMessage={this.submitMessage}
-            />
-          </section> */}
+
+          {this.state.loggingIn
+            ? <LoginModal dbUrl={this.props.dbUrl} handleLogin={this.handleLogin.bind(this)} />
+            : <div></div>
+          }
 
           <div className="mobile-menu">
             <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
@@ -246,10 +248,6 @@ class App extends Component {
               <button>Draft Review</button>
             </Link> */}
           </div>
-
-          <Route exact path="/"
-            render={(props) => <Home dbUrl={this.props.dbUrl} username={this.state.username} />}
-          />
           
         </div>
       </Router>

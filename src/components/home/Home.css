@@ -1,12 +1,14 @@
-.c-home__wrapper {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: calc(100vh - 65px); }
-.c-home__footer {
-  display: block;
-  height: 25px;
-  text-align: center;
-  background: #2c405a; }
+.c-home {
+  grid-area: draft;
+  padding: 25px 0; }
+  .c-home__wrapper {
+    display: flex;
+    justify-content: space-around;
+    height: calc(100vh - 65px); }
+  .c-home__footer {
+    display: block;
+    height: 25px;
+    text-align: center;
+    background: #2c405a; }
 
 /*# sourceMappingURL=Home.css.map */

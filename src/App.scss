@@ -8,10 +8,13 @@
     "messaging messaging messaging";
   grid-template-rows: 35px 595px 270px;
   grid-gap: 5px;
-  background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
-  background: -webkit-linear-gradient(-45deg, #eeeeee 0%,#F7F7F7 47%,#eeeeee 100%);
-  background: linear-gradient(135deg, #eeeeee 0%,#F7F7F7 47%,#eeeeee 100%);
+  background: $off-white;
   height: 100vh;
+
+  ul, li {
+    list-style-type: none;
+    padding: 0;
+  }
 }
 
 .App-header {
@@ -55,6 +58,56 @@
     display: inline-block;
     font-size: 12px;
     color: $off-white;
+  }
+}
+
+.c-app {
+  &__nav-list {
+    display: inline-block;
+    height: 100%;
+  }
+
+  &__nav-item {
+    display: inline-block;
+    margin: 0 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  
+  &__submenu {
+    position: absolute;
+    margin: 10px 0 0;
+    height: 0px;
+    overflow: hidden;
+    z-index: 99;
+    transition: .5s;
+
+    &.dropdown {
+      height: auto;
+    }
+
+    li {
+      background: $app-blue;
+      padding: 7px 10px;
+      border-bottom: 1px solid $off-white;
+      transition: .3s;
+
+      &:hover {
+        cursor: pointer;
+        opacity: .7;
+      }
+    }
+
+    a {
+      color: $off-white;
+      text-decoration: none;
+    }
+  }
+
+  &__caret {
+    font-size: 8px;
   }
 }
 

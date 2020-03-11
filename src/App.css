@@ -3,10 +3,11 @@
   grid-template-areas: "header header header" "draft draft draft" "messaging messaging messaging";
   grid-template-rows: 35px 595px 270px;
   grid-gap: 5px;
-  background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
-  background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
-  background: linear-gradient(135deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
+  background: #F2F4F4;
   height: 100vh; }
+  .App ul, .App li {
+    list-style-type: none;
+    padding: 0; }
 
 .App-header {
   display: flex;
@@ -42,6 +43,37 @@
     display: inline-block;
     font-size: 12px;
     color: #F2F4F4; }
+
+.c-app__nav-list {
+  display: inline-block;
+  height: 100%; }
+.c-app__nav-item {
+  display: inline-block;
+  margin: 0 30px; }
+  .c-app__nav-item:hover {
+    cursor: pointer; }
+.c-app__submenu {
+  position: absolute;
+  margin: 10px 0 0;
+  height: 0px;
+  overflow: hidden;
+  z-index: 99;
+  transition: .5s; }
+  .c-app__submenu.dropdown {
+    height: auto; }
+  .c-app__submenu li {
+    background: #2c405a;
+    padding: 7px 10px;
+    border-bottom: 1px solid #F2F4F4;
+    transition: .3s; }
+    .c-app__submenu li:hover {
+      cursor: pointer;
+      opacity: .7; }
+  .c-app__submenu a {
+    color: #F2F4F4;
+    text-decoration: none; }
+.c-app__caret {
+  font-size: 8px; }
 
 #draftWrapper {
   grid-area: draft; }

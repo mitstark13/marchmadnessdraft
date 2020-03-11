@@ -76,7 +76,7 @@ class DraftTable extends Component {
               <span>{total ? total : "5.6"}</span>
             </div>
             
-            <button data-id={id ? id : '1234'} onClick={this.props.draftPlayer}>Draft Player</button>
+            <button data-id={id ? id : '1234'} data-leagueid='1234' onClick={this.props.draftPlayer}>Draft Player</button>
           </div>
         </div>
 
@@ -118,27 +118,32 @@ class DraftTable extends Component {
           </thead>
           <tbody>
           {sortedPlayers.map((player, i) => {
-            const picked = Number(player.pickNumber) > 0;
             const playerLink = "http://www.espn.com/search/results?q=" + player.name
 
-            if ((player.name && player.owner.length < 1) && (filterSeedMax >= seedList[player.team] && filterSeedMin <= seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
+            if (player.name && (filterSeedMax >= seedList[player.team] && filterSeedMin <= seedList[player.team]) && (filterTeam === '' || player.team.toLowerCase().includes(filterTeam.toLowerCase()) || player.name.toLowerCase().includes(filterTeam.toLowerCase()))) {
               let name = player.name
-              let selectedPlayer = player.name === this.props.selectedPlayer.name ? "selected" : "nah"
+              let activePlayer = player.name === this.props.selectedPlayer.name ? "selected" : "nah"
               
               if( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ) {
                 name = name.length < 19 ? name : name.slice(0, 16) + '...'
               }
               
-              return (
-                <tr key={i} data-picked={picked} className={selectedPlayer} onClick={() => {this.props.selectPlayer(player)}}>
-                  <td className="name"><a href={playerLink} target="_blank">{name}</a></td>
-                  <td className="school"><small>{seedList[player.team]}</small> {player.team}</td>
-                  <td className="pts">{player.points}</td>
-                  <td className="reb">{player.rebounds}</td>
-                  <td className="ast">{player.assists}</td>
-                  <td className="total">{player.total}</td>
-                </tr>
-              );
+              let selectedPlayer = this.props.draftedOrder.findIndex(draftee => {return draftee.name === player.name}) < 0;
+
+              if (selectedPlayer) {
+                return (
+                  <tr key={i} className={activePlayer} onClick={() => {this.props.selectPlayer(player)}}>
+                    <td className="name"><a href={playerLink} target="_blank">{name}</a></td>
+                    <td className="school"><small>{seedList[player.team]}</small> {player.team}</td>
+                    <td className="pts">{player.points}</td>
+                    <td className="reb">{player.rebounds}</td>
+                    <td className="ast">{player.assists}</td>
+                    <td className="total">{player.total}</td>
+                  </tr>
+                );
+              } else {
+                return false
+              }
             } else {
               return false
             }

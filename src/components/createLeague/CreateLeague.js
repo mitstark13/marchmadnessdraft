@@ -9,23 +9,26 @@ class CreateLeague extends Component {
       name: '',
       maxTeams: '',
       maxPlayers: '',
-      publicLeague: true,
+      privateLeague: false,
       passphrase: '',
-      commish: "Mitchell",
+      successfulCreation: false
     };
   }
 
   onChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    if (e.target.name === 'privateLeague') {
+      this.setState({ [e.target.name]: e.target.checked })
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
   }
 
   createLeague = () => {
     const { name,
       maxTeams,
       maxPlayers,
-      publicLeague,
-      passphrase,
-      commish
+      privateLeague,
+      passphrase
     } = this.state;
 
     axios.post(this.props.dbUrl + '/newLeague', {
@@ -34,33 +37,55 @@ class CreateLeague extends Component {
         name,
         maxTeams,
         maxPlayers,
-        publicLeague,
+        privateLeague,
         passphrase,
-        commish
+        currentPick: 1,
+        lastPickTime: 0,
+        commish: this.props.loggedInUser
       },
-      "teams": []
+      "teams": [
+        {
+          "userId": this.props.loggedInUser,
+          "players": []
+        }
+      ]
     }).then((result) => {
-        console.log(result)
-      });
+      console.log(result)
+    });
   }
 
   render() {
     return(
     <section className="c-create">
+      {this.state.successfulCreation &&
+        <div className="c-create__success">
+          <p className="c-create__success-text">Successfully created league!</p>
+        </div>
+      }
       <h2 className="c-create__headline">Create League</h2>
       <p className="c-create__description">Create and customize your own league.</p>
-      <p className="c-create__description">Make private and invite your family and friends.</p>
-      <label htmlFor="leageName">League Name:</label>
-      <input type="text" placeholder="DreamLeague" name="name" onChange={this.onChange} />
-      <label htmlFor="leaguePrivate">Make Private:</label>
-      <input type="checkbox" name="publicLeague" onChange={this.onChange} />
-      <label htmlFor="leaguePw">Password to join your league:</label>
-      <input type="password" placeholder="Password" name="passphrase" onChange={this.onChange} />
-      <label htmlFor="leagueMax">Max size of league:</label>
-      <input type="number" min="2" max="12" name="maxTeams" onChange={this.onChange} />
-      <label htmlFor="leaguePlayers">Number of players to draft:</label>
-      <input type="number" min="7" max="15" name="maxPlayers" onChange={this.onChange} />
-      <button className="c-create__button" onClick={this.createLeague}>Create League</button>
+      <form className="c-create__form" onSubmit={this.createLeague}>
+        <label htmlFor="leageName" className="c-create__label">League Name:
+          <input type="text" className="c-create__input" placeholder="DreamLeague" name="name" onChange={this.onChange} />
+        </label>
+        <div className="c-create__flex">
+          <div data-am-toggle-switch>
+            <span>Private: </span>
+            <input type="checkbox" id="input-b" name="privateLeague" onChange={this.onChange} />
+            <label htmlFor="input-b"></label>
+          </div>
+          <input type="password" className="c-create__input" placeholder="Password" name="passphrase" disabled={!this.state.privateLeague} onChange={this.onChange} />
+        </div>
+        <div className="c-create__flex">
+          <label htmlFor="leagueMax" className="c-create__label">Size of league:
+            <input type="number" className="c-create__input c-create__input-number" min="4" max="12" placeholder="10" name="maxTeams" onChange={this.onChange} />
+          </label>
+          <label htmlFor="leaguePlayers" className="c-create__label">Number of rounds:
+            <input type="number" className="c-create__input c-create__input-number" min="5" max="15" placeholder="12" name="maxPlayers" onChange={this.onChange} />
+          </label>
+        </div>
+        <input type="submit" className="c-create__button" value="Create League"></input>
+      </form>
     </section>
     )
   }

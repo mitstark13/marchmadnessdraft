@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router';
 import axios from 'axios';
 import Pusher from 'pusher-js';
 import DraftTable from './draftTable/DraftTable';
 import DraftHistory from './draftHistory/DraftHistory';
 import DraftTeams from './draftTeams/DraftTeams';
 import DraftOrder from './draftOrder/DraftOrder';
+import ChatMain from '../chat/ChatMain';
 import soundFile from '../../music/mmMusic.mp3';
 
 class Draft extends Component {
@@ -15,13 +17,14 @@ class Draft extends Component {
       username: '',
       teamViewOwner: '',
       players: [],
+      thisLeague: {},
       ownersList: [],
       draftOrder: [],
       currentPick: 1,
       round: 1,
       maxRounds: 10,
       autopick: false,
-      lastDraftTime: '',
+      lastDraftTime: 0,
       selectedPlayer: {},
       seedList: {},
       filterTeam: '',
@@ -32,7 +35,6 @@ class Draft extends Component {
   }
 
   componentDidMount() {
-    //this.loginUser();
 
     const pusher = new Pusher('4f19babc17552ecbf634', {
       cluster: 'us2',
@@ -46,33 +48,41 @@ class Draft extends Component {
 
     this.audio = new Audio(soundFile)
 
-    // if (this.props.username.length < 1) {
-    //   window.location.pathname = '/'
-    // }
+    const savedUser = sessionStorage.getItem('loginUsername');
+    this.setState({
+      username: savedUser
+    })
 
-    this.setState({ username: this.props.username })
-
-    this.playerDrafted(pusher);
+    if (savedUser === "") {
+      window.location.pathname = '/'
+    }
 
     this.viewNewTeam = this.viewNewTeam.bind(this);
     this.countdownVar = true;
 
+    axios.get(this.props.dbUrl + '/ncaa').then((ncaa) => {
+      this.setState({ seedList: ncaa.data[0].seedList })
+    });
+
     axios.get(this.props.dbUrl + '/players').then((players) => {
-      let draftOrder = [...players.data[0].owners]
-      this.setState({ lastDraftTime: players.data[0].lastPick })
-      this.setState({ round: players.data[0].round })
-      this.setState({ seedList: players.data[0].seedList })
-      this.setState({ ownersList: draftOrder })
-      this.setState({ currentPick: players.data[0].currentPick })
       this.setState({ players: players.data })
       this.setState({ selectedPlayer: players.data[Math.floor(Math.random() * Math.floor(players.data.length - 1))]})
-      this.setTeamsDropdown();
-      this.getDraftOrder();
-      this.playMusic();
       // this.countdownInterval = setInterval(() => { this.getCountdown() }, 1000);
     });
 
-    this.countdownInterval = setInterval(() => { if (this.countdownVar) this.getCountdown() }, 1000);
+    axios.get(this.props.dbUrl + '/leagues').then((leagues) => {
+      console.log(leagues);
+      leagues = leagues.data;
+      const leagueId = this.props.match.params.id;
+      const thisLeague = leagues.filter(function(league) { return league._id === leagueId })
+      console.log(thisLeague);
+      this.setState({ thisLeague: thisLeague[0] });
+    }).then(() => {
+      this.getLeagueSettings();
+      this.playerDrafted(pusher);
+    })
+
+    // this.countdownInterval = setInterval(() => { if (this.countdownVar) this.getCountdown() }, 1000);
   }
 
   componentWillMount() {
@@ -88,16 +98,43 @@ class Draft extends Component {
     }
   }
 
-  playMusic() {
-    const owner = document.querySelector('.orderOwner.active .name').innerText;
+  getLeagueSettings() {
+    let currentLeague = this.state.thisLeague;
+    let draftOrder = [...currentLeague.teams];
+    console.log(draftOrder);
+    axios.get(this.props.dbUrl + '/users').then((users) => {
+      draftOrder.map((draftee, idx) => {
+        let name = users.data.filter((user) => user._id === draftee.userId);
+        draftOrder[idx].name = name[0].username;
+        return draftee;
+      })
+    }).then(() => {
+      this.setState({
+        lastDraftTime: currentLeague.settings.lastPickTime || 0,
+        maxRounds: currentLeague.settings.maxPlayers,
+        round: Math.round( currentLeague.settings.currentPick / (currentLeague.settings.maxTeams * 2)) + 1,
+        ownersList: draftOrder,
+        currentPick: currentLeague.settings.currentPick
+      })
 
-    if (owner === this.state.username) {
+      console.log(this.state.ownersList);
+
+      this.setTeamsDropdown();
+      this.getDraftOrder();
+      this.playMusic();
+    });
+  }
+
+  playMusic() {
+    const owner = document.querySelector('.orderOwner.active .name');
+
+    if (owner && owner.innerText === this.state.username) {
 
       if (!this.audio) return
 
       this.audio.currentTime = 10 //perfect timing
       this.audio.volume = 0.2 //quiet for testing
-      this.audio.play()
+      // this.audio.play()
 
     }
   }
@@ -128,11 +165,13 @@ class Draft extends Component {
     this.setState({filterTeam: team})
   }
 
-  handleSeedFilter(render, handle, value, un, percent) {
+  handleSeedFilter(value) {
     let minSeed = Math.floor(value[0]);
     let maxSeed = Math.floor(value[1]);
-    this.setState({ filterSeedMin: minSeed })
-    this.setState({ filterSeedMax: maxSeed })
+    this.setState({
+      filterSeedMin: minSeed,
+      filterSeedMax: maxSeed
+    })
 
     document.querySelector('.noUi-handle.noUi-handle-lower').innerHTML = "<span>" + minSeed + "</span>";
     document.querySelector('.noUi-handle.noUi-handle-upper').innerHTML = "<span>" + maxSeed + "</span>";
@@ -212,21 +251,17 @@ class Draft extends Component {
   }
 
   playerDrafted(pusher) {
-    const channel = pusher.subscribe('draft');
+    let pusherChannel = `draft-${this.state.thisLeague._id}`;
+    const channel = pusher.subscribe(pusherChannel);
     channel.bind('playerDrafted', data => {
+      console.log(data);
       const nameDrafted = data.value.name;
       console.log(nameDrafted + " has been drafted!")
       this.stopAudio()
       
-      const playersList = this.state.players
       let pickNum = this.state.currentPick
-      const owner = document.querySelector('.orderOwner.active span.name').innerHTML;
-      const playerIdx = playersList.findIndex(x => x.name === nameDrafted);
-      playersList[playerIdx].pickNumber = pickNum
-      playersList[playerIdx].owner = owner
       pickNum+=1
 
-      this.setState({ players: playersList });
       this.setState({ currentPick: pickNum});
       this.setState({ lastDraftTime: new Date().getTime() })
       this.testIfDraftEnded(this.state.ownersList.length, this.state.currentPick);
@@ -242,35 +277,39 @@ class Draft extends Component {
   }
 
   selectPlayer(e) {
-    if (e.pickNumber === '0') {
-      this.setState({selectedPlayer: e})
-    }
+    this.setState({selectedPlayer: e})
   }
 
   draftPlayer() {
     const name = document.querySelector('.draftName p').innerHTML;
+    const team = document.querySelector('.draftName small').innerHTML;
     let owner = document.querySelector('.orderOwner.active span.name').innerHTML;
     const pickNumber = this.state.currentPick;
     const players = this.state.players;
     let ownersList = [...this.state.ownersList];
+    const ownerIdx = ownersList.findIndex(x => x.name === owner);
+    const ownerId = ownersList[ownerIdx].userId;
+    ownersList[ownerIdx].players.push({name, team, pickNumber});
     const dateNow = new Date().getTime();
 
-    if (owner === this.state.username || this.state.username === 'Admin' || this.state.autopick) {
+    if (owner === this.state.username || this.state.username === 'Hoosier' || this.state.autopick) {
       const payload = {
         name,
+        team,
         owner,
         pickNumber,
-        dateNow
+        dateNow,
+        userId: ownerId,
+        leagueId: this.state.thisLeague._id
+        // teamId
       }
+
       axios.put(this.props.dbUrl + '/marchmadness', payload)
-      axios.put(this.props.dbUrl + '/currentPick', payload)
       
       let newPlayer = "";
       while (newPlayer === "") {
         let option = players[Math.floor(Math.random() * Math.floor(players.length - 1)) + 1]
-        if (option.owner.length < 1) {
-          newPlayer = option
-        }
+        newPlayer = option
       }
 
       let roundNum = Math.floor(pickNumber / ownersList.length) + 1
@@ -288,42 +327,77 @@ class Draft extends Component {
   }
 
   render() {
-    const draftedOrder = this.state.players
-    draftedOrder.sort((a, b) => {
-      return Number(b.pickNumber) - Number(a.pickNumber)
+    const draftedOrder = []
+
+    if (this.state.thisLeague.teams) {
+      this.state.thisLeague.teams.forEach(function (team) {
+        const owner = team.name;
+        team.players.map((player) => {
+          player.owner = owner
+          draftedOrder.push(player);
+          return player;
+        })
+      })
+      draftedOrder.sort((a, b) => {
+        return Number(b.pickNumber) - Number(a.pickNumber)
+      })
+    }
+
+    const viewTeamsPlayers = [];
+
+    this.state.ownersList.forEach((ownerObj, i) => {
+      let team = ownerObj.players;
+      
+      if (team && ownerObj.name === this.state.teamViewOwner) {
+        team.forEach((player, i) => {
+          viewTeamsPlayers.push({
+            name: player.name,
+            team: player.team
+          })
+        })
+      } else {
+        return false;
+      }
     })
 
     return (
-      <section id="draftWrapper">
-        <section id="draftOrder">
-          <DraftOrder owners={this.state.draftOrder} pickNumber={this.state.currentPick} />
+      <React.Fragment>
+        <section id="draftWrapper">
+          <section id="draftOrder">
+            <DraftOrder owners={this.state.draftOrder} pickNumber={this.state.currentPick} />
+          </section>
+          
+          <section id="draft">
+            <DraftTable
+              players={this.state.players}
+              draftedOrder={draftedOrder}
+              seedList={this.state.seedList}
+              selectedPlayer={this.state.selectedPlayer}
+              draftPlayer={this.draftPlayer.bind(this)}
+              filterTeam={this.state.filterTeam}
+              filterSeedMin={this.state.filterSeedMin}
+              filterSeedMax={this.state.filterSeedMax}
+              filterByProj={this.state.filterByProj}
+              handleTeamFilter={this.handleTeamFilter.bind(this)}
+              handleSeedFilter={this.handleSeedFilter.bind(this)}
+              handleAvailableFilter={this.handleAvailableFilter.bind(this)}
+              selectPlayer={this.selectPlayer.bind(this)}/>
+            <DraftHistory players={draftedOrder}/>
+            <DraftTeams
+              viewTeamsPlayers={viewTeamsPlayers}
+              owner={this.state.teamViewOwner}
+              viewNewTeam={this.viewNewTeam}
+              ownersList={this.state.ownersList}
+            />
+          </section>
         </section>
-        
-        <section id="draft">
-          <DraftTable
-            players={this.state.players}
-            seedList={this.state.seedList}
-            selectedPlayer={this.state.selectedPlayer}
-            draftPlayer={this.draftPlayer.bind(this)}
-            filterTeam={this.state.filterTeam}
-            filterSeedMin={this.state.filterSeedMin}
-            filterSeedMax={this.state.filterSeedMax}
-            filterByProj={this.state.filterByProj}
-            handleTeamFilter={this.handleTeamFilter.bind(this)}
-            handleSeedFilter={this.handleSeedFilter.bind(this)}
-            handleAvailableFilter={this.handleAvailableFilter.bind(this)}
-            selectPlayer={this.selectPlayer.bind(this)}/>
-          <DraftHistory players={draftedOrder}/>
-          <DraftTeams
-            players={draftedOrder}
-            owner={this.state.teamViewOwner}
-            viewNewTeam={this.viewNewTeam}
-            ownersList={this.state.ownersList}
-          />
-        </section>
-      </section>
+        <ChatMain
+          dbUrl={this.props.dbUrl}
+          leagueId={this.state.thisLeague._id}
+        />
+      </React.Fragment>
     )
   }
 };
 
-export default Draft;
+export default withRouter(Draft);

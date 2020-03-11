@@ -1,10 +1,12 @@
 @import "../assets/variables";
 
 .c-home {
+	grid-area: draft;
+	padding: 25px 0;
+
 	&__wrapper {
 		display: flex;
 		justify-content: space-around;
-		align-items: center;
 		height: calc(100vh - 65px);
 	}
 
