@@ -1,0 +1,64 @@
+@import "../assets/variables";
+
+.c-join {
+    width: 45vw;
+    padding: 20px 40px;
+    text-align: left;
+
+    &__headline {
+        font-size: 48px;
+        margin: 0;
+    }
+
+    &__description {
+        font-size: 26px;
+    }
+
+    ul {
+        display: block;
+        margin: 40px auto;
+        list-style-type: none;
+        width: 400px;
+        padding: 0;
+        overflow: hidden;
+        border-radius: 10px;
+        background: linear-gradient(225deg, #ffffff, #dadcdc);
+        box-shadow:  -20px 20px 60px #acadad, 
+             20px -20px 60px #ffffff;
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 0;
+            font-size: 18px;
+
+            &:nth-child(2n) {
+                background: #eceded;
+            }
+
+            span {
+                flex: 2 0 60%;
+            }
+
+            small {
+                flex: 1 0 20%;
+            }
+
+            button {
+                background: $app-green;
+                color: $off-white;
+                border: none;
+                border-radius: 5px;
+                padding: 5px 20px;
+                text-transform: uppercase;
+                transition: .3s;
+
+                &:hover {
+                    cursor: pointer;
+                    opacity: .9;
+                }
+            }
+        }
+    }
+}

@@ -3,33 +3,28 @@
   grid-template-areas: "header header header" "draft draft draft" "messaging messaging messaging";
   grid-template-rows: 35px 595px 270px;
   grid-gap: 5px;
-  background: linear-gradient(135deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
+  background: #F2F4F4;
   height: 100vh; }
+  .App ul, .App li {
+    list-style-type: none;
+    padding: 0; }
 
 .App-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   grid-area: header;
-  background-color: #3A814A;
+  background-color: #2c405a;
   color: #F2F4F4;
   text-align: center;
   padding: 10px 40px;
-  -webkit-box-shadow: 0px 1px 5px #475570;
-          box-shadow: 0px 1px 5px #475570; }
+  box-shadow: 0px 1px 5px #F2F4F4; }
   .App-header button {
     background: none;
     border: 1px solid #F2F4F4;
     border-radius: 5px;
     color: #F2F4F4;
     margin: 0 0 0 10px;
-    -webkit-transition: .5s;
     transition: .5s; }
     @media screen and (max-width: 760px) {
       .App-header button {
@@ -49,26 +44,52 @@
     font-size: 12px;
     color: #F2F4F4; }
 
+.c-app__nav-list {
+  display: inline-block;
+  height: 100%; }
+.c-app__nav-item {
+  display: inline-block;
+  margin: 0 30px; }
+  .c-app__nav-item:hover {
+    cursor: pointer; }
+.c-app__submenu {
+  position: absolute;
+  margin: 10px 0 0;
+  height: 0px;
+  overflow: hidden;
+  z-index: 99;
+  transition: .5s; }
+  .c-app__submenu.dropdown {
+    height: auto; }
+  .c-app__submenu li {
+    background: #2c405a;
+    padding: 7px 10px;
+    border-bottom: 1px solid #F2F4F4;
+    transition: .3s; }
+    .c-app__submenu li:hover {
+      cursor: pointer;
+      opacity: .7; }
+  .c-app__submenu a {
+    color: #F2F4F4;
+    text-decoration: none; }
+.c-app__caret {
+  font-size: 8px; }
+
 #draftWrapper {
   grid-area: draft; }
 
 #draft {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: top;
-      -ms-flex-align: top;
-          align-items: top;
+  justify-content: space-around;
+  align-items: top;
   width: 99vw;
   height: calc(100% - 75px); }
 
 #chat {
   grid-area: messaging;
   height: 257px;
-  background: #475570; }
+  background: #2c405a; }
 
 .mobile-hamburger, .mobile-menu {
   display: none; }
@@ -79,18 +100,12 @@
     height: auto; }
 
   #draft {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; } }
+    flex-wrap: wrap; } }
 @media screen and (max-width: 760px) {
   .mobile-menu {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: space-around;
+    align-items: center;
     height: 40px;
     width: 100vw;
     position: fixed;
@@ -103,7 +118,6 @@
       border-radius: 5px;
       color: #F2F4F4;
       margin: 0 0 0 10px;
-      -webkit-transition: .5s;
       transition: .5s; }
       .mobile-menu button:hover {
         cursor: pointer;

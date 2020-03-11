@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import axios from 'axios';
-import { Link } from "react-router-dom";
+// import axios from 'axios';
+import JoinLeague from '../joinLeague/JoinLeague';
+import CreateLeague from '../createLeague/CreateLeague';
 import './Home.css';
 
 class Home extends Component {
@@ -8,56 +9,25 @@ class Home extends Component {
     super(props);
     this.state = {
       text: '',
-      username: 'Human',
-      leagues: []
+      username: 'Human'
     };
   }
 
   componentDidMount() {
     console.log(this.props)
-    axios.get(this.props.dbUrl + '/leagues').then((leagues) => {
-      console.log(leagues.data)
-      this.setState({ leagues: leagues.data })
-    });
   };
-
-  openCreateLeague() {
-    document.querySelector('section.createLeague').classList.toggle('hide');
-  }
 
   render() {
     return(
-      <main>
-        <section className="home">
-          <h1>Draft Leagues</h1>
-          <p>Join / Create league below</p>
-          <input type="text" />
-          <button onClick={this.openCreateLeague}>Create</button>
-
-          <ul>
-            {this.state.leagues.map((league) => {
-              let joinLink = "/draft?id=" + league._id
-              return (
-                <li key={league._id}>
-                  <span>{league.name}</span>
-                  <small>{league.members.length}/{league.maxMembers}</small>
-                  <Link to={joinLink}>Join</Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-        <section className="createLeague hide">
-          <h2>Create new league</h2>
-          <input type="text" name="leagueName" placeholder="League Name" />
-          <input type="number" min="4" max="14" defaultValue="4" />
-          <input type="radio" name="leaguePrivate" />
-          <input type="password" name="leaguePw" placeholder="Password" />
-        </section>
-        <footer>
-          <small>Created by <a href="www.mstark.tech" target="_blank">Mitchell Starkey</a></small>
+      <section className="c-home">
+        <div className="c-home__wrapper">
+          <JoinLeague leagues={this.props.leagues} openLoginModal={this.props.openLoginModal} loggedInUser={this.props.loggedInUser} dbUrl={this.props.dbUrl} />
+          <CreateLeague openLoginModal={this.props.openLoginModal} loggedInUser={this.props.loggedInUser} dbUrl={this.props.dbUrl} />
+        </div>
+        <footer className="c-home__footer">
+          <small>Created by <a href="https://www.mstark.tech" rel="noopener noreferrer" target="_blank">Mitchell Starkey</a></small>
         </footer>
-      </main>
+      </section>
     )
   }
 };

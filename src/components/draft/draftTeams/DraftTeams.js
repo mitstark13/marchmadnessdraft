@@ -1,14 +1,14 @@
 import React from "react";
 import './DraftTeams.css';
 
-export default ({ players, owner, viewNewTeam, ownersList }) => (
+export default ({ viewTeamsPlayers, owner, viewNewTeam, ownersList }) => (
   <div className="teamsView">
     <div className="teamsHeader">
       <h2>View teams</h2>
       <select className="teamSelect" onChange={viewNewTeam}>
-        {ownersList.map((ownerName, i) => {
+        {ownersList.map((owner, i) => {
           return (
-            <option value={ownerName} key={i}>{ownerName}</option>
+            <option value={owner.name} key={i}>{owner.name}</option>
           )
         })}
       </select>
@@ -21,9 +21,7 @@ export default ({ players, owner, viewNewTeam, ownersList }) => (
         </tr>
       </thead>
       <tbody>
-      {players.map((player, i) => {
-        if ((player.owner === owner) && (player.name)) {
-
+        {viewTeamsPlayers.map((player, i) => {
           let name = player.name
           name = name.length < 19 ? name : name.slice(0, 16) + '...'
 
@@ -33,10 +31,7 @@ export default ({ players, owner, viewNewTeam, ownersList }) => (
               <td className="school">{player.team}</td>
             </tr>
           );
-        } else {
-          return false
-        }
-      })}
+        })}
       </tbody>
     </table>
   </div>

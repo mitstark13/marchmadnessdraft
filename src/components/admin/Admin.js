@@ -9,15 +9,13 @@ class Admin extends Component {
     this.state = {
       name: '',
       team: '',
+      teamShortName: '',
       points: '',
       rebounds: '',
       assists: '',
       total: '',
-      pickNumber: '0',
-      owner: '',
-      currentPick: 1,
-      lastPick: '0',
-      oFile: ''
+      oFile: '',
+      resetLeague: 0
     };
   }
 
@@ -29,9 +27,9 @@ class Admin extends Component {
   }
 
   postPlayer = () => {
-    const { name, team, points, rebounds, assists, total, pickNumber, owner, currentPick, lastPick } = this.state;
+    const { name, team, teamShortName, points, rebounds, assists, total } = this.state;
 
-    axios.put(this.props.dbUrl + '/marchmadnessadmin', { name, team, points, rebounds, assists, total, pickNumber, owner, currentPick, lastPick })
+    axios.put(this.props.dbUrl + '/marchmadnessadmin', { name, team, teamShortName, points, rebounds, assists, total })
       .then((result) => {
         console.log(result)
       });
@@ -46,10 +44,21 @@ class Admin extends Component {
     this.postPlayer();
   }
 
+  handleResetLeague = (e) => {
+    if (e.keyCode === 13) {
+      this.resetDraft();
+    } else {
+      this.setState({ resetLeague: e.target.value });
+    }
+  }
+
   resetDraft = () => {
     let confirmation = window.confirm("Are you sure? All progress will be lost unless Nick made an Excel sheet");
     if (confirmation) {
-      let payload = "Resetting draft"
+      let payload = {
+        text: "Resetting draft",
+        resetLeague: this.state.resetLeague,
+      }
       axios.put(this.props.dbUrl + '/reset', payload)
         .then((resp) => {
           alert('Draft reset to pick #1')
@@ -68,7 +77,8 @@ class Admin extends Component {
   uploadTeam = () => {
     let oFile = this.state.oFile;
     var reader = new FileReader();
-    let teamName = document.querySelector("input[name='teamName']").value
+    let teamName = document.querySelector("input[name='teamName']").value;
+    let teamShortName = document.querySelector("input[name='teamShortName'").value;
 
     reader.onload = function(evt) {
       const bstr = evt.target.result;
@@ -76,17 +86,19 @@ class Admin extends Component {
       // Get first worksheet
       const wsname = wb.SheetNames[0];
       const ws = wb.Sheets[wsname];
-      console.log(ws)
       let numPlayers = Math.round((Object.keys(ws).length + 3) / 26);
       console.log('Number of players: ' + numPlayers)
 
       for (let i = 2; i <= numPlayers; i++) {
-        this.setState({ 'name': ws['B' + i].v})
-        this.setState({ 'team': teamName})
-        this.setState({ 'rebounds': ws['T' + i].v})
-        this.setState({ 'assists': ws['U' + i].v})
-        this.setState({ 'points': ws['Z' + i].v})
-        this.setState({ 'total': Math.round( (ws['T' + i].v + ws['U' + i].v + ws['Z' + i].v) * 10 ) / 10 }) //Math fixes common JS decimal errors
+        this.setState({
+          'name': ws['B' + i].v,
+          'points': ws['Z' + i].v,
+          'rebounds': ws['T' + i].v,
+          'assists': ws['U' + i].v,
+          'total': Math.round( (ws['T' + i].v + ws['U' + i].v + ws['Z' + i].v) * 10 ) / 10, //Math fixes common JS decimal errors
+          'team': teamName,
+          'teamShortName': teamShortName,
+        })
 
         this.postPlayer();
       }
@@ -119,6 +131,7 @@ class Admin extends Component {
 
         <div className="fullTeamWrapper">
           <input type="text" placeholder="Team Name" name="teamName" />
+          <input type="text" placeholder="Team Acronym" name="teamShortName" />
           <input type="file" id="my_file_input" onChange={this.filePicked} />
           <button className="uploadExcelTeam" onClick={this.uploadTeam}>Upload Full Team</button>
           <div id='my_file_output'></div>
@@ -127,6 +140,7 @@ class Admin extends Component {
         <br/>
         <button className="deleteBlank" onClick={this.deleteNull}>Delete bad uploads</button>
         <br/>
+        <input type="text" onChange={this.handleResetLeague} />
         <button className="deleteBlank" onClick={this.resetDraft}>Reset Draft</button>
 
       </div>

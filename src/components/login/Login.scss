@@ -1,5 +1,120 @@
 @import "../assets/variables";
 
+.c-login {
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	top: 35px;
+	background: rgba(#fff, 0.7);
+
+	&__success {
+		display: inline-block;
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%);
+		background: rgba($app-green, 0.7);
+		color: #fff;
+		border-radius: 5px;
+		text-align: center;
+		margin: 20px 0 0;
+		padding: 7px 30px;
+	}
+
+	&__container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		overflow: hidden;
+		border-radius: 5px;
+		background: #e9eeea;
+		box-shadow:  20px 20px 60px #c6cac7, 
+					-20px -20px 60px #fff;
+	}
+
+	&__options {
+		display: flex;
+		width: 200%;
+		transition: .5s;
+
+		&.form-slide {
+			transform: translateX(-50%);
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			flex: 1;
+    		height: calc(100% - 50px);
+		}
+	}
+
+	&__tab-container {
+		display: flex;
+		align-items: center;
+	}
+	
+	&__tab {
+		flex: 1;
+		background: $app-blue;
+		padding: 15px 0;
+		color: white;
+		opacity: .7;
+		transition: .3s;
+
+		&.active-tab {
+			opacity: 1;
+		}
+
+		&:hover {
+			cursor: pointer;
+			opacity: 1;
+		}
+	}
+
+	&__message {
+		font-size: 22px;
+		text-align: center;
+	}
+
+	&__headline {
+		margin: 0;
+		text-align: center;
+		font-size: 18px;
+	}
+
+	&__label {
+		display: block;
+		min-width: 250px;
+		margin: 12px auto;
+	}
+
+	&__input {
+		display: block;
+		width: 100%;
+		padding: 5px;
+		margin-top: 5px;
+		font-size: 22px;
+	}
+
+	&__submit {
+		margin: 20px auto 20px;
+		padding: 5px 25px;
+		font-size: 16px;
+		background: $app-green;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		transition: .3s;
+
+		&:hover {
+			cursor: pointer;
+			opacity: .7;
+		}
+	}
+}
+
 section#login {
 	position: fixed;
 	transition: .5s;
