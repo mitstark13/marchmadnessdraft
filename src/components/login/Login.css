@@ -15,6 +15,22 @@
     text-align: center;
     margin: 20px 0 0;
     padding: 7px 30px; }
+  .c-login__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 5px;
+    top: 50px;
+    font-size: 18px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    color: #2c405a;
+    transition: .3s; }
+    .c-login__close:hover {
+      cursor: pointer;
+      opacity: .7; }
   .c-login__container {
     position: absolute;
     top: 50%;

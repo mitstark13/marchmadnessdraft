@@ -23,6 +23,15 @@ class CreateLeague extends Component {
     }
   }
 
+  handleCreate = (e) => {
+    if (this.props.loggedInUser === 0) {
+      this.props.openLoginModal();
+    } else {
+      this.createLeague();
+    }
+    e.preventDefault();
+  }
+
   createLeague = () => {
     const { name,
       maxTeams,
@@ -31,27 +40,32 @@ class CreateLeague extends Component {
       passphrase
     } = this.state;
 
-    axios.post(this.props.dbUrl + '/newLeague', {
-      "settings": {
-        "date": "",
-        name,
-        maxTeams,
-        maxPlayers,
-        privateLeague,
-        passphrase,
-        currentPick: 1,
-        lastPickTime: 0,
-        commish: this.props.loggedInUser
-      },
-      "teams": [
-        {
-          "userId": this.props.loggedInUser,
-          "players": []
-        }
-      ]
-    }).then((result) => {
-      console.log(result)
-    });
+    if (name !== "" && maxTeams !== "" && maxPlayers !== "") {
+
+      axios.post(this.props.dbUrl + '/newLeague', {
+        "settings": {
+          "date": "",
+          name,
+          maxTeams,
+          maxPlayers,
+          privateLeague,
+          passphrase,
+          currentPick: 1,
+          lastPickTime: 0,
+          commish: this.props.loggedInUser
+        },
+        "teams": [
+          {
+            "userId": this.props.loggedInUser,
+            "players": []
+          }
+        ]
+      }).then((result) => {
+        console.log(result)
+      });
+    } else {
+      alert('Please fill out required fields')
+    }
   }
 
   render() {
@@ -64,7 +78,7 @@ class CreateLeague extends Component {
       }
       <h2 className="c-create__headline">Create League</h2>
       <p className="c-create__description">Create and customize your own league.</p>
-      <form className="c-create__form" onSubmit={this.createLeague}>
+      <form className="c-create__form" onSubmit={this.handleCreate}>
         <label htmlFor="leageName" className="c-create__label">League Name:
           <input type="text" className="c-create__input" placeholder="DreamLeague" name="name" onChange={this.onChange} />
         </label>
@@ -74,7 +88,7 @@ class CreateLeague extends Component {
             <input type="checkbox" id="input-b" name="privateLeague" onChange={this.onChange} />
             <label htmlFor="input-b"></label>
           </div>
-          <input type="password" className="c-create__input" placeholder="Password" name="passphrase" disabled={!this.state.privateLeague} onChange={this.onChange} />
+          <input type="password" className="c-create__input" placeholder="Password" name="passphrase" autoComplete="current-password" disabled={!this.state.privateLeague} onChange={this.onChange} />
         </div>
         <div className="c-create__flex">
           <label htmlFor="leagueMax" className="c-create__label">Size of league:

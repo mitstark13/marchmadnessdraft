@@ -120,11 +120,11 @@ class LoginModal extends Component {
               <p className="c-login__message">Welcome Back!</p>
               <label className="c-login__label">
                 Email:
-                <input type="text" className="c-login__input" name="emailLogin" onChange={this.handleChange} />
+                <input type="text" className="c-login__input" placeholder="name@email.com" name="emailLogin" onChange={this.handleChange} />
               </label>
               <label className="c-login__label">
                 Password:
-                <input type="password" className="c-login__input" placeholder="******" name="passwordLogin" onChange={this.handleChange} />
+                <input type="password" className="c-login__input" placeholder="******" autoComplete="current-password" name="passwordLogin" onChange={this.handleChange} />
               </label>
               <input type="submit" className="c-login__submit" value="Login" />
               <small className="c-login__error">{this.state.loginError}</small>
@@ -133,19 +133,22 @@ class LoginModal extends Component {
             <form onSubmit={this.createAccount}>
               <label className="c-login__label">
                 Username:
-                <input type="text" className="c-login__input" name="name" onChange={this.handleChange} />
+                <input type="text" className="c-login__input" placeholder="username1" name="name" onChange={this.handleChange} />
               </label>
               <label className="c-login__label">
                 Email:
-                <input type="text" className="c-login__input" name="email" onChange={this.handleChange} />
+                <input type="text" className="c-login__input" placeholder="name@email.com" name="email" onChange={this.handleChange} />
               </label>
               <label className="c-login__label">
                 Password:
-                <input type="password" className="c-login__input" placeholder="******" name="password" onChange={this.handleChange} />
+                <input type="password" className="c-login__input" placeholder="******" autoComplete="current-password" name="password" onChange={this.handleChange} />
               </label>
               <input type="submit" className="c-login__submit" value="Create Account" />
               <small className="c-login__error">{this.state.createUserError}</small>
             </form>
+          </div>
+          <div className="c-login__close" onClick={this.props.closeLoginModal}>
+            <span>X</span>
           </div>
         </div>
       </div>

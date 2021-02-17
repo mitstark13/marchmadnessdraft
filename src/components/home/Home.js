@@ -21,6 +21,7 @@ class Home extends Component {
     return(
       <section className="c-home">
         <div className="c-home__wrapper">
+					
           <JoinLeague leagues={this.props.leagues} openLoginModal={this.props.openLoginModal} loggedInUser={this.props.loggedInUser} dbUrl={this.props.dbUrl} />
           <CreateLeague openLoginModal={this.props.openLoginModal} loggedInUser={this.props.loggedInUser} dbUrl={this.props.dbUrl} />
         </div>

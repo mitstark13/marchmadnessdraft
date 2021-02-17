@@ -233,7 +233,7 @@ class App extends Component {
             render={(props) => <Review dbUrl={this.props.dbUrl} /> } />
 
           {this.state.loggingIn
-            ? <LoginModal dbUrl={this.props.dbUrl} handleLogin={this.handleLogin.bind(this)} />
+            ? <LoginModal dbUrl={this.props.dbUrl} closeLoginModal={this.closeLoginModal.bind(this)} handleLogin={this.handleLogin.bind(this)} />
             : <div></div>
           }
 

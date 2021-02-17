@@ -1,6 +1,6 @@
 .c-home {
   grid-area: draft;
-  padding: 25px 0; }
+  padding: 0; }
   .c-home__wrapper {
     display: flex;
     justify-content: space-around;

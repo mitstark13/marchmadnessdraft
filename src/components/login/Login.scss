@@ -20,6 +20,26 @@
 		padding: 7px 30px;
 	}
 
+	&__close {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		right: 5px;
+		top: 50px;
+		font-size: 18px;
+		height: 30px;
+		width: 30px;
+		border-radius: 50%;
+		color: $app-blue;
+		transition: .3s;
+
+		&:hover {
+			cursor: pointer;
+			opacity: .7;
+		}
+	}
+
 	&__container {
 		position: absolute;
 		top: 50%;
