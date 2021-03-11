@@ -1,0 +1,19 @@
+@import "../assets/variables";
+
+.c-home {
+	grid-area: draft;
+	padding: 0;
+
+	&__wrapper {
+		display: flex;
+		justify-content: space-around;
+		height: calc(100vh - 65px);
+	}
+
+	&__footer {
+		display: block;
+		height: 25px;
+		text-align: center;
+		background: $app-blue;
+	}
+}

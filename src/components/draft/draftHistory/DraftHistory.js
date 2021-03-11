@@ -5,9 +5,9 @@ class DraftHistory extends Component {
 
   render() {
     let players = this.props.players
-    players.sort((a, b) => {
-      return Number(b.pickNumber) - Number(a.pickNumber)
-    })
+    // players.sort((a, b) => {
+    //   return Number(b.pickNumber) - Number(a.pickNumber)
+    // })
 
     return (
       <div className="draftHistory">
@@ -26,22 +26,16 @@ class DraftHistory extends Component {
           </thead>
           <tbody>
           {players.map((player, i) => {
-            const drafted = player.pickNumber > 0
-
-            if (drafted) {
-              let name = player.name
-              name = name.length < 19 ? name : name.slice(0, 16) + '...'
-              
-              return (
-                <tr key={i}>
-                  <td className="pick">{player.pickNumber}</td>
-                  <td className="name">{name}</td>
-                  <td className="owner">{player.owner}</td>
-                </tr>
-              );
-            } else {
-              return false
-            }
+            let name = player.name
+            name = name.length < 19 ? name : name.slice(0, 16) + '...'
+            
+            return (
+              <tr key={i}>
+                <td className="pick">{player.pickNumber}</td>
+                <td className="name">{name}</td>
+                <td className="owner">{player.owner}</td>
+              </tr>
+            );
           })}
           </tbody>
         </table>

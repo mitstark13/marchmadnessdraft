@@ -1,6 +1,104 @@
+.c-login {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 35px;
+  background: rgba(255, 255, 255, 0.7); }
+  .c-login__success {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    background: rgba(58, 129, 74, 0.7);
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px 0 0;
+    padding: 7px 30px; }
+  .c-login__close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 5px;
+    top: 50px;
+    font-size: 18px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    color: #2c405a;
+    transition: .3s; }
+    .c-login__close:hover {
+      cursor: pointer;
+      opacity: .7; }
+  .c-login__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    border-radius: 5px;
+    background: #e9eeea;
+    box-shadow: 20px 20px 60px #c6cac7,  -20px -20px 60px #fff; }
+  .c-login__options {
+    display: flex;
+    width: 200%;
+    transition: .5s; }
+    .c-login__options.form-slide {
+      transform: translateX(-50%); }
+    .c-login__options form {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      flex: 1;
+      height: calc(100% - 50px); }
+  .c-login__tab-container {
+    display: flex;
+    align-items: center; }
+  .c-login__tab {
+    flex: 1;
+    background: #2c405a;
+    padding: 15px 0;
+    color: white;
+    opacity: .7;
+    transition: .3s; }
+    .c-login__tab.active-tab {
+      opacity: 1; }
+    .c-login__tab:hover {
+      cursor: pointer;
+      opacity: 1; }
+  .c-login__message {
+    font-size: 22px;
+    text-align: center; }
+  .c-login__headline {
+    margin: 0;
+    text-align: center;
+    font-size: 18px; }
+  .c-login__label {
+    display: block;
+    min-width: 250px;
+    margin: 12px auto; }
+  .c-login__input {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    font-size: 22px; }
+  .c-login__submit {
+    margin: 20px auto 20px;
+    padding: 5px 25px;
+    font-size: 16px;
+    background: #3A814A;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: .3s; }
+    .c-login__submit:hover {
+      cursor: pointer;
+      opacity: .7; }
+
 section#login {
   position: fixed;
-  -webkit-transition: .5s;
   transition: .5s;
   background: rgba(0, 0, 0, 0.5);
   height: 100vh;
@@ -13,11 +111,9 @@ section#login {
   background: #fff;
   max-width: 650px;
   width: 100%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   text-align: center;
-  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
-          box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7); }
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7); }
   .loginContainer a {
     color: #4A556E;
     text-decoration: none; }
@@ -28,55 +124,28 @@ section#login {
   color: white; }
 
 .ownersLoginList {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap; }
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; }
   .ownersLoginList div {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 30%;
-            flex: 1 1 30%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1 1 30%;
     height: 80px;
-    -webkit-transition: .5s;
     transition: .5s; }
     .ownersLoginList div:hover {
       cursor: pointer;
-      -webkit-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
-              box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.7);
       background: linear-gradient(120deg, #1c212c, #4A556E, #1c212c);
-      -webkit-animation: warning-gradient-animation 2s ease-in-out infinite;
-              animation: warning-gradient-animation 2s ease-in-out infinite; }
+      animation: warning-gradient-animation 2s ease-in-out infinite; }
       .ownersLoginList div:hover p {
         color: white;
         font-size: 24px; }
     .ownersLoginList div p {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 0 100%;
-              flex: 1 0 100%; }
-
-@-webkit-keyframes warning-gradient-animation {
-  0% {
-    background-size: 100%; }
-  50% {
-    background-size: 200%; }
-  100% {
-    background-size: 100%; } }
+      flex: 1 0 100%; }
 
 @keyframes warning-gradient-animation {
   0% {
@@ -93,9 +162,7 @@ section#login {
     font-size: 10px; }
 
   .ownersLoginList div {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 45%;
-            flex: 1 1 45%;
+    flex: 1 1 45%;
     height: 72px; }
     .ownersLoginList div small {
       font-size: 10px; } }
