@@ -4,11 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
 
-const config = require('./config');
-
-
 const app = express();
-
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -38,9 +34,10 @@ app.get('/review', function(req, res){
 
 app.set('PORT', process.env.PORT || 5000);
 
-MongoClient.connect('mongodb://draftAdmin:password2113@ds131826.mlab.com:31826/new-db-starkey', (err, database) => {
-// MongoClient.connect('mongodb://127.0.0.1:27017/marchmadness', (err, database) => {
-  if (err) return console.log(err)
+const url = 'mongodb://admin:k6PPBPQF4prbN7C6@cluster0-shard-00-00.1tkc4.mongodb.net:27017,cluster0-shard-00-01.1tkc4.mongodb.net:27017,cluster0-shard-00-02.1tkc4.mongodb.net:27017/marchmadness-main?ssl=true&replicaSet=atlas-985tp5-shard-0&authSource=admin&retryWrites=true&w=majority';
+
+MongoClient.connect(url, (err, database) => {
+  if (err) return console.log("ERROR: ", err)
 
   app.listen(app.get('PORT'), () =>  {
     console.log('Listening at ' + app.get('PORT'))

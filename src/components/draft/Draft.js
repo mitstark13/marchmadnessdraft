@@ -39,7 +39,6 @@ class Draft extends Component {
       encrypted: true
     });
 
-    console.log('testing audio');
     if (this.audio) {
       this.audio.pause()
     }
@@ -68,7 +67,7 @@ class Draft extends Component {
       this.setState({ selectedPlayer: players.data[Math.floor(Math.random() * Math.floor(players.data.length - 1))]})
       this.setTeamsDropdown();
       this.getDraftOrder();
-      this.playMusic();
+      // this.playMusic();
       // this.countdownInterval = setInterval(() => { this.getCountdown() }, 1000);
     });
 
@@ -88,19 +87,19 @@ class Draft extends Component {
     }
   }
 
-  playMusic() {
-    const owner = document.querySelector('.orderOwner.active .name').innerText;
+  // playMusic() {
+  //   const owner = document.querySelector('.orderOwner.active .name').innerText;
 
-    if (owner === this.state.username) {
+  //   if (owner === this.state.username) {
 
-      if (!this.audio) return
+  //     if (!this.audio) return
 
-      this.audio.currentTime = 10 //perfect timing
-      this.audio.volume = 0.2 //quiet for testing
-      this.audio.play()
+  //     this.audio.currentTime = 10 //perfect timing
+  //     this.audio.volume = 0.2 //quiet for testing
+  //     this.audio.play()
 
-    }
-  }
+  //   }
+  // }
 
   stopAudio() {
     if (this.audio) {
@@ -230,7 +229,7 @@ class Draft extends Component {
       this.setState({ currentPick: pickNum});
       this.setState({ lastDraftTime: new Date().getTime() })
       this.testIfDraftEnded(this.state.ownersList.length, this.state.currentPick);
-      this.playMusic();
+      // this.playMusic();
       let countdownWrapper = document.querySelector('#countdown');
       countdownWrapper.classList.remove('draftWarning');
     });
@@ -241,9 +240,9 @@ class Draft extends Component {
     this.setState({teamViewOwner: newOwner})
   }
 
-  selectPlayer(e) {
-    if (e.pickNumber === '0') {
-      this.setState({selectedPlayer: e})
+  selectPlayer(player) {
+    if (player.pickNumber === '0') {
+      this.setState({selectedPlayer: player})
     }
   }
 

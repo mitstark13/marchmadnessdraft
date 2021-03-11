@@ -56,8 +56,8 @@ class DraftTable extends Component {
         <div className="draftPreview">
           <div className="draftPlayer">
             <div className="draftName">
-              <p>{name ? name : "Andrew Funk"}</p>
-              <p>{team ? <small>{seedList[team]} {team}</small> : "Bucknell"}</p>
+              <p>{name ? name : "Anthony Leal"}</p>
+              <p>{team ? <small>{seedList[team]} {team}</small> : "Indiana"}</p>
             </div>
             <div className="stats pts">
               <p>PTS</p>
