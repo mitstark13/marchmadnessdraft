@@ -2,3 +2,4 @@
 build/
 sslcert/
 config.js
+.env

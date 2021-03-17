@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
 
 const app = express();
 
@@ -28,13 +29,13 @@ app.get('/draft', function(req, res){
   res.redirect('/');
 });
 
-app.get('/review', function(req, res){
-  res.redirect('/');
-});
+// app.get('/review', function(req, res){
+//   res.redirect('/');
+// });
 
 app.set('PORT', process.env.PORT || 5000);
 
-const url = 'mongodb://admin:k6PPBPQF4prbN7C6@cluster0-shard-00-00.1tkc4.mongodb.net:27017,cluster0-shard-00-01.1tkc4.mongodb.net:27017,cluster0-shard-00-02.1tkc4.mongodb.net:27017/marchmadness-main?ssl=true&replicaSet=atlas-985tp5-shard-0&authSource=admin&retryWrites=true&w=majority';
+const url = `${process.env.MONGO_URL}`;
 
 MongoClient.connect(url, (err, database) => {
   if (err) return console.log("ERROR: ", err)

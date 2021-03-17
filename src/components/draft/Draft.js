@@ -67,6 +67,7 @@ class Draft extends Component {
       this.setState({ selectedPlayer: players.data[Math.floor(Math.random() * Math.floor(players.data.length - 1))]})
       this.setTeamsDropdown();
       this.getDraftOrder();
+      this.testIfDraftEnded(this.state.ownersList.length, this.state.currentPick);
       // this.playMusic();
       // this.countdownInterval = setInterval(() => { this.getCountdown() }, 1000);
     });

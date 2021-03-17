@@ -129,7 +129,7 @@ class App extends Component {
               <Link to="/">
                 <h1 className="App-title">Fantasy Draft 2019</h1>
               </Link>
-              <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
+              <a className="App-bracket" href="https://fantasy.espn.com/tournament-challenge-bracket/2021/en/bracket" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
                 <button>View Current Bracket</button>
               </a>
               {/* <Link to='/admin'>

@@ -29,7 +29,7 @@ class Review extends Component {
     return (
       <section className="draftHistory review">
         <h1> Draft Review </h1>
-
+        <p>The draft is complete!</p>
         <table>
           <thead>
             <tr>

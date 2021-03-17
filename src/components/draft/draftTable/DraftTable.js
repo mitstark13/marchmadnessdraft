@@ -131,7 +131,12 @@ class DraftTable extends Component {
               
               return (
                 <tr key={i} data-picked={picked} className={selectedPlayer} onClick={() => {this.props.selectPlayer(player)}}>
-                  <td className="name"><a href={playerLink} target="_blank">{name}</a></td>
+                  <td className="name">
+                    <a href={playerLink} target="_blank">{name}</a>
+                    {player.isInjured &&
+                      <span class="isInjured"></span>
+                    }
+                  </td>
                   <td className="school"><small>{seedList[player.team]}</small> {player.team}</td>
                   <td className="pts">{player.points}</td>
                   <td className="reb">{player.rebounds}</td>

@@ -1,24 +1,18 @@
 .draftTable {
   position: relative;
-  -webkit-box-flex: 2;
-      -ms-flex: 2 0 450px;
-          flex: 2 0 450px;
+  flex: 2 0 450px;
   margin: 0;
   padding: 0;
   width: 100%;
   overflow-y: scroll; }
   .draftTable tr {
+    display: -webkit-inline-flex;
     display: -moz-inline-flex;
     display: -ms-inline-flex;
     display: -o-inline-flex;
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
     display: inline-flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
-    -ms-flex-line-pack: center;
-        align-content: center;
+    justify-content: space-between;
+    align-content: center;
     width: 100%;
     height: 26px;
     border-bottom: 1px solid #fff; }
@@ -34,9 +28,7 @@
     background: #475570;
     color: #F2F4F4; }
   .draftTable td, .draftTable th {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 12%;
-            flex: 1 1 12%;
+    flex: 1 1 12%;
     width: 16%;
     text-align: left;
     padding: 3px 5px 0;
@@ -46,27 +38,24 @@
       .draftTable td.pts, .draftTable td.reb, .draftTable td.ast, .draftTable th.pts, .draftTable th.reb, .draftTable th.ast {
         display: none; } }
   .draftTable .name {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 28%;
-            flex: 1 1 28%; }
+    flex: 1 1 28%; }
+    .draftTable .name .isInjured {
+      height: 10px;
+      width: 10px;
+      background: red;
+      display: inline-block;
+      border-radius: 50%;
+      margin-left: 5px; }
   .draftTable .school {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 22%;
-            flex: 1 1 22%; }
+    flex: 1 1 22%; }
   .draftTable .total {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 12%;
-            flex: 1 1 12%; }
+    flex: 1 1 12%; }
   @media screen and (max-width: 760px) {
     .draftTable .school, .draftTable .total {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 1 40px;
-              flex: 1 1 40px;
+      flex: 1 1 40px;
       font-size: 14px; }
     .draftTable .total {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 1 20px;
-              flex: 1 1 20px; } }
+      flex: 1 1 20px; } }
   .draftTable td a {
     color: #3A814A;
     text-decoration: none; }
@@ -91,20 +80,14 @@
   height: 110px;
   padding: 0 0 0 10px; }
   .draftPreview .draftPlayer {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    align-items: center;
     width: 100%;
     height: 105px; }
     .draftPreview .draftPlayer div {
       display: inline-block; }
     .draftPreview .draftPlayer div.draftName {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 0 115px;
-              flex: 1 0 115px;
+      flex: 1 0 115px;
       max-width: 250px; }
       .draftPreview .draftPlayer div.draftName p {
         margin: 0 0 7px;
@@ -123,8 +106,7 @@
       text-align: center;
       padding: 7px 2px;
       margin-right: 25px;
-      -webkit-box-shadow: 0px 0px 5px #475570;
-              box-shadow: 0px 0px 5px #475570; }
+      box-shadow: 0px 0px 5px #475570; }
       @media screen and (max-width: 760px) {
         .draftPreview .draftPlayer div.stats.pts, .draftPreview .draftPlayer div.stats.rebs, .draftPreview .draftPlayer div.stats.ast {
           display: none; } }
@@ -136,17 +118,14 @@
   .draftPreview button {
     background: #3A814A;
     color: #F2F4F4;
-    -webkit-box-shadow: 0.4rem 0.4rem 2px black;
-            box-shadow: 0.4rem 0.4rem 2px black;
-    -webkit-transform: translate(-0.4rem, -0.4rem);
-            transform: translate(-0.4rem, -0.4rem);
+    box-shadow: 0.4rem 0.4rem 2px black;
+    transform: translate(-0.4rem, -0.4rem);
     border: none;
     height: 42px;
     width: 160px;
     font-size: 18px;
     margin-left: 20px;
     outline: none;
-    -webkit-transition: .5s;
     transition: .5s; }
     @media screen and (max-width: 760px) {
       .draftPreview button {
@@ -155,32 +134,21 @@
         font-size: 14px; } }
     .draftPreview button:hover {
       cursor: pointer;
-      -webkit-box-shadow: 0.2rem 0.2rem 2px black;
-              box-shadow: 0.2rem 0.2rem 2px black;
-      -webkit-transform: translate(-0.2rem, -0.2rem);
-              transform: translate(-0.2rem, -0.2rem); }
+      box-shadow: 0.2rem 0.2rem 2px black;
+      transform: translate(-0.2rem, -0.2rem); }
     .draftPreview button:active {
-      -webkit-box-shadow: 0rem 0rem 2px black;
-              box-shadow: 0rem 0rem 2px black;
-      -webkit-transform: translate(0rem, 0rem);
-              transform: translate(0rem, 0rem);
+      box-shadow: 0rem 0rem 2px black;
+      transform: translate(0rem, 0rem);
       outline: none; }
 
 .tableFilters {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   padding-left: 10px; }
   @media screen and (max-width: 680px) {
     .tableFilters {
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap; } }
+      flex-wrap: wrap; } }
   .tableFilters label {
     display: inline-block;
     margin-right: 10px; }
