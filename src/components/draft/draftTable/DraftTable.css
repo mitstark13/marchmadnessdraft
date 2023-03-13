@@ -40,13 +40,6 @@
         display: none; } }
   .draftTable .name {
     flex: 1 1 28%; }
-    .draftTable .name .isInjured {
-      height: 7px;
-      width: 7px;
-      background: #C97B84;
-      display: inline-block;
-      border-radius: 50%;
-      margin-left: 5px; }
   .draftTable .school {
     flex: 1 1 22%; }
   .draftTable .total {
@@ -197,5 +190,14 @@
   position: relative;
   width: 100%;
   padding: 0 10px 5px; }
+  .draftContainer .isInjured {
+    height: 7px;
+    width: 7px;
+    background: #C97B84;
+    display: inline-block;
+    border-radius: 50%;
+    margin-left: 5px; }
+  .draftContainer .injuryInfo {
+    color: #e2dfe2; }
 
 /*# sourceMappingURL=DraftTable.css.map */

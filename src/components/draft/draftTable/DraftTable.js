@@ -150,6 +150,7 @@ class DraftTable extends Component {
           })}
           </tbody>
         </table>
+        <span class="injuryInfo"><span class="isInjured"></span> = Check Injury Status</span>
       </div>
     )
   }

@@ -55,15 +55,6 @@
 	}
 	.name {
 		flex: 1 1 28%;
-
-		.isInjured {
-			height: 7px;
-			width: 7px;
-			background: $dm-red;
-			display: inline-block;
-			border-radius: 50%;
-			margin-left: 5px;
-		}
 	}
 	.school {
 		flex: 1 1 22%;
@@ -285,5 +276,18 @@
 .draftContainer {
 	position: relative;
 	width: 100%;
-    padding: 0 10px 5px;
+  padding: 0 10px 5px;
+
+	.isInjured {
+		height: 7px;
+		width: 7px;
+		background: $dm-red;
+		display: inline-block;
+		border-radius: 50%;
+		margin-left: 5px;
+	}
+
+	.injuryInfo {
+		color: $dm-white;
+	}
 }
