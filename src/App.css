@@ -1,74 +1,57 @@
 .App {
   display: grid;
   grid-template-areas: "header header header" "draft draft draft" "messaging messaging messaging";
-  grid-template-rows: 35px 595px 270px;
-  grid-gap: 5px;
-  background: linear-gradient(135deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
+  grid-template-rows: 35px minmax(595px, auto) 270px;
+  background: #141E2F;
   height: 100vh; }
 
 .App-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   grid-area: header;
-  background-color: #3A814A;
-  color: #F2F4F4;
+  background-color: #141E2F;
+  color: #e2dfe2;
   text-align: center;
   padding: 10px 40px;
-  -webkit-box-shadow: 0px 1px 5px #475570;
-          box-shadow: 0px 1px 5px #475570; }
+  box-shadow: 0px 1px 5px #303841; }
   .App-header button {
     background: none;
-    border: 1px solid #F2F4F4;
-    border-radius: 5px;
-    color: #F2F4F4;
+    color: #e2dfe2;
+    text-decoration: underline;
+    border: none;
     margin: 0 0 0 10px;
-    -webkit-transition: .5s;
     transition: .5s; }
     @media screen and (max-width: 760px) {
       .App-header button {
         display: none; } }
     .App-header button:hover {
-      cursor: pointer;
-      color: #3A814A;
-      border: 1px solid #3A814A;
-      background: #F2F4F4; }
+      cursor: pointer; }
   .App-header .App-title {
     display: inline-block;
     font-size: 16px;
-    margin: 0;
-    color: #F2F4F4; }
+    margin: 0 40px 0 0;
+    color: #e2dfe2; }
   .App-header .App-bracket {
     display: inline-block;
     font-size: 12px;
-    color: #F2F4F4; }
+    color: #e2dfe2; }
 
 #draftWrapper {
   grid-area: draft; }
 
 #draft {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: top;
-      -ms-flex-align: top;
-          align-items: top;
+  justify-content: space-around;
+  align-items: top;
   width: 99vw;
   height: calc(100% - 75px); }
 
 #chat {
   grid-area: messaging;
-  height: 257px;
-  background: #475570; }
+  height: 255px;
+  background: #0d131d; }
 
 .mobile-hamburger, .mobile-menu {
   display: none; }
@@ -79,37 +62,30 @@
     height: auto; }
 
   #draft {
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; } }
+    flex-wrap: wrap; } }
 @media screen and (max-width: 760px) {
   .mobile-menu {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    justify-content: space-around;
+    align-items: center;
     height: 40px;
     width: 100vw;
     position: fixed;
     bottom: 0;
     left: 0;
-    background: #3A814A; }
+    background: #34967A; }
     .mobile-menu button {
       background: none;
-      border: 1px solid #F2F4F4;
+      border: 1px solid #e2dfe2;
       border-radius: 5px;
-      color: #F2F4F4;
+      color: #e2dfe2;
       margin: 0 0 0 10px;
-      -webkit-transition: .5s;
       transition: .5s; }
       .mobile-menu button:hover {
         cursor: pointer;
-        color: #3A814A;
-        border: 1px solid #3A814A;
-        background: #F2F4F4; }
+        color: #34967A;
+        border: 1px solid #34967A;
+        background: #e2dfe2; }
 
   #chat {
     margin-bottom: 40px; } }

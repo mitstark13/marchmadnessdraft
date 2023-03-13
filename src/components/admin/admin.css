@@ -1,10 +1,29 @@
 .fullTeamWrapper {
     margin: 20px 0;
-    border: 2px solid black;
+    border: 2px solid #0d131d;
     padding: 10px 20px;
+}
+
+.fullTeamWrapper p {
+    color: #e2dfe2;
 }
 
 .fullTeamWrapper input {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    padding: 7px 15px;
+    background: #0d131d;
+    border: none;
+    color: #e2dfe2;
+}
+
+.fullTeamWrapper button {
+    border: none;
+    background: #34967A;
+    color: #e2dfe2;
+    padding: 5px 10px;
+}
+
+.fullTeamWrapper button:hover {
+    cursor: pointer;
 }

@@ -32,7 +32,7 @@ app.get('/review', function(req, res){
   res.redirect('/');
 });
 
-app.set('PORT', process.env.PORT || 5000);
+app.set('PORT', process.env.PORT || 5050);
 
 const url = 'mongodb://admin:k6PPBPQF4prbN7C6@cluster0-shard-00-00.1tkc4.mongodb.net:27017,cluster0-shard-00-01.1tkc4.mongodb.net:27017,cluster0-shard-00-02.1tkc4.mongodb.net:27017/marchmadness-main?ssl=true&replicaSet=atlas-985tp5-shard-0&authSource=admin&retryWrites=true&w=majority';
 
@@ -44,7 +44,7 @@ MongoClient.connect(url, (err, database) => {
 
     app.get('/players', (req, res) => {
       //Sort puts the document with the owners list first
-      database.collection('players').find().sort( { owners: -1 } ).toArray(function(err, array) {
+      database.collection('players2023').find().sort( { owners: -1 } ).toArray(function(err, array) {
         if (err) return console.log(err)
 
         res.send(array)
@@ -52,7 +52,7 @@ MongoClient.connect(url, (err, database) => {
     })
 
     app.put('/currentPick', (req, res) => {
-      database.collection('players')
+      database.collection('players2023')
       .updateMany({currentPick: { $gt: 0 }}, { //resets all to no owner and no pickNumber
         $inc: {
           currentPick: 1
@@ -69,7 +69,7 @@ MongoClient.connect(url, (err, database) => {
 
     app.put('/marchmadness', (req, res) => {
       console.log(req.body)
-      database.collection('players')
+      database.collection('players2023')
       .findOneAndUpdate({name: req.body.name}, { //finds the name, updates the following
         $set: {
           owner: req.body.owner,
@@ -86,7 +86,7 @@ MongoClient.connect(url, (err, database) => {
     // ***** RESET DB TO START OF DRAFT *****
     app.put('/reset', (req, res) => {
       console.log('resetting db')
-      database.collection('players')
+      database.collection('players2023')
       .updateMany({}, { //resets all to no owner and no pickNumber
         $set: {
           owner: "",
@@ -105,7 +105,7 @@ MongoClient.connect(url, (err, database) => {
 
     // ***** ADMIN PAGE *****
     app.post('/newPlayer', (req, res) => {
-      database.collection('players').save(req.body, (err, result) => {
+      database.collection('players2023').save(req.body, (err, result) => {
         if (err) return console.log(err)
 
         //https://docs.mongodb.com/manual/reference/method/db.collection.update/ to update if already exists
@@ -117,7 +117,7 @@ MongoClient.connect(url, (err, database) => {
 
     app.put('/marchmadnessadmin', (req, res) => {
       console.log(req.body)
-      database.collection('players')
+      database.collection('players2023')
       .update({name: req.body.name}, {
         name: req.body.name,
         team: req.body.team,
@@ -142,7 +142,7 @@ MongoClient.connect(url, (err, database) => {
 
     app.delete('/deletenullplayers', (req, res) => {
       console.log('Deleting players with null teams')
-      database.collection('players').remove({name: { $type : "string" }, team: null},
+      database.collection('players2023').remove({name: { $type : "string" }, team: null},
         (err, result) => {
         if (err) return res.send(err)
         res.send(result)

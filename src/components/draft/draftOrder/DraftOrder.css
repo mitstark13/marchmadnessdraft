@@ -1,33 +1,22 @@
 #draftOrder {
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: top;
-      -ms-flex-align: top;
-          align-items: top;
+  justify-content: space-around;
+  align-items: top;
   height: 75px;
   width: 99vw; }
 
 .draftOrder {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   width: 100%; }
   .draftOrder .orderOwner {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
+    box-sizing: border-box;
     position: relative;
-    border: 1px solid #fff;
-    color: #5a5a5a;
+    border: 1px solid #303841;
+    border-top: none;
+    color: #e2dfe2;
     text-align: center;
     padding-top: 10px;
     height: 100%;
@@ -37,7 +26,7 @@
       display: inline-block;
       margin-top: 5px;
       font-size: 22px;
-      color: black; }
+      color: #e2dfe2; }
     .draftOrder .orderOwner.active {
       border: none; }
       .draftOrder .orderOwner.active:before {
@@ -48,21 +37,17 @@
         right: 0;
         bottom: 0;
         border-radius: 0px;
-        background: linear-gradient(120deg, #00F260, #0575E6, #00F260);
+        background: linear-gradient(120deg, #34967A, #303841, #34967A);
         background-size: 300% 300%;
-        -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%);
-                clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%); }
+        clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%); }
     .draftOrder .orderOwner:before {
-      -webkit-animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite;
-              animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite; }
+      animation: frame-enter 1s forwards ease-in-out reverse, gradient-animation 4s ease-in-out infinite; }
   @media screen and (max-width: 760px) {
     .draftOrder {
       overflow-x: hidden; }
       .draftOrder .orderOwner {
         width: auto;
-        -webkit-box-flex: 1;
-            -ms-flex: 1 0 calc(100vw / 3 - 150px / 3);
-                flex: 1 0 calc(100vw / 3 - 150px / 3); }
+        flex: 1 0 calc(100vw / 3 - 150px / 3); }
         .draftOrder .orderOwner span.name {
           margin-top: 11px;
           font-size: 16px; } }
@@ -71,15 +56,11 @@
     height: calc(100% - 2px);
     min-width: 250px;
     text-align: center;
-    background: #475570;
+    background: #C97B84;
     border: 1px solid #111;
     padding: 0; }
-    .draftOrder #countdown.draftWarning {
-      background: linear-gradient(120deg, #650000, #e60505, #650000);
-      -webkit-animation: warning-gradient-animation 2s ease-in-out infinite;
-              animation: warning-gradient-animation 2s ease-in-out infinite; }
-      .draftOrder #countdown.draftWarning .labels li {
-        color: white; }
+    .draftOrder #countdown.draftWarning .labels li {
+      color: white; }
     .draftOrder #countdown #tiles {
       margin-top: 3px; }
       .draftOrder #countdown #tiles span {
@@ -87,11 +68,10 @@
         max-width: 92px;
         font: bold 24px 'Droid Sans', Arial, sans-serif;
         text-align: center;
-        color: #111;
+        color: #0d131d;
         background-color: #ddd;
         border-top: 1px solid #fff;
-        -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
-                box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
         margin: 5px 7px;
         padding: 4px 0;
         display: inline-block;
@@ -105,7 +85,7 @@
       .draftOrder #countdown .labels li {
         width: 102px;
         font: bold 15px 'Droid Sans', Arial, sans-serif;
-        color: #F2F4F4;
+        color: #e2dfe2;
         text-shadow: 1px 1px 0px #000;
         text-align: center;
         text-transform: uppercase;
@@ -122,13 +102,6 @@
           width: auto; } }
 
 /* motion */
-@-webkit-keyframes gradient-animation {
-  0% {
-    background-position: 15% 0%; }
-  50% {
-    background-position: 85% 100%; }
-  100% {
-    background-position: 15% 0%; } }
 @keyframes gradient-animation {
   0% {
     background-position: 15% 0%; }
@@ -136,13 +109,6 @@
     background-position: 85% 100%; }
   100% {
     background-position: 15% 0%; } }
-@-webkit-keyframes warning-gradient-animation {
-  0% {
-    background-size: 100%; }
-  50% {
-    background-size: 200%; }
-  100% {
-    background-size: 100%; } }
 @keyframes warning-gradient-animation {
   0% {
     background-size: 100%; }
@@ -150,30 +116,13 @@
     background-size: 200%; }
   100% {
     background-size: 100%; } }
-@-webkit-keyframes frame-enter {
-  0% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%); }
-  25% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 100% 100%, 100% 0%, 0% 0%); }
-  50% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, 100% 0%, 0% 0%); }
-  75% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 0%, 0% 0%); }
-  100% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 5px 100%, 0% 100%); } }
 @keyframes frame-enter {
   0% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%); }
+    clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), 5px calc(100% - 5px), 5px 100%, 100% 100%, 100% 0%, 0% 0%); }
   25% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 100% 100%, 100% 0%, 0% 0%); }
+    clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) 100%, 100% 100%, 100% 0%, 0% 0%); }
   50% {
-    -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, 100% 0%, 0% 0%); }
+    clip-path: polygon(0% 100%, 5px 100%, 5px 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, calc(100% - 5px) 5px, 100% 0%, 0% 0%); }
   75% {
     -webkit-clip-path: polygon(0% 100%, 5px 100%, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 5px, 5px 0%, 0% 0%); }
   100% {

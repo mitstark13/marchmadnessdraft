@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './admin.css';
-import * as XLSX from 'xlsjs';
+// import * as XLSX from 'xlsx';
 
 class Admin extends Component {
   constructor() {
@@ -72,22 +72,26 @@ class Admin extends Component {
 
     reader.onload = function(evt) {
       const bstr = evt.target.result;
-      const wb = XLSX.read(bstr, {type:'binary'});
-      // Get first worksheet
-      const wsname = wb.SheetNames[0];
-      const ws = wb.Sheets[wsname];
-      console.log(ws)
-      let numPlayers = Math.round((Object.keys(ws).length + 3) / 26);
-      console.log('Number of players: ' + numPlayers)
 
-      for (let i = 2; i <= numPlayers; i++) {
-        this.setState({ 'name': ws['B' + i].v})
+      const playerData = bstr.split('<tbody>')[1];
+      const numPlayers = playerData.split('<tr data-row');
+
+      for (let i = 1; i <= numPlayers.length-1; i++) {
+        console.log(numPlayers[i]);
+        const playerStats = numPlayers[i].split('</td>');
+        const name = playerStats[0].split('>').slice(-1)[0];
+        const rebounds = Number(playerStats[18].split('>').slice(-1)[0]);
+        const assists = Number(playerStats[19].split('>').slice(-1)[0]);
+        const points = Number(playerStats[24].split('>').slice(-1)[0]);
+
+        this.setState({ name })
         this.setState({ 'team': teamName})
-        this.setState({ 'rebounds': ws['T' + i].v})
-        this.setState({ 'assists': ws['U' + i].v})
-        this.setState({ 'points': ws['Z' + i].v})
-        this.setState({ 'total': Math.round( (ws['T' + i].v + ws['U' + i].v + ws['Z' + i].v) * 10 ) / 10 }) //Math fixes common JS decimal errors
+        this.setState({ rebounds })
+        this.setState({ assists })
+        this.setState({ points })
+        this.setState({ 'total': Math.round( (points + rebounds + assists) * 10 ) / 10 }) //Math fixes common JS decimal errors
 
+        console.log(this.state);
         this.postPlayer();
       }
 
@@ -105,9 +109,9 @@ class Admin extends Component {
   render() {
     return (
       <div className="draftHistory">
-        <h1>Admin Page</h1>
+        <h2>Admin Page</h2>
 
-        <form onSubmit={this.onSubmit} >
+        {/* <form onSubmit={this.onSubmit} >
           <input type="text" placeholder="name" name="name" onChange={this.onChange}/>
           <input type="text" placeholder="team" name="team" onChange={this.onChange}/>
           <input type="text" placeholder="points" name="points" onChange={this.onChange}/>
@@ -115,9 +119,10 @@ class Admin extends Component {
           <input type="text" placeholder="assists" name="assists" onChange={this.onChange}/>
           <input type="text" placeholder="total" name="total" onChange={this.onChange}/>
           <button type="submit">Submit</button>
-        </form>
+        </form> */}
 
         <div className="fullTeamWrapper">
+          <p>Upload Full Team</p>
           <input type="text" placeholder="Team Name" name="teamName" />
           <input type="file" id="my_file_input" onChange={this.filePicked} />
           <button className="uploadExcelTeam" onClick={this.uploadTeam}>Upload Full Team</button>

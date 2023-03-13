@@ -6,11 +6,8 @@
     "header header header"
     "draft draft draft"
     "messaging messaging messaging";
-  grid-template-rows: 35px 595px 270px;
-  grid-gap: 5px;
-  background: -moz-linear-gradient(-45deg, #eeeeee 0%, #F7F7F7 47%, #eeeeee 100%);
-  background: -webkit-linear-gradient(-45deg, #eeeeee 0%,#F7F7F7 47%,#eeeeee 100%);
-  background: linear-gradient(135deg, #eeeeee 0%,#F7F7F7 47%,#eeeeee 100%);
+  grid-template-rows: 35px minmax(595px, auto) 270px;
+  background: $dm-blue;
   height: 100vh;
 }
 
@@ -19,17 +16,17 @@
   justify-content: space-between;
   align-items: center;
   grid-area: header;
-  background-color: $app-green;
-  color: $off-white;
+  background-color: $dm-blue;
+  color: $dm-white;
   text-align: center;
   padding: 10px 40px;
-  box-shadow: 0px 1px 5px $app-blue;
+  box-shadow: 0px 1px 5px $dm-shadow;
 
   button {
     background: none;
-    border: 1px solid $off-white;
-    border-radius: 5px;
-    color: $off-white;
+    color: $dm-white;
+    text-decoration: underline;
+    border: none;
     margin: 0 0 0 10px;
     transition: .5s;
 
@@ -39,22 +36,19 @@
 
     &:hover {
       cursor: pointer;
-      color: $app-green;
-      border: 1px solid $app-green;
-      background: $off-white;
     }
   }
   .App-title {
     display: inline-block;
     font-size: 16px;
-    margin: 0;
-    color: $off-white;
+    margin: 0 40px 0 0;
+    color: $dm-white;
   }
 
   .App-bracket {
     display: inline-block;
     font-size: 12px;
-    color: $off-white;
+    color: $dm-white;
   }
 }
 
@@ -73,8 +67,8 @@
 
 #chat {
   grid-area: messaging;
-  height: 257px;
-  background: $app-blue;
+  height: 255px;
+  background: $dm-black;
 }
 
 .mobile-hamburger, .mobile-menu {
@@ -107,9 +101,9 @@
 
     button {
       background: none;
-      border: 1px solid $off-white;
+      border: 1px solid $dm-white;
       border-radius: 5px;
-      color: $off-white;
+      color: $dm-white;
       margin: 0 0 0 10px;
       transition: .5s;
   
@@ -117,7 +111,7 @@
         cursor: pointer;
         color: $app-green;
         border: 1px solid $app-green;
-        background: $off-white;
+        background: $dm-white;
       }
     }
   }

@@ -9,6 +9,8 @@
 	height: 100%;
 	border: 0;
 	padding: 0 15px;
+	background: #141E2F;
+	color: #e2dfe2;
 }
 
 .chatInput button {
@@ -16,8 +18,8 @@
 	height: 100%;
 	padding: 0 20px;
 	border: none;
-	background: green;
-	color: white;
+	background: #34967A;
+	color: #FEF9FF;
 	font-size: 18px;
 	text-align: center;
 	transition: .5s;

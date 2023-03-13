@@ -39,7 +39,7 @@ class DraftTable extends Component {
         a.AdjTotal = a.total * aSeedStrength
         b.AdjTotal = b.total * bSeedStrength
       } else {
-        [a.AdjTotal, b.AdjTotal] = [a.total, b.total]
+        [a.AdjTotal, b.AdjTotal] = [a.total || 0, b.total || 0]
       }
 
       return b.AdjTotal - a.AdjTotal

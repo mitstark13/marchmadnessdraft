@@ -154,7 +154,7 @@ class Draft extends Component {
     var seconds_left = (target_date - current_date) / 1000;
     
     if (seconds_left <= 1) {
-      this.setState({ autopick: true })
+      // this.setState({ autopick: true })
       //this.draftPlayer(); Autopick currently turned off. We talk too much and don't care about the countdown
 
       seconds_left = 0 // To keep from showing negative numbers when autopick is turned off
@@ -283,6 +283,7 @@ class Draft extends Component {
   }
 
   showDraftError() {
+    alert("Stop it. It's not your turn to draft")
     console.log('Not your turn to draft!');
   }
 

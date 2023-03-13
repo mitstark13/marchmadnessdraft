@@ -12,7 +12,7 @@ section#login {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	background: #fff;
+	background: $dm-black;
 	max-width: 650px;
     width: 100%;
 	transform: translate(-50%, -50%);
@@ -20,14 +20,14 @@ section#login {
 	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
 	
 	a {
-		color: #4A556E;
+		color: $dm-white;
 		text-decoration: none;
 	}
 }
 
 .loginHeader {
 	padding: 1px 0 10px;
-	background: $app-green;
+	background: $dm-green;
 	color: white;
 }
 

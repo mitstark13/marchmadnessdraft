@@ -1,10 +1,14 @@
 @import "../../assets/variables";
 
 .draftHistory {
-	border: 1px solid $off-white;
 	flex: 0 0 250px;
 	padding: 18px 10px 0;
-	background: #fff;
+	border-left: 1px solid $dm-shadow;
+	border-right: 1px solid $dm-shadow;
+
+	h2 {
+		color: $dm-white;
+	}
 
 	&.review {
 		grid-area: draft;
@@ -18,6 +22,7 @@
 
 	.historyTitle {
 		height: 100px;
+		color: $dm-white;
 
 		h2 {
 			font-size: 20px;
@@ -31,11 +36,11 @@
 			text-align: center;
 
 			&:first-of-type {
-				border-top: 1px solid $off-white;
+				border-top: 1px solid $dm-shadow;
 			}
 
 			&:last-of-type {
-				border-bottom: 1px solid $off-white;
+				border-bottom: 1px solid $dm-shadow;
 			}
 		}
 	}
@@ -56,14 +61,14 @@
 			align-content: center;
 			width: 100%;
 			height: 22px;
-			border-bottom: 1px solid $off-white;
+			border-bottom: 1px solid $dm-shadow;
 		}
 		thead tr {
 			height: 26px;
 	    	padding: 3px 0px 0;
 			border-bottom: none;
-			background: $off-white;
-			color: #000;
+			background: $dm-black;
+			color: $dm-white;
 		}
 		td, th {
 			width: 16%;
@@ -71,6 +76,7 @@
 			padding: 3px 5px 0;
 			font-size: 14px;
 			font-weight: 400;
+			color: $dm-white;
 		}
 		.pick {
 			flex: 1 1 5%;

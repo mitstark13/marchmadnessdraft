@@ -6,6 +6,7 @@
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	background: $dm-blue;
 	overflow-y: scroll;
 
 	tr {
@@ -18,7 +19,7 @@
 		align-content: center;
 		width: 100%;
 		height: 26px;
-		border-bottom: 1px solid #fff;
+		border-bottom: 1px solid $dm-shadow;
 
 		&[data-picked="true"] {
 			background: yellow;
@@ -26,17 +27,17 @@
 
 		&.selected {
 			td, th {
-				background: #fff;
+				background: rgba($dm-black, 0.5);;
 				font-weight: bold;
 			}
 		}
 	}
 	thead tr {
 		height: 26px;
-    	padding: 3px 0px 0;
+    padding: 3px 0px 0;
 		border-bottom: none;
-		background: $app-blue;
-		color: $off-white;
+		background: $dm-black;
+		color: $dm-white;
 	}
 	td, th {
 		flex: 1 1 12%;
@@ -83,9 +84,11 @@
 		display: block;
 		overflow: auto;
 		height: 345px;
+		color: $dm-white;
 
 		tr:hover {
-			background: #fff;
+			opacity: .8;
+			background: rgba($dm-black, 0.3);
 			cursor: pointer;
 
 			th, td {
@@ -107,7 +110,7 @@
 	padding: 0 0 0 10px;
 
 	.draftPlayer {
-	    display: flex;
+	  display: flex;
 		align-items: center;
 		width: 100%;
 		height: 105px;
@@ -123,6 +126,7 @@
 			p {
 				margin: 0 0 7px;
 				font-size: 30px;
+				color: $dm-white;
 
 				@media screen and (max-width: 1360px) {
 					font-size: 23px;
@@ -130,7 +134,6 @@
 
 				&:last-of-type {
 					font-size: 18px;
-					color: rgba(0,0,0,.7);
 					margin: 0 0 0;
 				}
 			}
@@ -143,7 +146,7 @@
 			text-align: center;
 			padding: 7px 2px;
 			margin-right: 25px;
-			box-shadow: 0px 0px 5px $app-blue;
+			box-shadow: 0px 0px 5px $dm-black;
 
 			@media screen and (max-width: 760px) {
 				&.pts, &.rebs, &.ast {
@@ -164,8 +167,8 @@
 
 	button {
 		background: $app-green;
-		color: $off-white;
-		box-shadow: 0.4rem 0.4rem 2px black;
+		color: $dm-white;
+		box-shadow: 0.4rem 0.4rem 2px $dm-shadow;
   		transform: translate(-0.4rem, -0.4rem);
 		border: none;
 		height: 42px;
@@ -198,8 +201,9 @@
 .tableFilters {
 	display: flex;
 	justify-content: space-between;
-    align-items: center;
+  align-items: center;
 	padding-left: 10px;
+	margin-bottom: 5px;
 
 	@media screen and (max-width: 680px) {
 		flex-wrap: wrap;
@@ -208,6 +212,7 @@
 	label {
 		display: inline-block;
 		margin-right: 10px;
+		color: $dm-white;
 
 		@media screen and (max-width: 760px) {
 			// font-size: 14px;
@@ -217,6 +222,12 @@
 	.teamFilterWrapper {
 		@media screen and (max-width: 650px) {
 			width: 100%;
+		}
+
+		input {
+			background: $dm-black;
+			color: $dm-white;
+			border: 1px solid $dm-shadow;
 		}
 	}
 
@@ -237,9 +248,13 @@
 			height: 20px;
 			padding-top: 5px;
 			padding-right: 1px;
-			border-radius: 50%;
+			border-radius: 20%;
 			top: -2px;
-			background: $app-blue;
+			background: $dm-black;
+
+			&:hover {
+				cursor: pointer;
+			}
 
 			span {
 				display: block;

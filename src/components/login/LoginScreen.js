@@ -7,7 +7,7 @@ export default ({ owners, teamNames, ownerLogin }) => (
     <div className="login">
       <div className="loginContainer">
         <div className="loginHeader">
-          <h1> Welcome to the 2019 March Madness Draft! </h1>
+          <h1> Welcome to the {new Date().getFullYear()} March Madness Draft! </h1>
           <small> Please select your name from the list below to login </small>
         </div>
         <Link to="/draft">

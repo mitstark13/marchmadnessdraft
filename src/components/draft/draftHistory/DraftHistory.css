@@ -1,21 +1,20 @@
 .draftHistory {
-  border: 1px solid #F2F4F4;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 250px;
-          flex: 0 0 250px;
+  flex: 0 0 250px;
   padding: 18px 10px 0;
-  background: #fff; }
+  border-left: 1px solid #303841;
+  border-right: 1px solid #303841; }
+  .draftHistory h2 {
+    color: #e2dfe2; }
   .draftHistory.review {
     grid-area: draft;
     max-width: 700px;
     margin: 0 auto; }
   @media screen and (max-width: 1150px) {
     .draftHistory {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 1 250px;
-              flex: 1 1 250px; } }
+      flex: 1 1 250px; } }
   .draftHistory .historyTitle {
-    height: 100px; }
+    height: 100px;
+    color: #e2dfe2; }
     .draftHistory .historyTitle h2 {
       font-size: 20px;
       margin: 10px 0 15px;
@@ -26,9 +25,9 @@
       font-size: 12px;
       text-align: center; }
       .draftHistory .historyTitle p:first-of-type {
-        border-top: 1px solid #F2F4F4; }
+        border-top: 1px solid #303841; }
       .draftHistory .historyTitle p:last-of-type {
-        border-bottom: 1px solid #F2F4F4; }
+        border-bottom: 1px solid #303841; }
   .draftHistory table {
     position: relative;
     margin: 0;
@@ -36,46 +35,37 @@
     width: 100%;
     overflow-y: scroll; }
     .draftHistory table tr {
+      display: -webkit-inline-flex;
       display: -moz-inline-flex;
       display: -ms-inline-flex;
       display: -o-inline-flex;
-      display: -webkit-inline-box;
-      display: -ms-inline-flexbox;
       display: inline-flex;
-      -webkit-box-pack: justify;
-          -ms-flex-pack: justify;
-              justify-content: space-between;
-      -ms-flex-line-pack: center;
-          align-content: center;
+      justify-content: space-between;
+      align-content: center;
       width: 100%;
       height: 22px;
-      border-bottom: 1px solid #F2F4F4; }
+      border-bottom: 1px solid #303841; }
     .draftHistory table thead tr {
       height: 26px;
       padding: 3px 0px 0;
       border-bottom: none;
-      background: #F2F4F4;
-      color: #000; }
+      background: #0d131d;
+      color: #e2dfe2; }
     .draftHistory table td, .draftHistory table th {
       width: 16%;
       text-align: left;
       padding: 3px 5px 0;
       font-size: 14px;
-      font-weight: 400; }
+      font-weight: 400;
+      color: #e2dfe2; }
     .draftHistory table .pick {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 1 5%;
-              flex: 1 1 5%; }
+      flex: 1 1 5%; }
     .draftHistory table .name {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 1 60%;
-              flex: 1 1 60%; }
+      flex: 1 1 60%; }
     .draftHistory table .owner {
-      -webkit-box-flex: 1;
-          -ms-flex: 1 1 35%;
-              flex: 1 1 35%; }
+      flex: 1 1 35%; }
     .draftHistory table td a {
-      color: #3A814A;
+      color: #34967A;
       text-decoration: none; }
     .draftHistory table td a:hover {
       text-decoration: underline; }

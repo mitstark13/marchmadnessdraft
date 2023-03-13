@@ -127,7 +127,7 @@ class App extends Component {
           <header className="App-header">
             <div className="App-name">
               <Link to="/">
-                <h1 className="App-title">Fantasy Draft 2019</h1>
+                <h1 className="App-title">Fantasy Draft {new Date().getFullYear()}</h1>
               </Link>
               <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
                 <button>View Current Bracket</button>
