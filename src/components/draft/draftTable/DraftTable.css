@@ -198,6 +198,8 @@
     border-radius: 50%;
     margin-left: 5px; }
   .draftContainer .injuryInfo {
+    display: inline-block;
+    margin: 5px;
     color: #e2dfe2; }
 
 /*# sourceMappingURL=DraftTable.css.map */
