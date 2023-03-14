@@ -82,7 +82,7 @@ class DraftTable extends Component {
 
         <div className="tableFilters">
           <div className="teamFilterWrapper">
-            <label>Search name or team: </label>
+            <label>Search: </label>
             <input type="text" className="teamFilter" placeholder="" onChange={this.props.handleTeamFilter} />
           </div>
 

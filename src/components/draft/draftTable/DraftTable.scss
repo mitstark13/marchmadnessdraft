@@ -66,10 +66,19 @@
 	@media screen and (max-width: 760px) {
 		.school, .total {
 			flex: 1 1 40px;
-    		font-size: 14px;
+    	font-size: 12px;
 		}
 		.total {
-			flex: 1 1 20px;
+			flex: 0 1 40px;
+		}
+		.name {
+			flex: 1 1 15%;
+		}
+		td, th {
+			font-size: 12px;
+		}
+		td {
+			padding: 7px 5px 0;
 		}
 	}
 
@@ -129,12 +138,16 @@
 				color: $dm-white;
 
 				@media screen and (max-width: 1360px) {
-					font-size: 23px;
+					font-size: 18px;
 				}
 
 				&:last-of-type {
 					font-size: 18px;
 					margin: 0 0 0;
+
+					@media screen and (max-width: 1360px) {
+						font-size: 14px;
+					}
 				}
 			}
 		}
@@ -149,6 +162,11 @@
 			box-shadow: 0px 0px 5px $dm-black;
 
 			@media screen and (max-width: 760px) {
+				height: auto;
+				width: auto;
+				padding: 7px 14px;
+				margin: 0;
+
 				&.pts, &.rebs, &.ast {
 					display: none;
 				}
@@ -161,6 +179,10 @@
 
 			span { //stat
 				font-size: 22px;
+
+				@media screen and (max-width: 760px) {
+					font-size: 14px;
+				}
 			}
 		}
 	}
@@ -179,9 +201,11 @@
 		transition: .5s;
 
 		@media screen and (max-width: 760px) {
-			height: 38px;
-			width: 130px;
-			font-size: 14px;
+			height: 30px;
+			width: 95px;
+			font-size: 12px;
+			box-shadow: 0.2rem 0.2rem 1px $dm-shadow;
+  		transform: none;
 		}
 
 		&:hover {
@@ -222,6 +246,7 @@
 	.teamFilterWrapper {
 		@media screen and (max-width: 650px) {
 			width: 100%;
+			margin-bottom: 5px;
 		}
 
 		input {

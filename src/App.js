@@ -129,7 +129,7 @@ class App extends Component {
               <Link to="/">
                 <h1 className="App-title">Fantasy Draft {new Date().getFullYear()}</h1>
               </Link>
-              <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
+              <a className="App-bracket" href="https://fantasy.espn.com/tournament-challenge-bracket/2023/en/bracket" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
                 <button>View Current Bracket</button>
               </a>
               {/* <Link to='/admin'>
@@ -167,12 +167,15 @@ class App extends Component {
           </section>
 
           <div className="mobile-menu">
-            <a className="App-bracket" href="http://www.espn.com/mens-college-basketball/bracketology" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
+            <a className="App-bracket" href="https://fantasy.espn.com/tournament-challenge-bracket/2023/en/bracket" alt="Bracket Link" target="_blank" rel="noopener noreferrer">
               <button>View Current Bracket</button>
             </a>
-            <Link to='/admin'>
+            {this.state.username === 'Admin'
+            ? <Link to='/admin'>
               <button>Admin Page</button>
             </Link>
+            : <div></div>
+            }
             <Link to='/review'>
               <button>Draft Review</button>
             </Link>

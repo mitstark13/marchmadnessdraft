@@ -15,6 +15,9 @@
   text-align: center;
   padding: 10px 40px;
   box-shadow: 0px 1px 5px #303841; }
+  @media screen and (max-width: 760px) {
+    .App-header {
+      padding: 10px 20px; } }
   .App-header button {
     background: none;
     color: #e2dfe2;
@@ -32,6 +35,13 @@
     font-size: 16px;
     margin: 0 40px 0 0;
     color: #e2dfe2; }
+    @media screen and (max-width: 760px) {
+      .App-header .App-title {
+        font-size: 12px;
+        margin: 0; } }
+  @media screen and (max-width: 760px) {
+    .App-header .App-user {
+      font-size: 12px; } }
   .App-header .App-bracket {
     display: inline-block;
     font-size: 12px;
@@ -59,7 +69,9 @@
 @media screen and (max-width: 1150px) {
   .App {
     grid-template-rows: 35px auto 270px;
-    height: auto; }
+    height: auto;
+    min-height: calc(100vh - 40px);
+    margin-bottom: 40px; }
 
   #draft {
     flex-wrap: wrap; } }
