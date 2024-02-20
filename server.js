@@ -2,7 +2,7 @@ const Pusher = require('pusher');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const app = express();
 
@@ -34,17 +34,24 @@ app.get('/review', function(req, res){
 
 app.set('PORT', process.env.PORT || 5050);
 
-const url = 'mongodb://admin:k6PPBPQF4prbN7C6@cluster0-shard-00-00.1tkc4.mongodb.net:27017,cluster0-shard-00-01.1tkc4.mongodb.net:27017,cluster0-shard-00-02.1tkc4.mongodb.net:27017/marchmadness-main?ssl=true&replicaSet=atlas-985tp5-shard-0&authSource=admin&retryWrites=true&w=majority';
+const uri = "mongodb+srv://admin:k6PPBPQF4prbN7C6@cluster0.1tkc4.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
 
-MongoClient.connect(url, (err, database) => {
-  if (err) return console.log("ERROR: ", err)
+client.connect().then((err) => {
+  // if (err) return console.log("ERROR: ", err)
 
   app.listen(app.get('PORT'), () =>  {
     console.log('Listening at ' + app.get('PORT'))
 
     app.get('/players', (req, res) => {
       //Sort puts the document with the owners list first
-      database.collection('players2023').find().sort( { owners: -1 } ).toArray(function(err, array) {
+      client.db('marchmadness-main').collection('players2023').find().sort( { owners: -1 } ).toArray(function(err, array) {
         if (err) return console.log(err)
 
         res.send(array)
@@ -52,7 +59,7 @@ MongoClient.connect(url, (err, database) => {
     })
 
     app.put('/currentPick', (req, res) => {
-      database.collection('players2023')
+      client.db('marchmadness-main').collection('players2023')
       .updateMany({currentPick: { $gt: 0 }}, { //resets all to no owner and no pickNumber
         $inc: {
           currentPick: 1
@@ -69,7 +76,7 @@ MongoClient.connect(url, (err, database) => {
 
     app.put('/marchmadness', (req, res) => {
       console.log(req.body)
-      database.collection('players2023')
+      client.db('marchmadness-main').collection('players2023')
       .findOneAndUpdate({name: req.body.name}, { //finds the name, updates the following
         $set: {
           owner: req.body.owner,
@@ -86,7 +93,7 @@ MongoClient.connect(url, (err, database) => {
     // ***** RESET DB TO START OF DRAFT *****
     app.put('/reset', (req, res) => {
       console.log('resetting db')
-      database.collection('players2023')
+      client.db('marchmadness-main').collection('players2023')
       .updateMany({}, { //resets all to no owner and no pickNumber
         $set: {
           owner: "",
@@ -105,19 +112,19 @@ MongoClient.connect(url, (err, database) => {
 
     // ***** ADMIN PAGE *****
     app.post('/newPlayer', (req, res) => {
-      database.collection('players2023').save(req.body, (err, result) => {
+      client.db('marchmadness-main').collection('players2023').save(req.body, (err, result) => {
         if (err) return console.log(err)
 
         //https://docs.mongodb.com/manual/reference/method/db.collection.update/ to update if already exists
     
-        console.log('saved new player to database')
+        console.log('saved new player to client')
         //ToDo: Add Pusher event to show success message
       })
     })
 
     app.put('/marchmadnessadmin', (req, res) => {
       console.log(req.body)
-      database.collection('players2023')
+      client.db('marchmadness-main').collection('players2023')
       .update({name: req.body.name}, {
         name: req.body.name,
         team: req.body.team,
@@ -142,7 +149,7 @@ MongoClient.connect(url, (err, database) => {
 
     app.delete('/deletenullplayers', (req, res) => {
       console.log('Deleting players with null teams')
-      database.collection('players2023').remove({name: { $type : "string" }, team: null},
+      client.db('marchmadness-main').collection('players2023').remove({name: { $type : "string" }, team: null},
         (err, result) => {
         if (err) return res.send(err)
         res.send(result)
