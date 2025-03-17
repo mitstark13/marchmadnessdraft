@@ -32,12 +32,12 @@ app.get('/review', function(req, res){
   res.redirect('/');
 });
 
-app.set('PORT', process.env.PORT || 5050);
+app.set('PORT', 5000);
 
 const uri = "mongodb+srv://admin:k6PPBPQF4prbN7C6@cluster0.1tkc4.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
   serverApi: {
-    version: ServerApiVersion.v1,
+    version: "1",
     strict: true,
     deprecationErrors: true,
   }
@@ -49,14 +49,14 @@ client.connect().then(() => {
 
     app.get('/players', async (req, res) => {
       //Sort puts the document with the owners list first
-      const players = client.db('marchmadness-main').collection('players2023').find();
+      const players = client.db('marchmadness-main').collection('players2025').find();
       const sortedPlayers = await players.sort( { owners: -1 } );
       const allPlayers = await sortedPlayers.toArray();
       res.send(allPlayers);
     })
 
     app.put('/currentPick', (req, res) => {
-      client.db('marchmadness-main').collection('players2023').updateMany({currentPick: { $gt: 0 }}, { //resets all to no owner and no pickNumber
+      client.db('marchmadness-main').collection('players2025').updateMany({currentPick: { $gt: 0 }}, { //resets all to no owner and no pickNumber
         $inc: {
           currentPick: 1
         },
@@ -70,7 +70,7 @@ client.connect().then(() => {
     })
 
     app.put('/marchmadness', async (req, res) => {
-      const collection = client.db('marchmadness-main').collection('players2023')
+      const collection = client.db('marchmadness-main').collection('players2025')
       try {
         await collection.findOneAndUpdate({name: req.body.name}, { //finds the name, updates the following
           $set: {
@@ -90,7 +90,7 @@ client.connect().then(() => {
     // ***** RESET DB TO START OF DRAFT *****
     app.put('/reset', async (req, res) => {
       console.log('resetting db')
-      const db = client.db('marchmadness-main').collection('players2023');
+      const db = client.db('marchmadness-main').collection('players2025');
       await db.updateMany({}, { //resets all to no owner and no pickNumber
         $set: {
           owner: "",
@@ -109,7 +109,7 @@ client.connect().then(() => {
 
     // ***** ADMIN PAGE *****
     app.post('/newPlayer', async (req, res) => {
-      const db = client.db('marchmadness-main').collection('players2023');
+      const db = client.db('marchmadness-main').collection('players2025');
       await db.save(req.body, (err, result) => {
         if (err) return console.log(err)
 
@@ -122,7 +122,7 @@ client.connect().then(() => {
 
     app.put('/marchmadnessadmin', async (req, res) => {
       console.log(req.body)
-      const db = client.db('marchmadness-main').collection('players2023');
+      const db = client.db('marchmadness-main').collection('players2025');
       await db.update({name: req.body.name}, {
         name: req.body.name,
         team: req.body.team,
@@ -147,7 +147,7 @@ client.connect().then(() => {
 
     app.delete('/deletenullplayers', async (req, res) => {
       console.log('Deleting players with null teams')
-      const db = client.db('marchmadness-main').collection('players2023');
+      const db = client.db('marchmadness-main').collection('players2025');
       await db.remove({name: { $type : "string" }, team: null},
         (err, result) => {
         if (err) return res.send(err)

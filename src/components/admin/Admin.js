@@ -80,9 +80,9 @@ class Admin extends Component {
         console.log(numPlayers[i]);
         const playerStats = numPlayers[i].split('</td>');
         const name = playerStats[0].split('>').slice(-1)[0];
-        const rebounds = Number(playerStats[18].split('>').slice(-1)[0]);
-        const assists = Number(playerStats[19].split('>').slice(-1)[0]);
-        const points = Number(playerStats[24].split('>').slice(-1)[0]);
+        const rebounds = Number(playerStats[20].split('>').slice(-1)[0]);
+        const assists = Number(playerStats[21].split('>').slice(-1)[0]);
+        const points = Number(playerStats[26].split('>').slice(-1)[0]);
 
         this.setState({ name })
         this.setState({ 'team': teamName})
