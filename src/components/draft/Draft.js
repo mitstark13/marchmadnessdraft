@@ -213,6 +213,7 @@ class Draft extends Component {
   playerDrafted(pusher) {
     const channel = pusher.subscribe('draft');
     channel.bind('playerDrafted', data => {
+      if (!data || !data.value) return;
       const nameDrafted = data.value.name;
       console.log(nameDrafted + " has been drafted!")
       this.stopAudio()

@@ -123,7 +123,7 @@ client.connect().then(() => {
     app.put('/marchmadnessadmin', async (req, res) => {
       console.log(req.body)
       const db = client.db('marchmadness-main').collection('players2025');
-      await db.update({name: req.body.name}, {
+      db.updateOne({"name": req.body.name}, {$set: {
         name: req.body.name,
         team: req.body.team,
         points: req.body.points,
@@ -134,7 +134,7 @@ client.connect().then(() => {
         owner: req.body.owner,
         currentPick: req.body.currentPick,
         lastPick: req.body.lastPick,
-      },
+      }},
       { upsert: true }, //If none exists, create new player
       (err, result) => {
         if (err) return res.send(err)
